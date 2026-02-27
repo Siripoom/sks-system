@@ -1,0 +1,243 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  TEACHER
+  DRIVER
+  PARENT
+}
+
+enum TripStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum EventType {
+  USER_LOGIN
+  USER_LOGOUT
+  TRIP_STARTED
+  TRIP_COMPLETED
+  STUDENT_PICKED_UP
+  STUDENT_DROPPED_OFF
+  VEHICLE_ASSIGNED
+  ROUTE_UPDATED
+  EMERGENCY_ALERT
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  phone     String?
+  role      Role
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  driver   Driver?
+  guardian Guardian?
+  eventLogs EventLog[]
+
+  @@map("users")
+}
+
+model School {
+  id        String   @id @default(cuid())
+  name      String
+  address   String
+  phone     String
+  email     String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  vehicles Vehicle[]
+  drivers  Driver[]
+  students Student[]
+  routes   Route[]
+
+  @@map("schools")
+}
+
+model Vehicle {
+  id           String   @id @default(cuid())
+  licensePlate String   @unique
+  model        String
+  capacity     Int
+  year         Int?
+  isActive     Boolean  @default(true)
+  schoolId     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  school      School       @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  assignments Assignment[]
+  trips       Trip[]
+
+  @@map("vehicles")
+}
+
+model Driver {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  licenseNumber String   @unique
+  schoolId      String
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school      School       @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  assignments Assignment[]
+  trips       Trip[]
+
+  @@map("drivers")
+}
+
+model Guardian {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  relationship String
+  emergencyContact String?
+  address      String
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  students Student[]
+
+  @@map("guardians")
+}
+
+model Student {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  grade     String
+  schoolId  String
+  guardianId String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  school      School            @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  guardian    Guardian          @relation(fields: [guardianId], references: [id], onDelete: Cascade)
+  assignments Assignment[]
+  routes      StudentRoute[]
+
+  @@map("students")
+}
+
+model Route {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  schoolId    String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  school   School         @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  stops    Stop[]
+  students StudentRoute[]
+  trips    Trip[]
+
+  @@map("routes")
+}
+
+model Stop {
+  id          String   @id @default(cuid())
+  name        String
+  address     String
+  latitude    Float?
+  longitude   Float?
+  order       Int
+  routeId     String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  route Route @relation(fields: [routeId], references: [id], onDelete: Cascade)
+
+  @@map("stops")
+}
+
+model StudentRoute {
+  id        String   @id @default(cuid())
+  studentId String
+  routeId   String
+  stopId    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  route   Route   @relation(fields: [routeId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, routeId])
+  @@map("student_routes")
+}
+
+model Assignment {
+  id        String   @id @default(cuid())
+  driverId  String
+  vehicleId String
+  studentId String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  driver  Driver  @relation(fields: [driverId], references: [id], onDelete: Cascade)
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([driverId, vehicleId, studentId])
+  @@map("assignments")
+}
+
+model Trip {
+  id           String     @id @default(cuid())
+  routeId      String
+  vehicleId    String
+  driverId     String
+  status       TripStatus @default(SCHEDULED)
+  scheduledAt  DateTime
+  startedAt    DateTime?
+  completedAt  DateTime?
+  currentLat   Float?
+  currentLng   Float?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  route   Route   @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  driver  Driver  @relation(fields: [driverId], references: [id], onDelete: Cascade)
+
+  @@map("trips")
+}
+
+model EventLog {
+  id          String    @id @default(cuid())
+  type        EventType
+  description String
+  metadata    Json?
+  userId      String?
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime  @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("event_logs")
+}
