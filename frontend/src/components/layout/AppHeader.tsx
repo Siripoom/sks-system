@@ -1,12 +1,12 @@
 'use client';
 
-import { 
-  Layout, 
-  Button, 
-  Avatar, 
-  Dropdown, 
-  Badge, 
-  Space, 
+import {
+  Layout,
+  Button,
+  Avatar,
+  Dropdown,
+  Badge,
+  Space,
   Input,
   Typography,
   Breadcrumb,
@@ -40,17 +40,17 @@ interface AppHeaderProps {
   onThemeChange: () => void;
 }
 
-export default function AppHeader({ 
-  collapsed, 
-  onToggle, 
-  theme, 
-  onThemeChange 
+export default function AppHeader({
+  collapsed,
+  onToggle,
+  theme,
+  onThemeChange,
 }: AppHeaderProps) {
   const router = useRouter();
   const { user, logout } = useAuthStore();
-  const { 
-    notifications, 
-    unreadCount, 
+  const {
+    notifications,
+    unreadCount,
     breadcrumbs,
     searchVisible,
     setSearchVisible,
@@ -84,7 +84,7 @@ export default function AppHeader({
 
   // Notification dropdown menu
   const notificationMenuItems: MenuProps['items'] = [
-    ...(notifications.slice(0, 5).map(notification => ({
+    ...notifications.slice(0, 5).map((notification) => ({
       key: notification.id,
       label: (
         <div className="notification-item">
@@ -95,19 +95,28 @@ export default function AppHeader({
           </div>
         </div>
       ),
-    }))),
-    ...(notifications.length > 0 ? [{
-      type: 'divider' as const,
-    }, {
-      key: 'view-all',
-      label: 'View All Notifications',
-      onClick: () => router.push('/notifications'),
-    }] : []),
-    ...(notifications.length === 0 ? [{
-      key: 'no-notifications',
-      label: 'No new notifications',
-      disabled: true,
-    }] : []),
+    })),
+    ...(notifications.length > 0
+      ? [
+          {
+            type: 'divider' as const,
+          },
+          {
+            key: 'view-all',
+            label: 'View All Notifications',
+            onClick: () => router.push('/notifications'),
+          },
+        ]
+      : []),
+    ...(notifications.length === 0
+      ? [
+          {
+            key: 'no-notifications',
+            label: 'No new notifications',
+            disabled: true,
+          },
+        ]
+      : []),
   ];
 
   async function handleLogout() {
@@ -126,9 +135,9 @@ export default function AppHeader({
   };
 
   return (
-    <Header 
-      style={{ 
-        padding: 0, 
+    <Header
+      style={{
+        padding: 0,
         background: theme === 'light' ? '#fff' : '#1f1f1f',
         borderBottom: `1px solid ${theme === 'light' ? '#f0f0f0' : '#303030'}`,
         display: 'flex',
@@ -148,15 +157,12 @@ export default function AppHeader({
             height: 64,
           }}
         />
-        
+
         {/* Breadcrumbs */}
         {breadcrumbs.length > 0 && (
           <Breadcrumb style={{ margin: '0 16px' }}>
             {breadcrumbs.map((item, index) => (
-              <Breadcrumb.Item 
-                key={index}
-                href={item.path}
-              >
+              <Breadcrumb.Item key={index} href={item.path}>
                 {item.title}
               </Breadcrumb.Item>
             ))}
@@ -183,24 +189,20 @@ export default function AppHeader({
           />
         )}
 
-        {/* Theme toggle */}
-        <Button
-          type="text"
-          icon={theme === 'light' ? <MoonOutlined /> : <SunOutlined />}
-          onClick={onThemeChange}
-        />
-
         {/* Notifications */}
         <Dropdown
           menu={{ items: notificationMenuItems }}
           placement="bottomRight"
           trigger={['click']}
         >
-          <Button type="text" icon={
-            <Badge count={unreadCount} size="small">
-              <BellOutlined />
-            </Badge>
-          } />
+          <Button
+            type="text"
+            icon={
+              <Badge count={unreadCount} size="small">
+                <BellOutlined />
+              </Badge>
+            }
+          />
         </Dropdown>
 
         {/* User menu */}
@@ -209,23 +211,22 @@ export default function AppHeader({
           placement="bottomRight"
           trigger={['click']}
         >
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            cursor: 'pointer',
-            padding: '0 8px',
-          }}>
-            <Avatar 
-              size="small" 
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              cursor: 'pointer',
+              padding: '0 8px',
+            }}
+          >
+            <Avatar
+              size="small"
               icon={<UserOutlined />}
               style={{ marginRight: 8 }}
             >
               {user ? getInitials(user.firstName, user.lastName) : 'U'}
             </Avatar>
             <Space direction="vertical" size={0}>
-              <Text strong style={{ fontSize: '12px' }}>
-                {user ? formatFullName(user.firstName, user.lastName) : 'User'}
-              </Text>
               <Text type="secondary" style={{ fontSize: '11px' }}>
                 {user?.role || 'Unknown'}
               </Text>

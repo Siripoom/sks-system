@@ -354,9 +354,24 @@ class ApiClient {
         this.instance.interceptors.request.use((config)=>{
             console.log('ApiClient: Making request to:', config.url);
             const token = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].getAccessToken();
-            if (token && !__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
-                config.headers.Authorization = `Bearer ${token}`;
+            console.log('ApiClient: Token available:', !!token);
+            if (token) {
+                console.log('ApiClient: Token expired?', __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token));
+                if (!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
+                    config.headers.Authorization = `Bearer ${token}`;
+                    console.log('ApiClient: Added Authorization header');
+                } else {
+                    console.log('ApiClient: Token expired, not adding to request');
+                }
+            } else {
+                console.log('ApiClient: No token available');
             }
+            console.log('ApiClient: Request config:', {
+                url: config.url,
+                method: config.method,
+                hasAuth: !!config.headers.Authorization,
+                params: config.params
+            });
             return config;
         }, (error)=>{
             console.error('ApiClient: Request error:', error);
@@ -873,23 +888,31 @@ const useAuthStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_mo
         error: null,
         // Actions
         login: async (credentials)=>{
+            console.log('AuthStore: Login attempt with credentials:', {
+                email: credentials.email
+            });
             set({
                 isLoading: true,
                 error: null
             });
             try {
                 const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$authService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].login(credentials);
+                console.log('AuthStore: Login response:', response);
                 if (response.success && response.data) {
+                    console.log('AuthStore: Login successful, user:', response.data.user);
+                    console.log('AuthStore: Tokens received:', !!response.data.tokens);
                     set({
                         isAuthenticated: true,
                         user: response.data.user,
                         isLoading: false,
                         error: null
                     });
+                    console.log('AuthStore: Auth state updated after login');
                 } else {
                     throw new Error('Login failed');
                 }
             } catch (error) {
+                console.error('AuthStore: Login error:', error);
                 set({
                     isAuthenticated: false,
                     user: null,
@@ -1035,12 +1058,17 @@ const useAuthStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_mo
             });
         },
         initializeAuth: ()=>{
+            console.log('AuthStore: Initializing auth...');
             const authData = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$authService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].initializeAuth();
+            console.log('AuthStore: Auth data:', authData);
+            console.log('AuthStore: Token available:', !!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$authService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].getAccessToken());
+            console.log('AuthStore: User from storage:', authData.user);
             set({
                 isAuthenticated: authData.isAuthenticated,
                 user: authData.user,
                 isLoading: false
             });
+            console.log('AuthStore: Auth initialized, isAuthenticated:', authData.isAuthenticated);
         },
         // Helper functions
         hasRole: (role)=>{
@@ -1633,8 +1661,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$des
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/UserOutlined.js [app-client] (ecmascript) <export default as UserOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SettingOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SettingOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/SettingOutlined.js [app-client] (ecmascript) <export default as SettingOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$LogoutOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__LogoutOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/LogoutOutlined.js [app-client] (ecmascript) <export default as LogoutOutlined>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SunOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SunOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/SunOutlined.js [app-client] (ecmascript) <export default as SunOutlined>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MoonOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MoonOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/MoonOutlined.js [app-client] (ecmascript) <export default as MoonOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$authStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/stores/authStore.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$appStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/stores/appStore.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/format.ts [app-client] (ecmascript)");
@@ -1656,14 +1682,14 @@ const { Search } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$
 const { Text } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$typography$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Typography$3e$__["Typography"];
 function AppHeader(t0) {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(94);
-    if ($[0] !== "4364253107127eec52a65cb1c5f1191e37acdc8ca789e27487fec2a404d66c04") {
-        for(let $i = 0; $i < 94; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(80);
+    if ($[0] !== "9058a75839643a7e36d17f22f237b83746e48f6c85907ef6c149886b808397dc") {
+        for(let $i = 0; $i < 80; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "4364253107127eec52a65cb1c5f1191e37acdc8ca789e27487fec2a404d66c04";
+        $[0] = "9058a75839643a7e36d17f22f237b83746e48f6c85907ef6c149886b808397dc";
     }
-    const { collapsed, onToggle, theme, onThemeChange } = t0;
+    const { collapsed, onToggle, theme } = t0;
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const { user, logout } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$authStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuthStore"])();
     const { notifications, unreadCount, breadcrumbs, searchVisible, setSearchVisible, setSearchQuery } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$appStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppStore"])();
@@ -1674,7 +1700,7 @@ function AppHeader(t0) {
         if ($[6] === Symbol.for("react.memo_cache_sentinel")) {
             t1 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__["UserOutlined"], {}, void 0, false, {
                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 59,
+                lineNumber: 58,
                 columnNumber: 12
             }, this);
             $[6] = t1;
@@ -1698,7 +1724,7 @@ function AppHeader(t0) {
         if ($[9] === Symbol.for("react.memo_cache_sentinel")) {
             t3 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SettingOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SettingOutlined$3e$__["SettingOutlined"], {}, void 0, false, {
                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 79,
+                lineNumber: 78,
                 columnNumber: 12
             }, this);
             $[9] = t3;
@@ -1731,7 +1757,7 @@ function AppHeader(t0) {
         if ($[13] === Symbol.for("react.memo_cache_sentinel")) {
             t6 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$LogoutOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__LogoutOutlined$3e$__["LogoutOutlined"], {}, void 0, false, {
                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 108,
+                lineNumber: 107,
                 columnNumber: 12
             }, this);
             $[13] = t6;
@@ -1861,11 +1887,11 @@ function AppHeader(t0) {
     if ($[28] !== collapsed) {
         t6 = collapsed ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MenuUnfoldOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MenuUnfoldOutlined$3e$__["MenuUnfoldOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 220,
+            lineNumber: 219,
             columnNumber: 22
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MenuFoldOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MenuFoldOutlined$3e$__["MenuFoldOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 220,
+            lineNumber: 219,
             columnNumber: 47
         }, this);
         $[28] = collapsed;
@@ -1893,7 +1919,7 @@ function AppHeader(t0) {
             style: t7
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 239,
+            lineNumber: 238,
             columnNumber: 10
         }, this);
         $[31] = onToggle;
@@ -1911,7 +1937,7 @@ function AppHeader(t0) {
             children: breadcrumbs.map(_AppHeaderBreadcrumbsMap)
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 248,
+            lineNumber: 247,
             columnNumber: 36
         }, this);
         $[34] = breadcrumbs;
@@ -1929,7 +1955,7 @@ function AppHeader(t0) {
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 258,
+            lineNumber: 257,
             columnNumber: 11
         }, this);
         $[36] = t8;
@@ -1961,13 +1987,13 @@ function AppHeader(t0) {
             autoFocus: true
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 276,
+            lineNumber: 275,
             columnNumber: 27
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
             type: "text",
             icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SearchOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SearchOutlined$3e$__["SearchOutlined"], {}, void 0, false, {
                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 280,
+                lineNumber: 279,
                 columnNumber: 86
             }, void 0),
             onClick: {
@@ -1975,7 +2001,7 @@ function AppHeader(t0) {
             }["AppHeader[<Button>.onClick]"]
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 280,
+            lineNumber: 279,
             columnNumber: 60
         }, this);
         $[40] = handleSearch;
@@ -1986,340 +2012,260 @@ function AppHeader(t0) {
         t12 = $[43];
     }
     let t13;
-    if ($[44] !== theme) {
-        t13 = theme === "light" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MoonOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MoonOutlined$3e$__["MoonOutlined"], {}, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 292,
-            columnNumber: 31
-        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SunOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SunOutlined$3e$__["SunOutlined"], {}, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 292,
-            columnNumber: 50
-        }, this);
-        $[44] = theme;
+    if ($[44] !== notificationMenuItems) {
+        t13 = {
+            items: notificationMenuItems
+        };
+        $[44] = notificationMenuItems;
         $[45] = t13;
     } else {
         t13 = $[45];
     }
     let t14;
-    if ($[46] !== onThemeChange || $[47] !== t13) {
-        t14 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
-            type: "text",
-            icon: t13,
-            onClick: onThemeChange
-        }, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 300,
-            columnNumber: 11
-        }, this);
-        $[46] = onThemeChange;
-        $[47] = t13;
-        $[48] = t14;
-    } else {
-        t14 = $[48];
-    }
-    let t15;
-    if ($[49] !== notificationMenuItems) {
-        t15 = {
-            items: notificationMenuItems
-        };
-        $[49] = notificationMenuItems;
-        $[50] = t15;
-    } else {
-        t15 = $[50];
-    }
-    let t16;
-    if ($[51] === Symbol.for("react.memo_cache_sentinel")) {
-        t16 = [
+    if ($[46] === Symbol.for("react.memo_cache_sentinel")) {
+        t14 = [
             "click"
         ];
-        $[51] = t16;
+        $[46] = t14;
     } else {
-        t16 = $[51];
+        t14 = $[46];
     }
-    let t17;
-    if ($[52] === Symbol.for("react.memo_cache_sentinel")) {
-        t17 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$BellOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__BellOutlined$3e$__["BellOutlined"], {}, void 0, false, {
+    let t15;
+    if ($[47] === Symbol.for("react.memo_cache_sentinel")) {
+        t15 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$BellOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__BellOutlined$3e$__["BellOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 326,
+            lineNumber: 308,
             columnNumber: 11
         }, this);
+        $[47] = t15;
+    } else {
+        t15 = $[47];
+    }
+    let t16;
+    if ($[48] !== unreadCount) {
+        t16 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
+            type: "text",
+            icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$badge$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Badge$3e$__["Badge"], {
+                count: unreadCount,
+                size: "small",
+                children: t15
+            }, void 0, false, {
+                fileName: "[project]/src/components/layout/AppHeader.tsx",
+                lineNumber: 315,
+                columnNumber: 37
+            }, void 0)
+        }, void 0, false, {
+            fileName: "[project]/src/components/layout/AppHeader.tsx",
+            lineNumber: 315,
+            columnNumber: 11
+        }, this);
+        $[48] = unreadCount;
+        $[49] = t16;
+    } else {
+        t16 = $[49];
+    }
+    let t17;
+    if ($[50] !== t13 || $[51] !== t16) {
+        t17 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
+            menu: t13,
+            placement: "bottomRight",
+            trigger: t14,
+            children: t16
+        }, void 0, false, {
+            fileName: "[project]/src/components/layout/AppHeader.tsx",
+            lineNumber: 323,
+            columnNumber: 11
+        }, this);
+        $[50] = t13;
+        $[51] = t16;
         $[52] = t17;
     } else {
         t17 = $[52];
     }
     let t18;
-    if ($[53] !== unreadCount) {
-        t18 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
-            type: "text",
-            icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$badge$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Badge$3e$__["Badge"], {
-                count: unreadCount,
-                size: "small",
-                children: t17
-            }, void 0, false, {
-                fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 333,
-                columnNumber: 37
-            }, void 0)
-        }, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 333,
-            columnNumber: 11
-        }, this);
-        $[53] = unreadCount;
+    if ($[53] !== userMenuItems) {
+        t18 = {
+            items: userMenuItems
+        };
+        $[53] = userMenuItems;
         $[54] = t18;
     } else {
         t18 = $[54];
     }
     let t19;
-    if ($[55] !== t15 || $[56] !== t18) {
-        t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
-            menu: t15,
-            placement: "bottomRight",
-            trigger: t16,
-            children: t18
-        }, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 341,
-            columnNumber: 11
-        }, this);
-        $[55] = t15;
-        $[56] = t18;
-        $[57] = t19;
-    } else {
-        t19 = $[57];
-    }
     let t20;
-    if ($[58] !== userMenuItems) {
-        t20 = {
-            items: userMenuItems
-        };
-        $[58] = userMenuItems;
-        $[59] = t20;
-    } else {
-        t20 = $[59];
-    }
-    let t21;
-    let t22;
-    if ($[60] === Symbol.for("react.memo_cache_sentinel")) {
-        t21 = [
+    if ($[55] === Symbol.for("react.memo_cache_sentinel")) {
+        t19 = [
             "click"
         ];
-        t22 = {
+        t20 = {
             display: "flex",
             alignItems: "center",
             cursor: "pointer",
             padding: "0 8px"
         };
-        $[60] = t21;
-        $[61] = t22;
+        $[55] = t19;
+        $[56] = t20;
     } else {
-        t21 = $[60];
-        t22 = $[61];
+        t19 = $[55];
+        t20 = $[56];
     }
-    let t23;
-    let t24;
-    if ($[62] === Symbol.for("react.memo_cache_sentinel")) {
-        t23 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__["UserOutlined"], {}, void 0, false, {
+    let t21;
+    let t22;
+    if ($[57] === Symbol.for("react.memo_cache_sentinel")) {
+        t21 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__["UserOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 377,
+            lineNumber: 359,
             columnNumber: 11
         }, this);
-        t24 = {
+        t22 = {
             marginRight: 8
         };
-        $[62] = t23;
-        $[63] = t24;
+        $[57] = t21;
+        $[58] = t22;
     } else {
-        t23 = $[62];
-        t24 = $[63];
+        t21 = $[57];
+        t22 = $[58];
+    }
+    let t23;
+    if ($[59] !== user) {
+        t23 = user ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getInitials"])(user.firstName, user.lastName) : "U";
+        $[59] = user;
+        $[60] = t23;
+    } else {
+        t23 = $[60];
+    }
+    let t24;
+    if ($[61] !== t23) {
+        t24 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$avatar$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Avatar$3e$__["Avatar"], {
+            size: "small",
+            icon: t21,
+            style: t22,
+            children: t23
+        }, void 0, false, {
+            fileName: "[project]/src/components/layout/AppHeader.tsx",
+            lineNumber: 379,
+            columnNumber: 11
+        }, this);
+        $[61] = t23;
+        $[62] = t24;
+    } else {
+        t24 = $[62];
     }
     let t25;
-    if ($[64] !== user) {
-        t25 = user ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getInitials"])(user.firstName, user.lastName) : "U";
-        $[64] = user;
-        $[65] = t25;
+    if ($[63] === Symbol.for("react.memo_cache_sentinel")) {
+        t25 = {
+            fontSize: "11px"
+        };
+        $[63] = t25;
     } else {
-        t25 = $[65];
+        t25 = $[63];
     }
-    let t26;
-    if ($[66] !== t25) {
-        t26 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$avatar$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Avatar$3e$__["Avatar"], {
-            size: "small",
-            icon: t23,
-            style: t24,
-            children: t25
+    const t26 = user?.role || "Unknown";
+    let t27;
+    if ($[64] !== t26) {
+        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
+            direction: "vertical",
+            size: 0,
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
+                type: "secondary",
+                style: t25,
+                children: t26
+            }, void 0, false, {
+                fileName: "[project]/src/components/layout/AppHeader.tsx",
+                lineNumber: 397,
+                columnNumber: 48
+            }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
             lineNumber: 397,
             columnNumber: 11
         }, this);
-        $[66] = t25;
-        $[67] = t26;
+        $[64] = t26;
+        $[65] = t27;
     } else {
-        t26 = $[67];
-    }
-    let t27;
-    if ($[68] === Symbol.for("react.memo_cache_sentinel")) {
-        t27 = {
-            fontSize: "12px"
-        };
-        $[68] = t27;
-    } else {
-        t27 = $[68];
+        t27 = $[65];
     }
     let t28;
-    if ($[69] !== user) {
-        t28 = user ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["formatFullName"])(user.firstName, user.lastName) : "User";
-        $[69] = user;
-        $[70] = t28;
+    if ($[66] !== t24 || $[67] !== t27) {
+        t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            style: t20,
+            children: [
+                t24,
+                t27
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/layout/AppHeader.tsx",
+            lineNumber: 405,
+            columnNumber: 11
+        }, this);
+        $[66] = t24;
+        $[67] = t27;
+        $[68] = t28;
     } else {
-        t28 = $[70];
+        t28 = $[68];
     }
     let t29;
-    if ($[71] !== t28) {
-        t29 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
-            strong: true,
-            style: t27,
+    if ($[69] !== t18 || $[70] !== t28) {
+        t29 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
+            menu: t18,
+            placement: "bottomRight",
+            trigger: t19,
             children: t28
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 422,
+            lineNumber: 414,
             columnNumber: 11
         }, this);
-        $[71] = t28;
-        $[72] = t29;
+        $[69] = t18;
+        $[70] = t28;
+        $[71] = t29;
     } else {
-        t29 = $[72];
+        t29 = $[71];
     }
     let t30;
-    if ($[73] === Symbol.for("react.memo_cache_sentinel")) {
-        t30 = {
-            fontSize: "11px"
-        };
-        $[73] = t30;
-    } else {
-        t30 = $[73];
-    }
-    const t31 = user?.role || "Unknown";
-    let t32;
-    if ($[74] !== t31) {
-        t32 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
-            type: "secondary",
-            style: t30,
-            children: t31
-        }, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 440,
-            columnNumber: 11
-        }, this);
-        $[74] = t31;
-        $[75] = t32;
-    } else {
-        t32 = $[75];
-    }
-    let t33;
-    if ($[76] !== t29 || $[77] !== t32) {
-        t33 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
-            direction: "vertical",
-            size: 0,
-            children: [
-                t29,
-                t32
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 448,
-            columnNumber: 11
-        }, this);
-        $[76] = t29;
-        $[77] = t32;
-        $[78] = t33;
-    } else {
-        t33 = $[78];
-    }
-    let t34;
-    if ($[79] !== t26 || $[80] !== t33) {
-        t34 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            style: t22,
-            children: [
-                t26,
-                t33
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 457,
-            columnNumber: 11
-        }, this);
-        $[79] = t26;
-        $[80] = t33;
-        $[81] = t34;
-    } else {
-        t34 = $[81];
-    }
-    let t35;
-    if ($[82] !== t20 || $[83] !== t34) {
-        t35 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
-            menu: t20,
-            placement: "bottomRight",
-            trigger: t21,
-            children: t34
-        }, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 466,
-            columnNumber: 11
-        }, this);
-        $[82] = t20;
-        $[83] = t34;
-        $[84] = t35;
-    } else {
-        t35 = $[84];
-    }
-    let t36;
-    if ($[85] !== t12 || $[86] !== t14 || $[87] !== t19 || $[88] !== t35) {
-        t36 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
+    if ($[72] !== t12 || $[73] !== t17 || $[74] !== t29) {
+        t30 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
             size: "middle",
             style: t11,
             children: [
                 t12,
-                t14,
-                t19,
-                t35
+                t17,
+                t29
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 475,
+            lineNumber: 423,
             columnNumber: 11
         }, this);
-        $[85] = t12;
-        $[86] = t14;
-        $[87] = t19;
-        $[88] = t35;
-        $[89] = t36;
+        $[72] = t12;
+        $[73] = t17;
+        $[74] = t29;
+        $[75] = t30;
     } else {
-        t36 = $[89];
+        t30 = $[75];
     }
-    let t37;
-    if ($[90] !== t10 || $[91] !== t36 || $[92] !== t4) {
-        t37 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Header, {
+    let t31;
+    if ($[76] !== t10 || $[77] !== t30 || $[78] !== t4) {
+        t31 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Header, {
             style: t4,
             children: [
                 t10,
-                t36
+                t30
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 486,
+            lineNumber: 433,
             columnNumber: 11
         }, this);
-        $[90] = t10;
-        $[91] = t36;
-        $[92] = t4;
-        $[93] = t37;
+        $[76] = t10;
+        $[77] = t30;
+        $[78] = t4;
+        $[79] = t31;
     } else {
-        t37 = $[93];
+        t31 = $[79];
     }
-    return t37;
+    return t31;
 }
 _s(AppHeader, "czXa0IYHsXQniwedFkJxy+ViLTE=", false, function() {
     return [
@@ -2335,7 +2281,7 @@ function _AppHeaderBreadcrumbsMap(item, index) {
         children: item.title
     }, index, false, {
         fileName: "[project]/src/components/layout/AppHeader.tsx",
-        lineNumber: 497,
+        lineNumber: 444,
         columnNumber: 10
     }, this);
 }
@@ -2350,7 +2296,7 @@ function _AppHeaderAnonymous(notification) {
                     children: notification.title
                 }, void 0, false, {
                     fileName: "[project]/src/components/layout/AppHeader.tsx",
-                    lineNumber: 502,
+                    lineNumber: 449,
                     columnNumber: 47
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2358,7 +2304,7 @@ function _AppHeaderAnonymous(notification) {
                     children: notification.message
                 }, void 0, false, {
                     fileName: "[project]/src/components/layout/AppHeader.tsx",
-                    lineNumber: 502,
+                    lineNumber: 449,
                     columnNumber: 109
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2366,13 +2312,13 @@ function _AppHeaderAnonymous(notification) {
                     children: notification.timestamp.toLocaleTimeString()
                 }, void 0, false, {
                     fileName: "[project]/src/components/layout/AppHeader.tsx",
-                    lineNumber: 502,
+                    lineNumber: 449,
                     columnNumber: 175
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 502,
+            lineNumber: 449,
             columnNumber: 12
         }, this)
     };
@@ -3212,26 +3158,58 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient
 class SchoolService {
     static BASE_PATH = '/schools';
     static async getSchools(params) {
+        console.log('SchoolService.getSchools called with params:', params);
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(this.BASE_PATH, {
             params
         });
-        console.log(response.data);
+        console.log('SchoolService.getSchools raw response:', response);
+        console.log('SchoolService.getSchools response type:', typeof response);
+        console.log('SchoolService.getSchools response keys:', Object.keys(response));
+        // Check if response has the expected structure
+        if (response && typeof response === 'object') {
+            console.log('SchoolService.getSchools response.success:', response.success);
+            console.log('SchoolService.getSchools response.data:', response.data);
+            console.log('SchoolService.getSchools response.error:', response.error);
+        }
+        // Handle different response structures
+        if (!response.success) {
+            console.error('SchoolService.getSchools API error:', response.error);
+            throw new Error(response.error?.message || 'Failed to fetch schools');
+        }
+        // Check if we have the expected data structure
+        if (!response.data) {
+            console.error('SchoolService.getSchools no data in response');
+            throw new Error('No data received from schools API');
+        }
+        console.log('SchoolService.getSchools returning data:', response.data);
         return response.data;
     }
     static async getSchool(id) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`${this.BASE_PATH}/${id}`);
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to fetch school');
+        }
         return response.data;
     }
     static async createSchool(data) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post(this.BASE_PATH, data);
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to create school');
+        }
         return response.data;
     }
     static async updateSchool(id, data) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].put(`${this.BASE_PATH}/${id}`, data);
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to update school');
+        }
         return response.data;
     }
     static async deleteSchool(id) {
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].delete(`${this.BASE_PATH}/${id}`);
+        const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].delete(`${this.BASE_PATH}/${id}`);
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to delete school');
+        }
     }
     static async searchSchools(query, params) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`${this.BASE_PATH}/search`, {
@@ -3240,10 +3218,16 @@ class SchoolService {
                 ...params
             }
         });
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to search schools');
+        }
         return response.data;
     }
     static async getSchoolStats(id) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(`${this.BASE_PATH}/${id}/stats`);
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to get school stats');
+        }
         return response.data;
     }
 }
@@ -3284,11 +3268,11 @@ var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.sign
 function useSchools(params) {
     _s();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(3);
-    if ($[0] !== "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33") {
+    if ($[0] !== "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4") {
         for(let $i = 0; $i < 3; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33";
+        $[0] = "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4";
     }
     let t0;
     if ($[1] !== params) {
@@ -3297,8 +3281,22 @@ function useSchools(params) {
                 ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["QUERY_KEYS"].SCHOOLS,
                 params
             ],
-            queryFn: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$schoolService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SchoolService"].getSchools(params),
-            staleTime: 300000
+            queryFn: async ()=>{
+                console.log("useSchools: Fetching schools with params:", params);
+                ;
+                try {
+                    const result = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$schoolService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SchoolService"].getSchools(params);
+                    console.log("useSchools: Success, result:", result);
+                    return result;
+                } catch (t1) {
+                    const error = t1;
+                    console.error("useSchools: Error fetching schools:", error);
+                    throw error;
+                }
+            },
+            staleTime: 300000,
+            onError: _temp,
+            onSuccess: _temp2
         };
         $[1] = params;
         $[2] = t0;
@@ -3312,14 +3310,20 @@ _s(useSchools, "4ZpngI1uv+Uo3WQHEZmTQ5FNM+k=", false, function() {
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useQuery"]
     ];
 });
+function _temp2(data) {
+    console.log("useSchools: Query success:", data);
+}
+function _temp(error_0) {
+    console.error("useSchools: Query error:", error_0);
+}
 function useSchool(id) {
     _s1();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(9);
-    if ($[0] !== "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33") {
+    if ($[0] !== "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4") {
         for(let $i = 0; $i < 9; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33";
+        $[0] = "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4";
     }
     let t0;
     if ($[1] !== id) {
@@ -3362,17 +3366,17 @@ _s1(useSchool, "4ZpngI1uv+Uo3WQHEZmTQ5FNM+k=", false, function() {
 function useCreateSchool() {
     _s2();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(3);
-    if ($[0] !== "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33") {
+    if ($[0] !== "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4") {
         for(let $i = 0; $i < 3; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33";
+        $[0] = "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4";
     }
     const queryClient = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$QueryClientProvider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useQueryClient"])();
     let t0;
     if ($[1] !== queryClient) {
         t0 = {
-            mutationFn: _temp,
+            mutationFn: _temp3,
             onSuccess: ()=>{
                 queryClient.invalidateQueries({
                     queryKey: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["QUERY_KEYS"].SCHOOLS
@@ -3392,23 +3396,23 @@ _s2(useCreateSchool, "YK0wzM21ECnncaq5SECwU+/SVdQ=", false, function() {
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useMutation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMutation"]
     ];
 });
-function _temp(data) {
+function _temp3(data) {
     return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$schoolService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SchoolService"].createSchool(data);
 }
 function useUpdateSchool() {
     _s3();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(3);
-    if ($[0] !== "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33") {
+    if ($[0] !== "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4") {
         for(let $i = 0; $i < 3; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33";
+        $[0] = "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4";
     }
     const queryClient = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$QueryClientProvider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useQueryClient"])();
     let t0;
     if ($[1] !== queryClient) {
         t0 = {
-            mutationFn: _temp2,
+            mutationFn: _temp4,
             onSuccess: (_, t1)=>{
                 const { id: id_0 } = t1;
                 queryClient.invalidateQueries({
@@ -3432,24 +3436,24 @@ _s3(useUpdateSchool, "YK0wzM21ECnncaq5SECwU+/SVdQ=", false, function() {
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useMutation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMutation"]
     ];
 });
-function _temp2(t0) {
+function _temp4(t0) {
     const { id, data } = t0;
     return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$schoolService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SchoolService"].updateSchool(id, data);
 }
 function useDeleteSchool() {
     _s4();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(3);
-    if ($[0] !== "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33") {
+    if ($[0] !== "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4") {
         for(let $i = 0; $i < 3; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33";
+        $[0] = "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4";
     }
     const queryClient = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$QueryClientProvider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useQueryClient"])();
     let t0;
     if ($[1] !== queryClient) {
         t0 = {
-            mutationFn: _temp3,
+            mutationFn: _temp5,
             onSuccess: ()=>{
                 queryClient.invalidateQueries({
                     queryKey: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["QUERY_KEYS"].SCHOOLS
@@ -3469,17 +3473,17 @@ _s4(useDeleteSchool, "YK0wzM21ECnncaq5SECwU+/SVdQ=", false, function() {
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useMutation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMutation"]
     ];
 });
-function _temp3(id) {
+function _temp5(id) {
     return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$schoolService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SchoolService"].deleteSchool(id);
 }
 function useSearchSchools(query, params) {
     _s5();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(9);
-    if ($[0] !== "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33") {
+    if ($[0] !== "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4") {
         for(let $i = 0; $i < 9; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33";
+        $[0] = "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4";
     }
     let t0;
     let t1;
@@ -3525,11 +3529,11 @@ _s5(useSearchSchools, "4ZpngI1uv+Uo3WQHEZmTQ5FNM+k=", false, function() {
 function useSchoolStats(id) {
     _s6();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(8);
-    if ($[0] !== "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33") {
+    if ($[0] !== "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4") {
         for(let $i = 0; $i < 8; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "1013aa64d02f6c27984d2586c13fba4bf17bcdebfa83de57b21c7c08023a8a33";
+        $[0] = "db5786e1d99c0f3eb82fe0c04b8abcb72f83f79b0ec6772d9d26ebad870a5bc4";
     }
     let t0;
     let t1;
@@ -3618,12 +3622,12 @@ const { Title } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2
 const { Search } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$input$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Input$3e$__["Input"];
 function SchoolList(t0) {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(44);
-    if ($[0] !== "019bea348f0808fd846ab1e9f246a31e6d1e0a4786ca878e0de4c878b49e6be2") {
-        for(let $i = 0; $i < 44; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(48);
+    if ($[0] !== "443e7dd3d3d3f202db5ec90a245939fc95fa67953a3804cabfab945da25f6d9f") {
+        for(let $i = 0; $i < 48; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "019bea348f0808fd846ab1e9f246a31e6d1e0a4786ca878e0de4c878b49e6be2";
+        $[0] = "443e7dd3d3d3f202db5ec90a245939fc95fa67953a3804cabfab945da25f6d9f";
     }
     const { onAdd, onEdit } = t0;
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
@@ -3653,7 +3657,15 @@ function SchoolList(t0) {
     } else {
         t3 = $[5];
     }
-    const { data: schoolsData, isLoading, error } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useSchools$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSchools"])(t3);
+    const { data: schoolsData, isLoading, error, isError } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useSchools$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSchools"])(t3);
+    console.log("SchoolList: Query state:", {
+        isLoading,
+        isError,
+        error,
+        schoolsData,
+        dataAvailable: !!schoolsData,
+        itemsCount: schoolsData?.items?.length || 0
+    });
     const deleteSchoolMutation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useSchools$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDeleteSchool"])();
     let t4;
     if ($[6] !== deleteSchoolMutation) {
@@ -3766,7 +3778,7 @@ function SchoolList(t0) {
                                     type: "text",
                                     icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EditOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__EditOutlined$3e$__["EditOutlined"], {}, void 0, false, {
                                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                        lineNumber: 165,
+                                        lineNumber: 174,
                                         columnNumber: 96
                                     }, void 0),
                                     onClick: {
@@ -3775,12 +3787,12 @@ function SchoolList(t0) {
                                     size: "small"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 165,
+                                    lineNumber: 174,
                                     columnNumber: 70
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                lineNumber: 165,
+                                lineNumber: 174,
                                 columnNumber: 41
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$popconfirm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Popconfirm$3e$__["Popconfirm"], {
@@ -3800,7 +3812,7 @@ function SchoolList(t0) {
                                         type: "text",
                                         icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$DeleteOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__DeleteOutlined$3e$__["DeleteOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                            lineNumber: 171,
+                                            lineNumber: 180,
                                             columnNumber: 69
                                         }, void 0),
                                         danger: true,
@@ -3808,23 +3820,23 @@ function SchoolList(t0) {
                                         loading: deleteSchoolMutation.isPending
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                        lineNumber: 171,
+                                        lineNumber: 180,
                                         columnNumber: 43
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 171,
+                                    lineNumber: 180,
                                     columnNumber: 12
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                lineNumber: 167,
+                                lineNumber: 176,
                                 columnNumber: 85
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                        lineNumber: 165,
+                        lineNumber: 174,
                         columnNumber: 34
                     }, this)
             }
@@ -3837,8 +3849,9 @@ function SchoolList(t0) {
         t11 = $[17];
     }
     const columns = t11;
-    if (error) {
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$message$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__message$3e$__["message"].error("Failed to load schools");
+    if (error || isError) {
+        console.error("SchoolList: Error loading schools:", error);
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$message$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__message$3e$__["message"].error(`Failed to load schools: ${error?.message || "Unknown error"}`);
     }
     let t12;
     if ($[18] === Symbol.for("react.memo_cache_sentinel")) {
@@ -3873,12 +3886,12 @@ function SchoolList(t0) {
                 children: "Schools Management"
             }, void 0, false, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 202,
+                lineNumber: 212,
                 columnNumber: 40
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/schools/SchoolList.tsx",
-            lineNumber: 202,
+            lineNumber: 212,
             columnNumber: 11
         }, this);
         $[20] = t14;
@@ -3889,7 +3902,7 @@ function SchoolList(t0) {
     if ($[21] === Symbol.for("react.memo_cache_sentinel")) {
         t15 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$PlusOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PlusOutlined$3e$__["PlusOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/schools/SchoolList.tsx",
-            lineNumber: 211,
+            lineNumber: 221,
             columnNumber: 11
         }, this);
         $[21] = t15;
@@ -3918,23 +3931,23 @@ function SchoolList(t0) {
                             children: "Add School"
                         }, void 0, false, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 218,
+                            lineNumber: 228,
                             columnNumber: 117
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                        lineNumber: 218,
+                        lineNumber: 228,
                         columnNumber: 90
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 218,
+                lineNumber: 228,
                 columnNumber: 28
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/schools/SchoolList.tsx",
-            lineNumber: 218,
+            lineNumber: 228,
             columnNumber: 11
         }, this);
         $[22] = onAdd;
@@ -3965,7 +3978,7 @@ function SchoolList(t0) {
     if ($[26] === Symbol.for("react.memo_cache_sentinel")) {
         t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SearchOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SearchOutlined$3e$__["SearchOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/schools/SchoolList.tsx",
-            lineNumber: 242,
+            lineNumber: 252,
             columnNumber: 11
         }, this);
         $[26] = t19;
@@ -3993,22 +4006,22 @@ function SchoolList(t0) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                        lineNumber: 249,
+                        lineNumber: 259,
                         columnNumber: 74
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                    lineNumber: 249,
+                    lineNumber: 259,
                     columnNumber: 46
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 249,
+                lineNumber: 259,
                 columnNumber: 28
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/schools/SchoolList.tsx",
-            lineNumber: 249,
+            lineNumber: 259,
             columnNumber: 11
         }, this);
         $[27] = t20;
@@ -4016,96 +4029,144 @@ function SchoolList(t0) {
         t20 = $[27];
     }
     let t21;
-    if ($[28] !== schoolsData?.data?.items) {
-        t21 = schoolsData?.data?.items || [];
-        $[28] = schoolsData?.data?.items;
-        $[29] = t21;
-    } else {
-        t21 = $[29];
-    }
-    const t22 = schoolsData?.data?.pagination.total || 0;
-    let t23;
-    if ($[30] === Symbol.for("react.memo_cache_sentinel")) {
-        t23 = [
-            ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].PAGE_SIZE_OPTIONS
-        ];
-        $[30] = t23;
-    } else {
-        t23 = $[30];
-    }
-    let t24;
-    if ($[31] !== pagination.current || $[32] !== pagination.pageSize || $[33] !== t22) {
-        t24 = {
-            current: pagination.current,
-            pageSize: pagination.pageSize,
-            total: t22,
-            showSizeChanger: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].SHOW_SIZE_CHANGER,
-            showQuickJumper: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].SHOW_QUICK_JUMPER,
-            pageSizeOptions: t23,
-            showTotal: _temp5
-        };
-        $[31] = pagination.current;
-        $[32] = pagination.pageSize;
-        $[33] = t22;
-        $[34] = t24;
-    } else {
-        t24 = $[34];
-    }
-    let t25;
-    if ($[35] === Symbol.for("react.memo_cache_sentinel")) {
-        t25 = {
-            x: 800
-        };
-        $[35] = t25;
-    } else {
-        t25 = $[35];
-    }
-    let t26;
-    if ($[36] !== columns || $[37] !== isLoading || $[38] !== t21 || $[39] !== t24) {
-        t26 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$table$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Table$3e$__["Table"], {
-            columns: columns,
-            dataSource: t21,
-            rowKey: "id",
-            loading: isLoading,
-            pagination: t24,
-            onChange: handleTableChange,
-            scroll: t25,
-            size: "small"
-        }, void 0, false, {
-            fileName: "[project]/src/components/schools/SchoolList.tsx",
-            lineNumber: 301,
-            columnNumber: 11
-        }, this);
-        $[36] = columns;
-        $[37] = isLoading;
-        $[38] = t21;
-        $[39] = t24;
-        $[40] = t26;
-    } else {
-        t26 = $[40];
-    }
-    let t27;
-    if ($[41] !== t16 || $[42] !== t26) {
-        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$card$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Card$3e$__["Card"], {
+    if ($[28] !== error?.message || $[29] !== isError) {
+        t21 = isError && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            style: {
+                padding: "20px",
+                textAlign: "center",
+                background: "#fff2f0",
+                border: "1px solid #ffccc7",
+                borderRadius: "6px",
+                marginBottom: "16px"
+            },
             children: [
-                t16,
-                t20,
-                t26
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
+                    style: {
+                        color: "#cf1322",
+                        margin: "0 0 8px 0"
+                    },
+                    children: "Failed to load schools"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/schools/SchoolList.tsx",
+                    lineNumber: 275,
+                    columnNumber: 8
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    style: {
+                        margin: 0,
+                        color: "#8c8c8c"
+                    },
+                    children: error?.message || "An error occurred while loading schools. Please try again."
+                }, void 0, false, {
+                    fileName: "[project]/src/components/schools/SchoolList.tsx",
+                    lineNumber: 278,
+                    columnNumber: 37
+                }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/schools/SchoolList.tsx",
-            lineNumber: 312,
+            lineNumber: 268,
+            columnNumber: 22
+        }, this);
+        $[28] = error?.message;
+        $[29] = isError;
+        $[30] = t21;
+    } else {
+        t21 = $[30];
+    }
+    let t22;
+    if ($[31] !== schoolsData?.items) {
+        t22 = schoolsData?.items || [];
+        $[31] = schoolsData?.items;
+        $[32] = t22;
+    } else {
+        t22 = $[32];
+    }
+    const t23 = schoolsData?.pagination?.total || 0;
+    let t24;
+    if ($[33] === Symbol.for("react.memo_cache_sentinel")) {
+        t24 = [
+            ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].PAGE_SIZE_OPTIONS
+        ];
+        $[33] = t24;
+    } else {
+        t24 = $[33];
+    }
+    let t25;
+    if ($[34] !== pagination.current || $[35] !== pagination.pageSize || $[36] !== t23) {
+        t25 = {
+            current: pagination.current,
+            pageSize: pagination.pageSize,
+            total: t23,
+            showSizeChanger: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].SHOW_SIZE_CHANGER,
+            showQuickJumper: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].SHOW_QUICK_JUMPER,
+            pageSizeOptions: t24,
+            showTotal: _temp5
+        };
+        $[34] = pagination.current;
+        $[35] = pagination.pageSize;
+        $[36] = t23;
+        $[37] = t25;
+    } else {
+        t25 = $[37];
+    }
+    let t26;
+    if ($[38] === Symbol.for("react.memo_cache_sentinel")) {
+        t26 = {
+            x: 800
+        };
+        $[38] = t26;
+    } else {
+        t26 = $[38];
+    }
+    let t27;
+    if ($[39] !== columns || $[40] !== isLoading || $[41] !== t22 || $[42] !== t25) {
+        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$table$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Table$3e$__["Table"], {
+            columns: columns,
+            dataSource: t22,
+            rowKey: "id",
+            loading: isLoading,
+            pagination: t25,
+            onChange: handleTableChange,
+            scroll: t26,
+            size: "small"
+        }, void 0, false, {
+            fileName: "[project]/src/components/schools/SchoolList.tsx",
+            lineNumber: 333,
             columnNumber: 11
         }, this);
-        $[41] = t16;
-        $[42] = t26;
+        $[39] = columns;
+        $[40] = isLoading;
+        $[41] = t22;
+        $[42] = t25;
         $[43] = t27;
     } else {
         t27 = $[43];
     }
-    return t27;
+    let t28;
+    if ($[44] !== t16 || $[45] !== t21 || $[46] !== t27) {
+        t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$card$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Card$3e$__["Card"], {
+            children: [
+                t16,
+                t20,
+                t21,
+                t27
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/schools/SchoolList.tsx",
+            lineNumber: 344,
+            columnNumber: 11
+        }, this);
+        $[44] = t16;
+        $[45] = t21;
+        $[46] = t27;
+        $[47] = t28;
+    } else {
+        t28 = $[47];
+    }
+    return t28;
 }
-_s(SchoolList, "fedvRvnRekyRGD2y/1QGBajihR0=", false, function() {
+_s(SchoolList, "hPez9pB5b8TCm2U8U9Gxe8Z43bw=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useSchools$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSchools"],
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useSchools$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDeleteSchool"]
@@ -4124,7 +4185,7 @@ function _temp3(isActive) {
         children: isActive ? "Active" : "Inactive"
     }, void 0, false, {
         fileName: "[project]/src/components/schools/SchoolList.tsx",
-        lineNumber: 328,
+        lineNumber: 361,
         columnNumber: 10
     }, this);
 }
@@ -4147,20 +4208,20 @@ function _temp2(_, record_0) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                        lineNumber: 336,
+                        lineNumber: 369,
                         columnNumber: 8
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: record_0.address
                     }, void 0, false, {
                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                        lineNumber: 338,
+                        lineNumber: 371,
                         columnNumber: 12
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 331,
+                lineNumber: 364,
                 columnNumber: 68
             }, this),
             record_0.phone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4177,20 +4238,20 @@ function _temp2(_, record_0) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                        lineNumber: 343,
+                        lineNumber: 376,
                         columnNumber: 8
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: record_0.phone
                     }, void 0, false, {
                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                        lineNumber: 345,
+                        lineNumber: 378,
                         columnNumber: 12
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 338,
+                lineNumber: 371,
                 columnNumber: 69
             }, this),
             record_0.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4207,26 +4268,26 @@ function _temp2(_, record_0) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                        lineNumber: 350,
+                        lineNumber: 383,
                         columnNumber: 8
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: record_0.email
                     }, void 0, false, {
                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                        lineNumber: 352,
+                        lineNumber: 385,
                         columnNumber: 12
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 345,
+                lineNumber: 378,
                 columnNumber: 67
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/schools/SchoolList.tsx",
-        lineNumber: 331,
+        lineNumber: 364,
         columnNumber: 10
     }, this);
 }
@@ -4241,7 +4302,7 @@ function _temp(name_0, record) {
                 children: name_0
             }, void 0, false, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 355,
+                lineNumber: 388,
                 columnNumber: 15
             }, this),
             record.code && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4255,13 +4316,13 @@ function _temp(name_0, record) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 358,
+                lineNumber: 391,
                 columnNumber: 38
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/schools/SchoolList.tsx",
-        lineNumber: 355,
+        lineNumber: 388,
         columnNumber: 10
     }, this);
 }

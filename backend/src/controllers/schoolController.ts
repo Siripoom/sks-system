@@ -62,7 +62,7 @@ export const getSchools = async (req: AuthRequest, res: Response) => {
   res.json({
     success: true,
     data: {
-      schools,
+      items: schools,
       pagination: {
         page: Number(page),
         limit: Number(limit),

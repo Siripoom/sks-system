@@ -1,7 +1,286 @@
-[00:00:03.317] Server  LOG     ✓ Ready in 3.1s
-[01:21:57.711] Browser LOG     ApiClient: Initializing with BASE_URL: http://localhost:5000/api
-[01:21:59.453] Browser ERROR   Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://react.dev/link/setstate-in-render Router ProtectedRoute ProtectedRoute
-[01:21:59.453] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+[00:00:02.044] Server  LOG     ✓ Ready in 1685ms
+[00:00:03.612] Browser LOG     ApiClient: Initializing with BASE_URL: http://localhost:5000/api
+[00:00:04.072] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en">
+                          <body
+                            className="antialiased"
+-                           cz-shortcut-listen="true"
+                          >
+                  ...
+
+[00:00:04.072] Browser LOG     AuthStore: Initializing auth...
+[00:00:04.072] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:00:04.072] Browser LOG     AuthStore: Token available: true
+[00:00:04.072] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:00:04.072] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:00:04.073] Browser LOG     SW registered:  {}
+[00:00:07.110] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:07.111] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:07.356] Server  LOG     ○ Compiling /dashboard ...
+[00:00:07.497] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:07.498] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:07.690] Browser ERROR   uncaughtError: Error: Module [project]/node_modules/@ant-design/icons/es/icons/SunOutlined.js [app-client] (ecmascript) <export default as SunOutlined> was instantiated because it was required from module [project]/src/components/layout/AppHeader.tsx [app-client] (ecmascript), but the module factory is not available. It might have been deleted in an HMR update.
+[00:00:17.429] Browser LOG     ApiClient: Initializing with BASE_URL: http://localhost:5000/api
+[00:00:17.709] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:17.710] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:17.739] Browser LOG     AuthStore: Initializing auth...
+[00:00:17.739] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:00:17.739] Browser LOG     AuthStore: Token available: true
+[00:00:17.739] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:00:17.739] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:00:17.739] Browser LOG     SW registered:  {}
+[00:00:17.739] Browser ERROR   uncaughtError: Error: Module [project]/node_modules/@ant-design/icons/es/icons/SunOutlined.js [app-client] (ecmascript) <export default as SunOutlined> was instantiated because it was required from module [project]/src/components/layout/AppHeader.tsx [app-client] (ecmascript), but the module factory is not available. It might have been deleted in an HMR update.
+[00:25:45.835] Browser LOG     ApiClient: Initializing with BASE_URL: http://localhost:5000/api
+[00:25:46.104] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.105] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.139] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.139] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.159] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.159] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.197] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.198] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.235] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.235] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.262] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.262] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.286] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.286] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.432] Browser ERROR   Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://react.dev/link/setstate-in-render Router ProtectedRoute ProtectedRoute
+[00:25:46.432] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/dashboard" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en">
+                          <body
+                            className="antialiased"
+-                           cz-shortcut-listen="true"
+-                           data-new-gr-c-s-check-loaded="14.1275.0"
+-                           data-gr-ext-installed=""
+                          >
+                  ...
+
+[00:25:46.432] Browser LOG     AuthStore: Initializing auth...
+[00:25:46.432] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:46.432] Browser LOG     AuthStore: Token available: true
+[00:25:46.432] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:46.432] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:25:46.432] Browser LOG     AuthStore: Initializing auth...
+[00:25:46.432] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:46.432] Browser LOG     AuthStore: Token available: true
+[00:25:46.432] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:46.432] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:25:46.432] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[00:25:46.432] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:46.432] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[00:25:46.433] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:46.433] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[00:25:46.433] Browser ERROR   Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+[00:25:46.433] Browser ERROR   Warning: [antd: Statistic] `valueStyle` is deprecated. Please use `styles.content` instead.
+[00:25:46.433] Browser ERROR   Warning: [antd: Breadcrumb] `Breadcrumb.Item and Breadcrumb.Separator` is deprecated. Please use `items` instead.
+[00:25:46.433] Browser LOG     SW registered:  {}
+[00:25:46.544] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.545] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.659] Browser LOG     AuthStore: Initializing auth...
+[00:25:46.659] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:46.659] Browser LOG     AuthStore: Token available: true
+[00:25:46.659] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:46.659] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:25:46.659] Browser LOG     AuthStore: Initializing auth...
+[00:25:46.659] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:46.659] Browser LOG     AuthStore: Token available: true
+[00:25:46.659] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:46.659] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:25:46.659] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[00:25:46.659] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:46.659] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[00:25:46.659] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:46.659] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[00:25:46.659] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[00:25:46.659] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:46.659] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[00:25:46.659] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:46.659] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[00:25:46.680] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:46.680] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:49.821] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:49.821] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:25:49.872] Browser LOG     AuthStore: Initializing auth...
+[00:25:49.872] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:49.872] Browser LOG     AuthStore: Token available: true
+[00:25:49.872] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:49.872] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:25:49.872] Browser LOG     AuthStore: Initializing auth...
+[00:25:49.872] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:49.872] Browser LOG     AuthStore: Token available: true
+[00:25:49.872] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:49.872] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[00:25:49.872] Browser LOG     SchoolList: Query state: {"dataAvailable":false,"error":null,"isError":false,"isLoading":true,"itemsCount":0}
+[00:25:49.872] Browser LOG     [2;38;2;124;124;124m%s[0m SchoolList: Query state: {"dataAvailable":false,"error":null,"isError":false,"isLoading":true,"itemsCount":0}
+[00:25:49.872] Browser ERROR   Warning: [antd: Modal] `destroyOnClose` is deprecated. Please use `destroyOnHidden` instead.
+[00:25:49.872] Browser LOG     useSchools: Fetching schools with params: {"limit":10,"page":1}
+[00:25:49.872] Browser LOG     SchoolService.getSchools called with params: {"limit":10,"page":1}
+[00:25:49.872] Browser LOG     ApiClient: Making request to: /schools
+[00:25:49.872] Browser LOG     ApiClient: Token available: true
+[00:25:49.872] Browser LOG     ApiClient: Token expired? false
+[00:25:49.872] Browser LOG     ApiClient: Added Authorization header
+[00:25:49.872] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1},"url":"/schools"}
+[00:25:50.143] Browser LOG     ApiClient: Response received: 200 /schools
+[00:25:50.143] Browser LOG     SchoolService.getSchools raw response: {"data":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}},"success":true}
+[00:25:50.143] Browser LOG     SchoolService.getSchools response type: object
+[00:25:50.143] Browser LOG     SchoolService.getSchools response keys: ["success","data"]
+[00:25:50.143] Browser LOG     SchoolService.getSchools response.success: true
+[00:25:50.143] Browser LOG     SchoolService.getSchools response.data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[00:25:50.143] Browser LOG     SchoolService.getSchools response.error: undefined
+[00:25:50.143] Browser LOG     SchoolService.getSchools returning data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[00:25:50.143] Browser LOG     useSchools: Success, result: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[00:25:50.143] Browser LOG     SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":0,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:25:50.143] Browser LOG     [2;38;2;124;124;124m%s[0m SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":0,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:26:23.541] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /schools. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:23.541] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /schools. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:23.732] Server  LOG     ApiClient: Initializing with BASE_URL: "http://localhost:5000/api"
+[00:26:24.182] Server  ERROR   ReferenceError: location is not defined
+[00:26:24.385] Server  ERROR   ⨯ "uncaughtException:" ReferenceError: location is not defined
+[00:26:24.575] Server  ERROR   ⨯ "uncaughtException: " ReferenceError: location is not defined
+[00:26:24.729] Browser LOG     ApiClient: Initializing with BASE_URL: http://localhost:5000/api
+[00:26:24.796] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.797] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.828] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.830] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.873] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.873] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.896] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.896] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.921] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.921] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.938] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:24.938] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:25.130] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:25.131] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:25.387] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:25.388] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:25.396] Browser ERROR   Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://react.dev/link/setstate-in-render Router ProtectedRoute ProtectedRoute
+[00:26:25.396] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -44,35 +323,297 @@ It can also happen if the client has a browser extension installed which messes 
                           >
                   ...
 
-[01:21:59.453] Browser ERROR   Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
-[01:21:59.453] Browser ERROR   Warning: [antd: Modal] `destroyOnClose` is deprecated. Please use `destroyOnHidden` instead.
-[01:21:59.453] Browser ERROR   Warning: [antd: Breadcrumb] `Breadcrumb.Item and Breadcrumb.Separator` is deprecated. Please use `items` instead.
-[01:21:59.453] Browser LOG     ApiClient: Making request to: /schools
-[01:21:59.453] Browser LOG     SW registered:  {}
-[01:22:00.196] Browser LOG     ApiClient: Response received: 200 /schools
-[01:22:00.196] Browser ERROR   Warning: [antd: Statistic] `valueStyle` is deprecated. Please use `styles.content` instead.
-[01:22:01.147] Server  LOG     ○ Compiling /_error ...
-[01:22:04.940] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /vehicles. Please move it to viewport export instead.
+[00:26:25.396] Browser LOG     AuthStore: Initializing auth...
+[00:26:25.396] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:25.396] Browser LOG     AuthStore: Token available: true
+[00:26:25.396] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:25.396] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:26:25.396] Browser LOG     AuthStore: Initializing auth...
+[00:26:25.396] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:25.396] Browser LOG     AuthStore: Token available: true
+[00:26:25.396] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:25.396] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:26:25.396] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[00:26:25.396] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:25.396] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[00:26:25.396] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:25.396] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[00:26:25.396] Browser ERROR   Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+[00:26:25.396] Browser LOG     SchoolList: Query state: {"dataAvailable":false,"error":null,"isError":false,"isLoading":true,"itemsCount":0}
+[00:26:25.396] Browser LOG     [2;38;2;124;124;124m%s[0m SchoolList: Query state: {"dataAvailable":false,"error":null,"isError":false,"isLoading":true,"itemsCount":0}
+[00:26:25.396] Browser ERROR   Warning: [antd: Modal] `destroyOnClose` is deprecated. Please use `destroyOnHidden` instead.
+[00:26:25.396] Browser LOG     useSchools: Fetching schools with params: {"limit":10,"page":1}
+[00:26:25.396] Browser LOG     SchoolService.getSchools called with params: {"limit":10,"page":1}
+[00:26:25.396] Browser ERROR   Warning: [antd: Breadcrumb] `Breadcrumb.Item and Breadcrumb.Separator` is deprecated. Please use `items` instead.
+[00:26:25.396] Browser LOG     ApiClient: Making request to: /schools
+[00:26:25.396] Browser LOG     ApiClient: Token available: true
+[00:26:25.396] Browser LOG     ApiClient: Token expired? false
+[00:26:25.396] Browser LOG     ApiClient: Added Authorization header
+[00:26:25.396] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1},"url":"/schools"}
+[00:26:25.396] Browser LOG     SW registered:  {}
+[00:26:25.396] Browser LOG     ApiClient: Response received: 200 /schools
+[00:26:25.396] Browser LOG     SchoolService.getSchools raw response: {"data":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}},"success":true}
+[00:26:25.396] Browser LOG     SchoolService.getSchools response type: object
+[00:26:25.396] Browser LOG     SchoolService.getSchools response keys: ["success","data"]
+[00:26:25.396] Browser LOG     SchoolService.getSchools response.success: true
+[00:26:25.396] Browser LOG     SchoolService.getSchools response.data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[00:26:25.396] Browser LOG     SchoolService.getSchools response.error: undefined
+[00:26:25.396] Browser LOG     SchoolService.getSchools returning data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[00:26:25.396] Browser LOG     useSchools: Success, result: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[00:26:25.396] Browser LOG     SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":0,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:26:25.396] Browser LOG     [2;38;2;124;124;124m%s[0m SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":0,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:26:25.538] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:04.940] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /vehicles. Please move it to viewport export instead.
+[00:26:25.538] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:05.764] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[00:26:25.602] Browser LOG     AuthStore: Initializing auth...
+[00:26:25.602] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:25.602] Browser LOG     AuthStore: Token available: true
+[00:26:25.602] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:25.602] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:26:25.602] Browser LOG     AuthStore: Initializing auth...
+[00:26:25.602] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:25.602] Browser LOG     AuthStore: Token available: true
+[00:26:25.602] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:25.602] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:26:25.602] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[00:26:25.602] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:25.602] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[00:26:25.602] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:25.602] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[00:26:25.602] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[00:26:25.602] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:25.602] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[00:26:25.602] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:25.602] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[00:26:25.602] Browser ERROR   Warning: [antd: Statistic] `valueStyle` is deprecated. Please use `styles.content` instead.
+[00:26:29.435] Browser LOG     AuthStore: Initializing auth...
+[00:26:29.435] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:29.435] Browser LOG     AuthStore: Token available: true
+[00:26:29.435] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:29.435] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:26:29.435] Browser LOG     AuthStore: Initializing auth...
+[00:26:29.435] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:29.435] Browser LOG     AuthStore: Token available: true
+[00:26:29.435] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:29.435] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[00:26:29.435] Browser LOG     SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":0,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:26:29.435] Browser LOG     [2;38;2;124;124;124m%s[0m SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":0,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:26:29.466] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:05.764] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[00:26:29.466] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:05.816] Browser LOG     ApiClient: Making request to: /vehicles
-[01:22:05.816] Browser LOG     ApiClient: Response received: 200 /vehicles
-[01:22:07.299] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[00:26:30.396] Server  LOG     ○ Compiling /vehicles ...
+[00:26:30.450] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /vehicles. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:07.299] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[00:26:30.450] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /vehicles. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:20.275] Browser LOG     ApiClient: Initializing with BASE_URL: http://localhost:5000/api
-[01:22:20.799] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[00:26:36.943] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:20.799] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[00:26:36.943] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:20.842] Browser ERROR   Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://react.dev/link/setstate-in-render Router ProtectedRoute ProtectedRoute
-[01:22:21.195] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+[00:26:37.230] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:26:37.230] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:55:08.874] Server  LOG     ✓ Compiled in 984ms
+[00:55:10.883] Browser LOG     SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":0,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:55:10.883] Browser LOG     [2;38;2;124;124;124m%s[0m SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":0,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:55:10.884] Browser LOG     useSchools: Fetching schools with params: {"limit":10,"page":1}
+[00:55:10.884] Browser LOG     SchoolService.getSchools called with params: {"limit":10,"page":1}
+[00:55:10.884] Browser LOG     SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":0,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:55:10.884] Browser LOG     [2;38;2;124;124;124m%s[0m SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":0,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:55:10.884] Browser LOG     ApiClient: Making request to: /schools
+[00:55:10.884] Browser LOG     ApiClient: Token available: true
+[00:55:10.884] Browser LOG     ApiClient: Token expired? false
+[00:55:10.884] Browser LOG     ApiClient: Added Authorization header
+[00:55:10.884] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1},"url":"/schools"}
+[00:55:10.884] Browser LOG     ApiClient: Response received: 200 /schools
+[00:55:10.884] Browser LOG     SchoolService.getSchools raw response: {"data":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}},"success":true}
+[00:55:10.884] Browser LOG     SchoolService.getSchools response type: object
+[00:55:10.884] Browser LOG     SchoolService.getSchools response keys: ["success","data"]
+[00:55:10.884] Browser LOG     SchoolService.getSchools response.success: true
+[00:55:10.884] Browser LOG     SchoolService.getSchools response.data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[00:55:10.884] Browser LOG     SchoolService.getSchools response.error: undefined
+[00:55:10.884] Browser LOG     SchoolService.getSchools returning data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[00:55:10.884] Browser LOG     useSchools: Success, result: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[00:55:21.139] Server  LOG     ✓ Compiled in 363ms
+[00:55:21.522] Browser LOG     SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":4,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[00:55:21.522] Browser LOG     [2;38;2;124;124;124m%s[0m SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":4,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-02-25T17:26:55.590Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[02:23:16.086] Browser LOG     ApiClient: Making request to: /schools/cmm2b3zhi0004uv39rczqjm3m
+[02:23:16.086] Browser LOG     ApiClient: Token available: true
+[02:23:16.086] Browser LOG     ApiClient: Token expired? false
+[02:23:16.086] Browser LOG     ApiClient: Added Authorization header
+[02:23:16.086] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"put","url":"/schools/cmm2b3zhi0004uv39rczqjm3m"}
+[02:23:16.086] Browser LOG     ApiClient: Response received: 200 /schools/cmm2b3zhi0004uv39rczqjm3m
+[02:23:16.086] Browser LOG     useSchools: Fetching schools with params: {"limit":10,"page":1}
+[02:23:16.086] Browser LOG     SchoolService.getSchools called with params: {"limit":10,"page":1}
+[02:23:16.086] Browser LOG     ApiClient: Making request to: /schools
+[02:23:16.086] Browser LOG     ApiClient: Token available: true
+[02:23:16.086] Browser LOG     ApiClient: Token expired? false
+[02:23:16.087] Browser LOG     ApiClient: Added Authorization header
+[02:23:16.087] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1},"url":"/schools"}
+[02:23:16.087] Browser ERROR   Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+[02:23:16.087] Browser LOG     ApiClient: Response received: 200 /schools
+[02:23:16.087] Browser LOG     SchoolService.getSchools raw response: {"data":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirira","phone":"0925878198","updatedAt":"2026-03-02T14:53:31.691Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}},"success":true}
+[02:23:16.087] Browser LOG     SchoolService.getSchools response type: object
+[02:23:16.087] Browser LOG     SchoolService.getSchools response keys: ["success","data"]
+[02:23:16.087] Browser LOG     SchoolService.getSchools response.success: true
+[02:23:16.087] Browser LOG     SchoolService.getSchools response.data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirira","phone":"0925878198","updatedAt":"2026-03-02T14:53:31.691Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[02:23:16.087] Browser LOG     SchoolService.getSchools response.error: undefined
+[02:23:16.087] Browser LOG     SchoolService.getSchools returning data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirira","phone":"0925878198","updatedAt":"2026-03-02T14:53:31.691Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[02:23:16.087] Browser LOG     useSchools: Success, result: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirira","phone":"0925878198","updatedAt":"2026-03-02T14:53:31.691Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[02:23:16.087] Browser LOG     SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":4,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirira","phone":"0925878198","updatedAt":"2026-03-02T14:53:31.691Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[02:23:16.087] Browser LOG     [2;38;2;124;124;124m%s[0m SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":4,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirira","phone":"0925878198","updatedAt":"2026-03-02T14:53:31.691Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[02:23:21.913] Browser LOG     ApiClient: Making request to: /schools/cmm2b3zhi0004uv39rczqjm3m
+[02:23:21.913] Browser LOG     ApiClient: Token available: true
+[02:23:21.913] Browser LOG     ApiClient: Token expired? false
+[02:23:21.913] Browser LOG     ApiClient: Added Authorization header
+[02:23:21.913] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"put","url":"/schools/cmm2b3zhi0004uv39rczqjm3m"}
+[02:23:21.913] Browser LOG     ApiClient: Response received: 200 /schools/cmm2b3zhi0004uv39rczqjm3m
+[02:23:21.913] Browser LOG     useSchools: Fetching schools with params: {"limit":10,"page":1}
+[02:23:21.913] Browser LOG     SchoolService.getSchools called with params: {"limit":10,"page":1}
+[02:23:21.913] Browser LOG     ApiClient: Making request to: /schools
+[02:23:21.913] Browser LOG     ApiClient: Token available: true
+[02:23:21.913] Browser LOG     ApiClient: Token expired? false
+[02:23:21.913] Browser LOG     ApiClient: Added Authorization header
+[02:23:21.913] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1},"url":"/schools"}
+[02:23:21.913] Browser LOG     ApiClient: Response received: 200 /schools
+[02:23:21.913] Browser LOG     SchoolService.getSchools raw response: {"data":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-03-02T14:53:37.490Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}},"success":true}
+[02:23:21.913] Browser LOG     SchoolService.getSchools response type: object
+[02:23:21.913] Browser LOG     SchoolService.getSchools response keys: ["success","data"]
+[02:23:21.913] Browser LOG     SchoolService.getSchools response.success: true
+[02:23:21.913] Browser LOG     SchoolService.getSchools response.data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-03-02T14:53:37.490Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[02:23:21.913] Browser LOG     SchoolService.getSchools response.error: undefined
+[02:23:21.913] Browser LOG     SchoolService.getSchools returning data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-03-02T14:53:37.490Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[02:23:21.913] Browser LOG     useSchools: Success, result: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-03-02T14:53:37.490Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[02:23:21.913] Browser LOG     SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":4,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-03-02T14:53:37.490Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[02:23:21.913] Browser LOG     [2;38;2;124;124;124m%s[0m SchoolList: Query state: {"dataAvailable":true,"error":null,"isError":false,"isLoading":false,"itemsCount":4,"schoolsData":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-03-02T14:53:37.490Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}}
+[02:23:34.162] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /vehicles. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:34.163] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /vehicles. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:34.610] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:34.611] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:23:34.816] Browser LOG     AuthStore: Initializing auth...
+[02:23:34.816] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[02:23:34.816] Browser LOG     AuthStore: Token available: true
+[02:23:34.816] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[02:23:34.816] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[02:23:34.816] Browser LOG     AuthStore: Initializing auth...
+[02:23:34.816] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[02:23:34.816] Browser LOG     AuthStore: Token available: true
+[02:23:34.816] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[02:23:34.816] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[02:23:34.816] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[02:23:34.816] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[02:23:34.816] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[02:23:34.816] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[02:23:34.816] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[02:23:34.816] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[02:23:34.816] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[02:23:34.816] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[02:23:34.816] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[02:23:34.816] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[02:23:34.816] Browser LOG     ApiClient: Making request to: /vehicles
+[02:23:34.816] Browser LOG     ApiClient: Token available: true
+[02:23:34.816] Browser LOG     ApiClient: Token expired? false
+[02:23:34.816] Browser LOG     ApiClient: Added Authorization header
+[02:23:34.816] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1},"url":"/vehicles"}
+[02:23:34.816] Browser LOG     ApiClient: Response received: 200 /vehicles
+[02:23:36.301] Browser ERROR   Warning: [antd: InputNumber] `addonAfter` is deprecated. Please use `Space.Compact` instead.
+[02:38:06.493] Server  LOG     ✓ Compiled in 195ms
+[02:38:11.168] Server  LOG     ✓ Compiled in 33ms
+[02:38:23.158] Server  LOG     ✓ Compiled in 427ms
+[02:38:23.643] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:23.643] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:24.497] Browser LOG     ApiClient: Making request to: /vehicles
+[02:38:24.497] Browser LOG     ApiClient: Token available: true
+[02:38:24.497] Browser LOG     ApiClient: Token expired? false
+[02:38:24.497] Browser LOG     ApiClient: Added Authorization header
+[02:38:24.497] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1},"url":"/vehicles"}
+[02:38:24.497] Browser LOG     ApiClient: Response received: 200 /vehicles
+[02:38:24.497] Browser ERROR   uncaughtError: TypeError: Cannot read properties of undefined (reading 'replace')
+[02:38:45.932] Server  LOG     ✓ Compiled in 473ms
+[02:38:45.949] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[02:38:46.698] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /vehicles. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:46.698] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /vehicles. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:47.207] Server  LOG     ApiClient: Initializing with BASE_URL: "http://localhost:5000/api"
+[02:38:47.588] Server  ERROR   ReferenceError: location is not defined
+[02:38:47.770] Server  ERROR   ⨯ "uncaughtException:" ReferenceError: location is not defined
+[02:38:47.943] Server  ERROR   ⨯ "uncaughtException: " ReferenceError: location is not defined
+[02:38:47.955] Browser LOG     AuthStore: Initializing auth...
+[02:38:47.955] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[02:38:47.955] Browser LOG     AuthStore: Token available: true
+[02:38:47.955] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[02:38:47.955] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[02:38:47.955] Browser LOG     AuthStore: Initializing auth...
+[02:38:47.955] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[02:38:47.955] Browser LOG     AuthStore: Token available: true
+[02:38:47.955] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[02:38:47.955] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[02:38:47.955] Browser ERROR   uncaughtError: TypeError: Cannot read properties of undefined (reading 'replace')
+[02:38:47.955] Browser LOG     SW registered:  {}
+[02:38:48.042] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:48.043] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:50.498] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:50.498] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:50.614] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:50.614] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:50.631] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:50.631] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:50.752] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:50.752] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:50.768] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:50.768] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /auth/login. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:51.486] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:51.486] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:51.723] Server  LOG     ✓ Compiled in 819ms
+[02:38:51.830] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:51.830] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /dashboard. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:52.957] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:52.958] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:53.291] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:53.291] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[02:38:53.341] Browser LOG     ApiClient: Initializing with BASE_URL: http://localhost:5000/api
+[02:38:53.341] Browser ERROR   Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://react.dev/link/setstate-in-render Router ProtectedRoute ProtectedRoute
+[02:38:53.341] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -125,31 +666,206 @@ https://react.dev/link/hydration-mismatch
 -                                   <Suspense>
                   ...
 
-[01:22:21.195] Browser LOG     SW registered:  {}
-[01:22:21.195] Browser LOG     SW registered:  {}
-[01:22:21.244] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[02:38:53.341] Browser LOG     SW registered:  {}
+[02:38:53.341] Browser LOG     SW registered:  {}
+[02:38:53.341] Browser LOG     AuthStore: Initializing auth...
+[02:38:53.341] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[02:38:53.341] Browser LOG     AuthStore: Token available: true
+[02:38:53.341] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[02:38:53.341] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[02:38:53.341] Browser LOG     AuthStore: Initializing auth...
+[02:38:53.341] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[02:38:53.341] Browser LOG     AuthStore: Token available: true
+[02:38:53.341] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[02:38:53.341] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[02:38:53.341] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[02:38:53.341] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[02:38:53.341] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[02:38:53.341] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[02:38:53.341] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[02:38:53.341] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[02:38:53.341] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[02:38:53.341] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[02:38:53.341] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[02:38:53.341] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[02:38:53.341] Browser ERROR   Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
+[02:38:53.341] Browser ERROR   Warning: [antd: Statistic] `valueStyle` is deprecated. Please use `styles.content` instead.
+[02:38:53.341] Browser ERROR   Warning: [antd: Breadcrumb] `Breadcrumb.Item and Breadcrumb.Separator` is deprecated. Please use `items` instead.
+[02:38:57.207] Server  LOG     ✓ Compiled in 290ms
+[02:39:02.857] Server  LOG     ✓ Compiled in 215ms
+[02:39:14.790] Server  LOG     ✓ Compiled in 266ms
+[02:39:22.508] Server  LOG     ✓ Compiled in 304ms
+[02:39:27.822] Server  LOG     ✓ Compiled in 211ms
+[02:39:36.332] Server  LOG     ✓ Compiled in 248ms
+[02:39:43.552] Server  LOG     ✓ Compiled in 122ms
+[03:10:45.408] Server  LOG     ✓ Compiled in 33ms
+[03:10:50.525] Server  LOG     ✓ Compiled in 28ms
+[03:11:33.857] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:21.245] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[03:11:33.857] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:21.710] Browser ERROR   Warning: [antd: Space] `direction` is deprecated. Please use `orientation` instead.
-[01:22:21.710] Browser ERROR   Warning: [antd: Statistic] `valueStyle` is deprecated. Please use `styles.content` instead.
-[01:22:21.710] Browser ERROR   Warning: [antd: Breadcrumb] `Breadcrumb.Item and Breadcrumb.Separator` is deprecated. Please use `items` instead.
-[01:22:21.743] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[03:11:33.923] Browser LOG     AuthStore: Initializing auth...
+[03:11:33.923] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[03:11:33.923] Browser LOG     AuthStore: Token available: true
+[03:11:33.923] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[03:11:33.923] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[03:11:33.923] Browser LOG     AuthStore: Initializing auth...
+[03:11:33.923] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[03:11:33.923] Browser LOG     AuthStore: Token available: true
+[03:11:33.923] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[03:11:33.923] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[03:11:33.923] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[03:11:33.923] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[03:11:33.923] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[03:11:33.923] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[03:11:33.923] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[03:11:33.923] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[03:11:33.923] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[03:11:33.923] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[03:11:33.923] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[03:11:33.923] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[03:11:33.923] Browser ERROR   Warning: [antd: Modal] `destroyOnClose` is deprecated. Please use `destroyOnHidden` instead.
+[03:11:33.923] Browser LOG     ApiClient: Making request to: /vehicles
+[03:11:33.923] Browser LOG     ApiClient: Token available: true
+[03:11:33.923] Browser LOG     ApiClient: Token expired? false
+[03:11:33.923] Browser LOG     ApiClient: Added Authorization header
+[03:11:33.923] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1},"url":"/vehicles"}
+[03:11:33.923] Browser LOG     ApiClient: Response received: 200 /vehicles
+[03:11:35.618] Browser ERROR   Warning: [antd: InputNumber] `addonAfter` is deprecated. Please use `Space.Compact` instead.
+[03:11:35.618] Browser LOG     useSchools: Fetching schools with params: undefined
+[03:11:35.618] Browser LOG     SchoolService.getSchools called with params: undefined
+[03:11:35.618] Browser LOG     ApiClient: Making request to: /schools
+[03:11:35.618] Browser LOG     ApiClient: Token available: true
+[03:11:35.618] Browser LOG     ApiClient: Token expired? false
+[03:11:35.618] Browser LOG     ApiClient: Added Authorization header
+[03:11:35.618] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","url":"/schools"}
+[03:11:35.618] Browser LOG     ApiClient: Response received: 200 /schools
+[03:11:35.618] Browser LOG     SchoolService.getSchools raw response: {"data":{"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-03-02T14:53:37.490Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":2},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}},"success":true}
+[03:11:35.618] Browser LOG     SchoolService.getSchools response type: object
+[03:11:35.618] Browser LOG     SchoolService.getSchools response keys: ["success","data"]
+[03:11:35.618] Browser LOG     SchoolService.getSchools response.success: true
+[03:11:35.618] Browser LOG     SchoolService.getSchools response.data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-03-02T14:53:37.490Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":2},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[03:11:35.618] Browser LOG     SchoolService.getSchools response.error: undefined
+[03:11:35.618] Browser LOG     SchoolService.getSchools returning data: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-03-02T14:53:37.490Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":2},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[03:11:35.618] Browser LOG     useSchools: Success, result: {"items":[{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"19/1 TaladKhauw","createdAt":"2026-02-25T17:26:55.590Z","email":"artorsiriratpoom@gmail.com","id":"cmm2b3zhi0004uv39rczqjm3m","isActive":true,"name":"Poom Arthonsirirat","phone":"0925878198","updatedAt":"2026-03-02T14:53:37.490Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":2},"address":"456 Maple Avenue, Springfield, IL 62702","createdAt":"2026-02-24T07:20:38.807Z","email":"office@roosevelt.edu","id":"cmm0a0gba0001fg6zjxi74lkb","isActive":true,"name":"Roosevelt Middle School","phone":"+1-217-555-0102","updatedAt":"2026-02-24T07:20:38.807Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Oak Street, Springfield, IL 62701","createdAt":"2026-02-24T07:20:38.800Z","email":"admin@lincoln.edu","id":"cmm0a0gb40000fg6zirlewsvf","isActive":true,"name":"Lincoln Elementary School","phone":"+1-217-555-0101","updatedAt":"2026-02-24T07:20:38.800Z"},{"_count":{"drivers":0,"routes":0,"students":0,"vehicles":0},"address":"123 Education Street","createdAt":"2026-02-23T17:59:32.705Z","email":"admin@centralhigh.edu","id":"cmlzhe89t0004dc1pe48mem07","isActive":true,"name":"Central High School","phone":"+1234567890","updatedAt":"2026-02-23T17:59:32.705Z"}],"pagination":{"limit":10,"page":1,"pages":1,"total":4}}
+[03:12:12.062] Browser LOG     ApiClient: Making request to: /vehicles
+[03:12:12.063] Browser LOG     ApiClient: Token available: true
+[03:12:12.063] Browser LOG     ApiClient: Token expired? false
+[03:12:12.063] Browser LOG     ApiClient: Added Authorization header
+[03:12:12.063] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1,"status":"INACTIVE"},"url":"/vehicles"}
+[03:12:12.063] Browser LOG     ApiClient: Response received: 200 /vehicles
+[03:12:12.986] Browser LOG     ApiClient: Making request to: /vehicles
+[03:12:12.986] Browser LOG     ApiClient: Token available: true
+[03:12:12.987] Browser LOG     ApiClient: Token expired? false
+[03:12:12.987] Browser LOG     ApiClient: Added Authorization header
+[03:12:12.987] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1,"status":"ACTIVE"},"url":"/vehicles"}
+[03:12:12.987] Browser LOG     ApiClient: Response received: 200 /vehicles
+[03:13:06.862] Server  LOG     ✓ Compiled in 542ms
+[03:13:48.758] Server  LOG     ✓ Compiled in 117ms
+[03:13:48.878] Browser ERROR   ./src/components/vehicles/VehicleForm.tsx:306:17
+Parsing ecmascript source code failed
+  304 |               />
+  305 |             </Form.Item> */}
+> 306 |           </Col>
+      |                 ^
+> 307 |         </Row>
+      | ^^^^^^^^^
+  308 |
+  309 |         <Row gutter={[16, 0]}>
+  310 |           <Col xs={24} sm={12}>
+
+Expected '</', got 'jsx text'
+
+Import traces:
+  Client Component Browser:
+    ./src/components/vehicles/VehicleForm.tsx [Client Component Browser]
+    ./src/app/vehicles/page.tsx [Client Component Browser]
+    ./src/app/vehicles/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/vehicles/VehicleForm.tsx [Client Component SSR]
+    ./src/app/vehicles/page.tsx [Client Component SSR]
+    ./src/app/vehicles/page.tsx [Server Component]
+[03:13:57.049] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /vehicles. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:21.743] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[03:13:57.049] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /vehicles. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:23.584] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[03:13:57.144] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:23.584] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[03:13:57.144] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:23.598] Browser ERROR   Warning: [antd: Modal] `destroyOnClose` is deprecated. Please use `destroyOnHidden` instead.
-[01:22:23.598] Browser LOG     ApiClient: Making request to: /schools
-[01:22:23.972] Browser LOG     ApiClient: Response received: 200 /schools
-[01:22:26.164] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /dashboard. Please move it to viewport export instead.
+[03:14:03.410] Server  LOG     ✓ Compiled in 293ms
+[03:14:28.751] Server  LOG     ✓ Compiled in 324ms
+[03:15:26.816] Server  LOG     ✓ Compiled in 571ms
+[03:15:38.924] Server  LOG     ✓ Compiled in 489ms
+[03:15:53.098] Browser LOG     ApiClient: Making request to: /vehicles
+[03:15:53.098] Browser LOG     ApiClient: Token available: true
+[03:15:53.098] Browser LOG     ApiClient: Token expired? false
+[03:15:53.098] Browser LOG     ApiClient: Added Authorization header
+[03:15:53.098] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"post","url":"/vehicles"}
+[03:15:53.098] Browser LOG     ApiClient: Response received: 201 /vehicles
+[03:15:53.098] Browser LOG     ApiClient: Making request to: /vehicles
+[03:15:53.098] Browser LOG     ApiClient: Token available: true
+[03:15:53.098] Browser LOG     ApiClient: Token expired? false
+[03:15:53.098] Browser LOG     ApiClient: Added Authorization header
+[03:15:53.098] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1,"status":"ACTIVE"},"url":"/vehicles"}
+[03:15:53.098] Browser ERROR   Warning: [antd: message] Static function can not consume context like dynamic theme. Please use 'App' component instead.
+[03:15:53.098] Browser LOG     ApiClient: Response received: 200 /vehicles
+[03:16:04.198] Browser LOG     ApiClient: Making request to: /vehicles/cmm9clh0a0005r7ize237xdp5
+[03:16:04.198] Browser LOG     ApiClient: Token available: true
+[03:16:04.198] Browser LOG     ApiClient: Token expired? false
+[03:16:04.198] Browser LOG     ApiClient: Added Authorization header
+[03:16:04.198] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"put","url":"/vehicles/cmm9clh0a0005r7ize237xdp5"}
+[03:16:04.198] Browser LOG     ApiClient: Response received: 200 /vehicles/cmm9clh0a0005r7ize237xdp5
+[03:16:04.198] Browser LOG     ApiClient: Making request to: /vehicles
+[03:16:04.198] Browser LOG     ApiClient: Token available: true
+[03:16:04.198] Browser LOG     ApiClient: Token expired? false
+[03:16:04.198] Browser LOG     ApiClient: Added Authorization header
+[03:16:04.198] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1,"status":"ACTIVE"},"url":"/vehicles"}
+[03:16:04.198] Browser LOG     ApiClient: Response received: 200 /vehicles
+[03:16:11.357] Browser LOG     ApiClient: Making request to: /vehicles/cmm9clh0a0005r7ize237xdp5
+[03:16:11.357] Browser LOG     ApiClient: Token available: true
+[03:16:11.357] Browser LOG     ApiClient: Token expired? false
+[03:16:11.357] Browser LOG     ApiClient: Added Authorization header
+[03:16:11.357] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"delete","url":"/vehicles/cmm9clh0a0005r7ize237xdp5"}
+[03:16:11.357] Browser LOG     ApiClient: Response received: 200 /vehicles/cmm9clh0a0005r7ize237xdp5
+[03:16:11.357] Browser LOG     ApiClient: Making request to: /vehicles
+[03:16:11.357] Browser LOG     ApiClient: Token available: true
+[03:16:11.357] Browser LOG     ApiClient: Token expired? false
+[03:16:11.357] Browser LOG     ApiClient: Added Authorization header
+[03:16:11.357] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1,"status":"ACTIVE"},"url":"/vehicles"}
+[03:16:11.357] Browser LOG     ApiClient: Response received: 200 /vehicles
+[03:16:15.917] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /users. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:26.164] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /dashboard. Please move it to viewport export instead.
+[03:16:15.917] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /users. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:26.544] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[03:16:16.355] Server  WARN    ⚠ Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-[01:22:26.544] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
+[03:16:16.356] Server  WARN    ⚠ Unsupported metadata viewport is configured in metadata export in /_not-found. Please move it to viewport export instead.
 Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[03:16:16.443] Browser LOG     AuthStore: Initializing auth...
+[03:16:16.443] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[03:16:16.443] Browser LOG     AuthStore: Token available: true
+[03:16:16.443] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[03:16:16.443] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[03:16:16.443] Browser LOG     AuthStore: Initializing auth...
+[03:16:16.443] Browser LOG     AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[03:16:16.443] Browser LOG     AuthStore: Token available: true
+[03:16:16.443] Browser LOG     AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[03:16:16.443] Browser LOG     AuthStore: Auth initialized, isAuthenticated: true
+[03:16:16.443] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[03:16:16.443] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[03:16:16.443] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[03:16:16.443] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[03:16:16.443] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[03:16:16.443] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Initializing auth...
+[03:16:16.443] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth data: {"isAuthenticated":true,"user":{"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}}
+[03:16:16.443] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Token available: true
+[03:16:16.443] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: User from storage: {"createdAt":"2026-02-23T17:58:29.809Z","email":"admin@example.com","firstName":"Admin","id":"afe13408-f9bb-4cfb-90b8-8b5a2d674a1f","lastName":"User","phone":"+1234567890","role":"ADMIN"}
+[03:16:16.443] Browser LOG     [2;38;2;124;124;124m%s[0m AuthStore: Auth initialized, isAuthenticated: true
+[03:16:16.443] Browser LOG     ApiClient: Making request to: /users
+[03:16:16.443] Browser LOG     ApiClient: Token available: true
+[03:16:16.443] Browser LOG     ApiClient: Token expired? false
+[03:16:16.443] Browser LOG     ApiClient: Added Authorization header
+[03:16:16.443] Browser LOG     ApiClient: Request config: {"hasAuth":true,"method":"get","params":{"limit":10,"page":1},"url":"/users"}
+[03:16:16.443] Browser LOG     ApiClient: Response received: 200 /users

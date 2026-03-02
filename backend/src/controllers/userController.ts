@@ -49,7 +49,7 @@ export const getUsers = async (req: AuthRequest, res: Response) => {
   res.json({
     success: true,
     data: {
-      users,
+      items: users,
       pagination: {
         page: Number(page),
         limit: Number(limit),

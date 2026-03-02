@@ -119,12 +119,18 @@ export interface Vehicle {
   model: string;
   year: number;
   capacity: number;
-  status: VehicleStatus;
-  maintenanceStatus: MaintenanceStatus;
+  status?: VehicleStatus;
+  maintenanceStatus?: MaintenanceStatus;
   lastMaintenanceDate?: string;
   nextMaintenanceDate?: string;
   mileage?: number;
   notes?: string;
+  isActive: boolean;
+  schoolId: string;
+  school?: {
+    id: string;
+    name: string;
+  };
   createdAt: string;
   updatedAt: string;
 }
@@ -134,6 +140,7 @@ export interface CreateVehicleData {
   model: string;
   year: number;
   capacity: number;
+  schoolId: string;
   status?: VehicleStatus;
   maintenanceStatus?: MaintenanceStatus;
   lastMaintenanceDate?: string;

@@ -89,7 +89,7 @@ export const getVehicles = async (req: AuthRequest, res: Response) => {
   res.json({
     success: true,
     data: {
-      vehicles,
+      items: vehicles,
       pagination: {
         page: Number(page),
         limit: Number(limit),

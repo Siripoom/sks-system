@@ -444,9 +444,24 @@ class ApiClient {
         this.instance.interceptors.request.use((config)=>{
             console.log('ApiClient: Making request to:', config.url);
             const token = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].getAccessToken();
-            if (token && !__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
-                config.headers.Authorization = `Bearer ${token}`;
+            console.log('ApiClient: Token available:', !!token);
+            if (token) {
+                console.log('ApiClient: Token expired?', __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token));
+                if (!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
+                    config.headers.Authorization = `Bearer ${token}`;
+                    console.log('ApiClient: Added Authorization header');
+                } else {
+                    console.log('ApiClient: Token expired, not adding to request');
+                }
+            } else {
+                console.log('ApiClient: No token available');
             }
+            console.log('ApiClient: Request config:', {
+                url: config.url,
+                method: config.method,
+                hasAuth: !!config.headers.Authorization,
+                params: config.params
+            });
             return config;
         }, (error)=>{
             console.error('ApiClient: Request error:', error);
@@ -953,23 +968,31 @@ const useAuthStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_mo
         error: null,
         // Actions
         login: async (credentials)=>{
+            console.log('AuthStore: Login attempt with credentials:', {
+                email: credentials.email
+            });
             set({
                 isLoading: true,
                 error: null
             });
             try {
                 const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$authService$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].login(credentials);
+                console.log('AuthStore: Login response:', response);
                 if (response.success && response.data) {
+                    console.log('AuthStore: Login successful, user:', response.data.user);
+                    console.log('AuthStore: Tokens received:', !!response.data.tokens);
                     set({
                         isAuthenticated: true,
                         user: response.data.user,
                         isLoading: false,
                         error: null
                     });
+                    console.log('AuthStore: Auth state updated after login');
                 } else {
                     throw new Error('Login failed');
                 }
             } catch (error) {
+                console.error('AuthStore: Login error:', error);
                 set({
                     isAuthenticated: false,
                     user: null,
@@ -1115,12 +1138,17 @@ const useAuthStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_mo
             });
         },
         initializeAuth: ()=>{
+            console.log('AuthStore: Initializing auth...');
             const authData = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$authService$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].initializeAuth();
+            console.log('AuthStore: Auth data:', authData);
+            console.log('AuthStore: Token available:', !!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$authService$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].getAccessToken());
+            console.log('AuthStore: User from storage:', authData.user);
             set({
                 isAuthenticated: authData.isAuthenticated,
                 user: authData.user,
                 isLoading: false
             });
+            console.log('AuthStore: Auth initialized, isAuthenticated:', authData.isAuthenticated);
         },
         // Helper functions
         hasRole: (role)=>{
@@ -1497,8 +1525,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$des
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/UserOutlined.js [app-ssr] (ecmascript) <export default as UserOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SettingOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__SettingOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/SettingOutlined.js [app-ssr] (ecmascript) <export default as SettingOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$LogoutOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__LogoutOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/LogoutOutlined.js [app-ssr] (ecmascript) <export default as LogoutOutlined>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SunOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__SunOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/SunOutlined.js [app-ssr] (ecmascript) <export default as SunOutlined>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MoonOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MoonOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/MoonOutlined.js [app-ssr] (ecmascript) <export default as MoonOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$authStore$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/stores/authStore.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$appStore$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/stores/appStore.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/format.ts [app-ssr] (ecmascript)");
@@ -1646,11 +1672,11 @@ function AppHeader({ collapsed, onToggle, theme, onThemeChange }) {
                         type: "text",
                         icon: collapsed ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MenuUnfoldOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MenuUnfoldOutlined$3e$__["MenuUnfoldOutlined"], {}, void 0, false, {
                             fileName: "[project]/src/components/layout/AppHeader.tsx",
-                            lineNumber: 143,
+                            lineNumber: 152,
                             columnNumber: 29
                         }, void 0) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MenuFoldOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MenuFoldOutlined$3e$__["MenuFoldOutlined"], {}, void 0, false, {
                             fileName: "[project]/src/components/layout/AppHeader.tsx",
-                            lineNumber: 143,
+                            lineNumber: 152,
                             columnNumber: 54
                         }, void 0),
                         onClick: onToggle,
@@ -1661,7 +1687,7 @@ function AppHeader({ collapsed, onToggle, theme, onThemeChange }) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppHeader.tsx",
-                        lineNumber: 141,
+                        lineNumber: 150,
                         columnNumber: 9
                     }, this),
                     breadcrumbs.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$breadcrumb$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Breadcrumb$3e$__["Breadcrumb"], {
@@ -1673,18 +1699,18 @@ function AppHeader({ collapsed, onToggle, theme, onThemeChange }) {
                                 children: item.title
                             }, index, false, {
                                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                                lineNumber: 156,
+                                lineNumber: 165,
                                 columnNumber: 15
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppHeader.tsx",
-                        lineNumber: 154,
+                        lineNumber: 163,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 140,
+                lineNumber: 149,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
@@ -1703,37 +1729,20 @@ function AppHeader({ collapsed, onToggle, theme, onThemeChange }) {
                         autoFocus: true
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppHeader.tsx",
-                        lineNumber: 171,
+                        lineNumber: 177,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
                         type: "text",
                         icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SearchOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__SearchOutlined$3e$__["SearchOutlined"], {}, void 0, false, {
                             fileName: "[project]/src/components/layout/AppHeader.tsx",
-                            lineNumber: 181,
+                            lineNumber: 187,
                             columnNumber: 19
                         }, void 0),
                         onClick: ()=>setSearchVisible(true)
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppHeader.tsx",
-                        lineNumber: 179,
+                        lineNumber: 185,
                         columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
-                        type: "text",
-                        icon: theme === 'light' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MoonOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MoonOutlined$3e$__["MoonOutlined"], {}, void 0, false, {
-                            fileName: "[project]/src/components/layout/AppHeader.tsx",
-                            lineNumber: 189,
-                            columnNumber: 37
-                        }, void 0) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SunOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__SunOutlined$3e$__["SunOutlined"], {}, void 0, false, {
-                            fileName: "[project]/src/components/layout/AppHeader.tsx",
-                            lineNumber: 189,
-                            columnNumber: 56
-                        }, void 0),
-                        onClick: onThemeChange
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/layout/AppHeader.tsx",
-                        lineNumber: 187,
-                        columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
                         menu: {
@@ -1750,22 +1759,22 @@ function AppHeader({ collapsed, onToggle, theme, onThemeChange }) {
                                 size: "small",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$BellOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__BellOutlined$3e$__["BellOutlined"], {}, void 0, false, {
                                     fileName: "[project]/src/components/layout/AppHeader.tsx",
-                                    lineNumber: 201,
-                                    columnNumber: 15
+                                    lineNumber: 202,
+                                    columnNumber: 17
                                 }, void 0)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                                lineNumber: 200,
-                                columnNumber: 13
+                                lineNumber: 201,
+                                columnNumber: 15
                             }, void 0)
                         }, void 0, false, {
                             fileName: "[project]/src/components/layout/AppHeader.tsx",
-                            lineNumber: 199,
+                            lineNumber: 198,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppHeader.tsx",
-                        lineNumber: 194,
+                        lineNumber: 193,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
@@ -1788,7 +1797,7 @@ function AppHeader({ collapsed, onToggle, theme, onThemeChange }) {
                                     size: "small",
                                     icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__["UserOutlined"], {}, void 0, false, {
                                         fileName: "[project]/src/components/layout/AppHeader.tsx",
-                                        lineNumber: 220,
+                                        lineNumber: 224,
                                         columnNumber: 21
                                     }, void 0),
                                     style: {
@@ -1797,62 +1806,49 @@ function AppHeader({ collapsed, onToggle, theme, onThemeChange }) {
                                     children: user ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getInitials"])(user.firstName, user.lastName) : 'U'
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/layout/AppHeader.tsx",
-                                    lineNumber: 218,
+                                    lineNumber: 222,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
                                     direction: "vertical",
                                     size: 0,
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
-                                            strong: true,
-                                            style: {
-                                                fontSize: '12px'
-                                            },
-                                            children: user ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["formatFullName"])(user.firstName, user.lastName) : 'User'
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/components/layout/AppHeader.tsx",
-                                            lineNumber: 226,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
-                                            type: "secondary",
-                                            style: {
-                                                fontSize: '11px'
-                                            },
-                                            children: user?.role || 'Unknown'
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/components/layout/AppHeader.tsx",
-                                            lineNumber: 229,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
+                                        type: "secondary",
+                                        style: {
+                                            fontSize: '11px'
+                                        },
+                                        children: user?.role || 'Unknown'
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/layout/AppHeader.tsx",
+                                        lineNumber: 230,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
                                     fileName: "[project]/src/components/layout/AppHeader.tsx",
-                                    lineNumber: 225,
+                                    lineNumber: 229,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/layout/AppHeader.tsx",
-                            lineNumber: 212,
+                            lineNumber: 214,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppHeader.tsx",
-                        lineNumber: 207,
+                        lineNumber: 209,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 168,
+                lineNumber: 174,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/layout/AppHeader.tsx",
-        lineNumber: 129,
+        lineNumber: 138,
         columnNumber: 5
     }, this);
 }
@@ -2371,26 +2367,58 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient
 class SchoolService {
     static BASE_PATH = '/schools';
     static async getSchools(params) {
+        console.log('SchoolService.getSchools called with params:', params);
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(this.BASE_PATH, {
             params
         });
-        console.log(response.data);
+        console.log('SchoolService.getSchools raw response:', response);
+        console.log('SchoolService.getSchools response type:', typeof response);
+        console.log('SchoolService.getSchools response keys:', Object.keys(response));
+        // Check if response has the expected structure
+        if (response && typeof response === 'object') {
+            console.log('SchoolService.getSchools response.success:', response.success);
+            console.log('SchoolService.getSchools response.data:', response.data);
+            console.log('SchoolService.getSchools response.error:', response.error);
+        }
+        // Handle different response structures
+        if (!response.success) {
+            console.error('SchoolService.getSchools API error:', response.error);
+            throw new Error(response.error?.message || 'Failed to fetch schools');
+        }
+        // Check if we have the expected data structure
+        if (!response.data) {
+            console.error('SchoolService.getSchools no data in response');
+            throw new Error('No data received from schools API');
+        }
+        console.log('SchoolService.getSchools returning data:', response.data);
         return response.data;
     }
     static async getSchool(id) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${this.BASE_PATH}/${id}`);
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to fetch school');
+        }
         return response.data;
     }
     static async createSchool(data) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(this.BASE_PATH, data);
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to create school');
+        }
         return response.data;
     }
     static async updateSchool(id, data) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].put(`${this.BASE_PATH}/${id}`, data);
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to update school');
+        }
         return response.data;
     }
     static async deleteSchool(id) {
-        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].delete(`${this.BASE_PATH}/${id}`);
+        const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].delete(`${this.BASE_PATH}/${id}`);
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to delete school');
+        }
     }
     static async searchSchools(query, params) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${this.BASE_PATH}/search`, {
@@ -2399,10 +2427,16 @@ class SchoolService {
                 ...params
             }
         });
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to search schools');
+        }
         return response.data;
     }
     static async getSchoolStats(id) {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${this.BASE_PATH}/${id}/stats`);
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to get school stats');
+        }
         return response.data;
     }
 }
@@ -2440,8 +2474,24 @@ function useSchools(params) {
             ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["QUERY_KEYS"].SCHOOLS,
             params
         ],
-        queryFn: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$schoolService$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SchoolService"].getSchools(params),
-        staleTime: 5 * 60 * 1000
+        queryFn: async ()=>{
+            console.log('useSchools: Fetching schools with params:', params);
+            try {
+                const result = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$schoolService$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SchoolService"].getSchools(params);
+                console.log('useSchools: Success, result:', result);
+                return result;
+            } catch (error) {
+                console.error('useSchools: Error fetching schools:', error);
+                throw error;
+            }
+        },
+        staleTime: 5 * 60 * 1000,
+        onError: (error)=>{
+            console.error('useSchools: Query error:', error);
+        },
+        onSuccess: (data)=>{
+            console.log('useSchools: Query success:', data);
+        }
     });
 }
 function useSchool(id) {
@@ -2558,10 +2608,18 @@ function SchoolList({ onAdd, onEdit }) {
         current: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PAGINATION"].DEFAULT_PAGE,
         pageSize: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PAGINATION"].DEFAULT_PAGE_SIZE
     });
-    const { data: schoolsData, isLoading, error } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useSchools$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSchools"])({
+    const { data: schoolsData, isLoading, error, isError } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useSchools$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSchools"])({
         page: pagination.current,
         limit: pagination.pageSize,
         search: searchQuery || undefined
+    });
+    console.log('SchoolList: Query state:', {
+        isLoading,
+        isError,
+        error,
+        schoolsData,
+        dataAvailable: !!schoolsData,
+        itemsCount: schoolsData?.items?.length || 0
     });
     const deleteSchoolMutation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useSchools$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useDeleteSchool"])();
     const handleDelete = async (id, name)=>{
@@ -2601,7 +2659,7 @@ function SchoolList({ onAdd, onEdit }) {
                             children: name
                         }, void 0, false, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 89,
+                            lineNumber: 99,
                             columnNumber: 11
                         }, this),
                         record.code && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2615,13 +2673,13 @@ function SchoolList({ onAdd, onEdit }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 91,
+                            lineNumber: 101,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                    lineNumber: 88,
+                    lineNumber: 98,
                     columnNumber: 9
                 }, this)
         },
@@ -2647,20 +2705,20 @@ function SchoolList({ onAdd, onEdit }) {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 106,
+                                    lineNumber: 116,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     children: record.address
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 107,
+                                    lineNumber: 117,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 105,
+                            lineNumber: 115,
                             columnNumber: 13
                         }, this),
                         record.phone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2677,20 +2735,20 @@ function SchoolList({ onAdd, onEdit }) {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 112,
+                                    lineNumber: 122,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     children: record.phone
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 113,
+                                    lineNumber: 123,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 111,
+                            lineNumber: 121,
                             columnNumber: 13
                         }, this),
                         record.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2707,26 +2765,26 @@ function SchoolList({ onAdd, onEdit }) {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 118,
+                                    lineNumber: 128,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     children: record.email
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 119,
+                                    lineNumber: 129,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 117,
+                            lineNumber: 127,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                    lineNumber: 103,
+                    lineNumber: 113,
                     columnNumber: 9
                 }, this)
         },
@@ -2741,7 +2799,7 @@ function SchoolList({ onAdd, onEdit }) {
                     children: isActive ? 'Active' : 'Inactive'
                 }, void 0, false, {
                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                    lineNumber: 132,
+                    lineNumber: 142,
                     columnNumber: 9
                 }, this)
         },
@@ -2766,19 +2824,19 @@ function SchoolList({ onAdd, onEdit }) {
                                 type: "text",
                                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EditOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__EditOutlined$3e$__["EditOutlined"], {}, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 155,
+                                    lineNumber: 165,
                                     columnNumber: 21
                                 }, void 0),
                                 onClick: ()=>onEdit(record),
                                 size: "small"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                lineNumber: 153,
+                                lineNumber: 163,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 152,
+                            lineNumber: 162,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$popconfirm$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Popconfirm$3e$__["Popconfirm"], {
@@ -2796,7 +2854,7 @@ function SchoolList({ onAdd, onEdit }) {
                                     type: "text",
                                     icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$DeleteOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__DeleteOutlined$3e$__["DeleteOutlined"], {}, void 0, false, {
                                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                        lineNumber: 171,
+                                        lineNumber: 181,
                                         columnNumber: 23
                                     }, void 0),
                                     danger: true,
@@ -2804,29 +2862,30 @@ function SchoolList({ onAdd, onEdit }) {
                                     loading: deleteSchoolMutation.isPending
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 169,
+                                    lineNumber: 179,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                lineNumber: 168,
+                                lineNumber: 178,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 160,
+                            lineNumber: 170,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                    lineNumber: 151,
+                    lineNumber: 161,
                     columnNumber: 9
                 }, this)
         }
     ];
-    if (error) {
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$message$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__message$3e$__["message"].error('Failed to load schools');
+    if (error || isError) {
+        console.error('SchoolList: Error loading schools:', error);
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$message$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__message$3e$__["message"].error(`Failed to load schools: ${error?.message || 'Unknown error'}`);
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$card$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Card$3e$__["Card"], {
         children: [
@@ -2854,12 +2913,12 @@ function SchoolList({ onAdd, onEdit }) {
                                 children: "Schools Management"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                lineNumber: 192,
+                                lineNumber: 203,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 191,
+                            lineNumber: 202,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -2870,7 +2929,7 @@ function SchoolList({ onAdd, onEdit }) {
                                 type: "primary",
                                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$PlusOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__PlusOutlined$3e$__["PlusOutlined"], {}, void 0, false, {
                                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                    lineNumber: 199,
+                                    lineNumber: 210,
                                     columnNumber: 21
                                 }, void 0),
                                 onClick: onAdd,
@@ -2878,23 +2937,23 @@ function SchoolList({ onAdd, onEdit }) {
                                 children: "Add School"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                lineNumber: 197,
+                                lineNumber: 208,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 196,
+                            lineNumber: 207,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                    lineNumber: 190,
+                    lineNumber: 201,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 189,
+                lineNumber: 200,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2915,7 +2974,7 @@ function SchoolList({ onAdd, onEdit }) {
                             allowClear: true,
                             enterButton: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SearchOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__SearchOutlined$3e$__["SearchOutlined"], {}, void 0, false, {
                                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                                lineNumber: 215,
+                                lineNumber: 226,
                                 columnNumber: 28
                             }, void 0),
                             size: "large",
@@ -2925,33 +2984,71 @@ function SchoolList({ onAdd, onEdit }) {
                             }
                         }, void 0, false, {
                             fileName: "[project]/src/components/schools/SchoolList.tsx",
-                            lineNumber: 212,
+                            lineNumber: 223,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/schools/SchoolList.tsx",
-                        lineNumber: 211,
+                        lineNumber: 222,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/schools/SchoolList.tsx",
-                    lineNumber: 210,
+                    lineNumber: 221,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 209,
+                lineNumber: 220,
                 columnNumber: 7
+            }, this),
+            isError && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    padding: '20px',
+                    textAlign: 'center',
+                    background: '#fff2f0',
+                    border: '1px solid #ffccc7',
+                    borderRadius: '6px',
+                    marginBottom: '16px'
+                },
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
+                        style: {
+                            color: '#cf1322',
+                            margin: '0 0 8px 0'
+                        },
+                        children: "Failed to load schools"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/schools/SchoolList.tsx",
+                        lineNumber: 244,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        style: {
+                            margin: 0,
+                            color: '#8c8c8c'
+                        },
+                        children: error?.message || 'An error occurred while loading schools. Please try again.'
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/schools/SchoolList.tsx",
+                        lineNumber: 247,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/schools/SchoolList.tsx",
+                lineNumber: 236,
+                columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$table$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Table$3e$__["Table"], {
                 columns: columns,
-                dataSource: schoolsData?.data?.items || [],
+                dataSource: schoolsData?.items || [],
                 rowKey: "id",
                 loading: isLoading,
                 pagination: {
                     current: pagination.current,
                     pageSize: pagination.pageSize,
-                    total: schoolsData?.data?.pagination.total || 0,
+                    total: schoolsData?.pagination?.total || 0,
                     showSizeChanger: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PAGINATION"].SHOW_SIZE_CHANGER,
                     showQuickJumper: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PAGINATION"].SHOW_QUICK_JUMPER,
                     pageSizeOptions: [
@@ -2966,13 +3063,13 @@ function SchoolList({ onAdd, onEdit }) {
                 size: "small"
             }, void 0, false, {
                 fileName: "[project]/src/components/schools/SchoolList.tsx",
-                lineNumber: 224,
+                lineNumber: 253,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/schools/SchoolList.tsx",
-        lineNumber: 188,
+        lineNumber: 199,
         columnNumber: 5
     }, this);
 }

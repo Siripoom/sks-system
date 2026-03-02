@@ -4,9 +4,18 @@ import type { Vehicle, CreateVehicleData, UpdateVehicleData, PaginationParams, P
 export class VehicleService {
   private static readonly BASE_PATH = '/vehicles';
 
-  static async getVehicles(params?: PaginationParams & { status?: string }): Promise<PaginatedResponse<Vehicle>> {
-    const response = await apiClient.get<PaginatedResponse<Vehicle>>(this.BASE_PATH, { params });
-    return response.data as PaginatedResponse<Vehicle>;
+  static async getVehicles(params?: PaginationParams & { status?: string }): Promise<{ items: Vehicle[], pagination: { page: number, limit: number, total: number, pages: number } }> {
+    const response = await apiClient.get<{ items: Vehicle[], pagination: { page: number, limit: number, total: number, pages: number } }>(this.BASE_PATH, { params });
+    
+    if (!response.success) {
+      throw new Error(response.error?.message || 'Failed to fetch vehicles');
+    }
+    
+    if (!response.data) {
+      throw new Error('No data received from vehicles API');
+    }
+    
+    return response.data;
   }
 
   static async getVehicle(id: string): Promise<Vehicle> {
@@ -28,11 +37,20 @@ export class VehicleService {
     await apiClient.delete(`${this.BASE_PATH}/${id}`);
   }
 
-  static async searchVehicles(query: string, params?: PaginationParams): Promise<PaginatedResponse<Vehicle>> {
-    const response = await apiClient.get<PaginatedResponse<Vehicle>>(`${this.BASE_PATH}/search`, {
+  static async searchVehicles(query: string, params?: PaginationParams): Promise<{ items: Vehicle[], pagination: { page: number, limit: number, total: number, pages: number } }> {
+    const response = await apiClient.get<{ items: Vehicle[], pagination: { page: number, limit: number, total: number, pages: number } }>(`${this.BASE_PATH}/search`, {
       params: { q: query, ...params }
     });
-    return response.data as PaginatedResponse<Vehicle>;
+    
+    if (!response.success) {
+      throw new Error(response.error?.message || 'Failed to search vehicles');
+    }
+    
+    if (!response.data) {
+      throw new Error('No data received from vehicle search API');
+    }
+    
+    return response.data;
   }
 
   static async getVehicleStats(id: string) {

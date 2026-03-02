@@ -62,7 +62,7 @@ export default function SchoolList({ onAdd, onEdit }: SchoolListProps) {
     error,
     schoolsData,
     dataAvailable: !!schoolsData,
-    itemsCount: schoolsData?.data?.items?.length || 0
+    itemsCount: schoolsData?.items?.length || 0
   });
 
   const deleteSchoolMutation = useDeleteSchool();
@@ -252,13 +252,13 @@ export default function SchoolList({ onAdd, onEdit }: SchoolListProps) {
 
       <Table
         columns={columns}
-        dataSource={schoolsData?.data?.items || []}
+        dataSource={schoolsData?.items || []}
         rowKey="id"
         loading={isLoading}
         pagination={{
           current: pagination.current,
           pageSize: pagination.pageSize,
-          total: schoolsData?.data?.pagination?.total || 0,
+          total: schoolsData?.pagination?.total || 0,
           showSizeChanger: PAGINATION.SHOW_SIZE_CHANGER,
           showQuickJumper: PAGINATION.SHOW_QUICK_JUMPER,
           pageSizeOptions: [...PAGINATION.PAGE_SIZE_OPTIONS],

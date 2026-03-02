@@ -2,5 +2,7 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/auth/login/page": "app/auth/login/page.js",
   "/dashboard/page": "app/dashboard/page.js",
+  "/schools/page": "app/schools/page.js",
+  "/users/page": "app/users/page.js",
   "/vehicles/page": "app/vehicles/page.js"
 }

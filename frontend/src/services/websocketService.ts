@@ -1,5 +1,6 @@
 'use client';
 
+import { io, Socket } from 'socket.io-client';
 import { message } from 'antd';
 
 export type WebSocketEventType = 
@@ -37,7 +38,7 @@ export type EventHandler = (data: any) => void;
 export type ConnectionStatusHandler = (status: 'connected' | 'disconnected' | 'reconnecting' | 'error') => void;
 
 class WebSocketService {
-  private ws: WebSocket | null = null;
+  private socket: Socket | null = null;
   private eventHandlers: Map<WebSocketEventType, EventHandler[]> = new Map();
   private connectionStatusHandlers: ConnectionStatusHandler[] = [];
   private config: WebSocketConfig;
@@ -50,7 +51,9 @@ class WebSocketService {
 
   constructor(config: Partial<WebSocketConfig> = {}) {
     this.config = {
-      url: config.url || (typeof window !== 'undefined' ? `ws://${window.location.hostname}:3001` : 'ws://localhost:3001'),
+      url: config.url || (typeof window !== 'undefined' ? 
+        process.env.NEXT_PUBLIC_WS_URL || `http://${window.location.hostname}:5000` : 
+        'http://localhost:5000'),
       reconnectInterval: config.reconnectInterval || 5000,
       maxReconnectAttempts: config.maxReconnectAttempts || 10,
       heartbeatInterval: config.heartbeatInterval || 30000,
@@ -62,7 +65,7 @@ class WebSocketService {
   connect(userId?: string): Promise<void> {
     return new Promise((resolve, reject) => {
       try {
-        if (this.ws?.readyState === WebSocket.OPEN) {
+        if (this.socket?.connected) {
           resolve();
           return;
         }
@@ -70,16 +73,22 @@ class WebSocketService {
         this.userId = userId || null;
         this.isManuallyDisconnected = false;
         
-        const wsUrl = this.userId 
-          ? `${this.config.url}?userId=${this.userId}`
-          : this.config.url;
-
-        this.ws = new WebSocket(wsUrl);
+        const socketOptions: any = {
+          reconnection: true,
+          reconnectionAttempts: this.config.maxReconnectAttempts,
+          reconnectionDelay: this.config.reconnectInterval,
+          transports: ['websocket', 'polling']
+        };
         
-        this.ws.onopen = () => {
-          this.log('WebSocket connected');
+        if (this.userId) {
+          socketOptions.query = { userId: this.userId };
+        }
+
+        this.socket = io(this.config.url, socketOptions);
+        
+        this.socket.on('connect', () => {
+          this.log('Socket.io connected');
           this.reconnectAttempts = 0;
-          this.startHeartbeat();
           this.notifyConnectionStatus('connected');
           
           // Resubscribe to previous subscriptions
@@ -88,27 +97,38 @@ class WebSocketService {
           });
           
           resolve();
-        };
+        });
 
-        this.ws.onmessage = (event) => {
-          this.handleMessage(event.data);
-        };
+        this.socket.on('message', (data: any) => {
+          this.handleMessage(JSON.stringify(data));
+        });
+        
+        // Listen for all WebSocket event types
+        Object.values([
+          'TRIP_LOCATION_UPDATE', 'TRIP_STATUS_CHANGE', 'STUDENT_STATUS_UPDATE',
+          'ALERT_CREATED', 'ALERT_ACKNOWLEDGED', 'ALERT_RESOLVED',
+          'EMERGENCY_REPORTED', 'DRIVER_MESSAGE', 'SYSTEM_NOTIFICATION',
+          'ROUTE_UPDATE', 'WEATHER_ALERT'
+        ]).forEach(eventType => {
+          this.socket?.on(eventType.toLowerCase(), (data: any) => {
+            this.handleMessage(JSON.stringify({ type: eventType, data, timestamp: new Date().toISOString() }));
+          });
+        });
 
-        this.ws.onclose = (event) => {
-          this.log(`WebSocket disconnected: ${event.code} - ${event.reason}`);
-          this.stopHeartbeat();
+        this.socket.on('disconnect', (reason: string) => {
+          this.log(`Socket.io disconnected: ${reason}`);
           this.notifyConnectionStatus('disconnected');
-          
-          if (!this.isManuallyDisconnected && this.reconnectAttempts < this.config.maxReconnectAttempts) {
-            this.scheduleReconnect();
-          }
-        };
+        });
+        
+        this.socket.on('reconnecting', () => {
+          this.notifyConnectionStatus('reconnecting');
+        });
 
-        this.ws.onerror = (error) => {
-          this.log('WebSocket error:', error);
+        this.socket.on('connect_error', (error: any) => {
+          this.log('Socket.io connection error:', error);
           this.notifyConnectionStatus('error');
           reject(error);
-        };
+        });
 
       } catch (error) {
         reject(error);
@@ -119,15 +139,14 @@ class WebSocketService {
   disconnect(): void {
     this.isManuallyDisconnected = true;
     this.clearReconnectTimer();
-    this.stopHeartbeat();
     
-    if (this.ws) {
-      this.ws.close(1000, 'Manual disconnect');
-      this.ws = null;
+    if (this.socket) {
+      this.socket.disconnect();
+      this.socket = null;
     }
     
     this.subscriptions.clear();
-    this.log('WebSocket manually disconnected');
+    this.log('Socket.io manually disconnected');
   }
 
   private scheduleReconnect(): void {
@@ -153,24 +172,13 @@ class WebSocketService {
     }
   }
 
-  // Heartbeat Management
+  // Heartbeat Management (Socket.io handles this automatically)
   private startHeartbeat(): void {
-    this.heartbeatTimer = setInterval(() => {
-      if (this.ws?.readyState === WebSocket.OPEN) {
-        this.send({
-          type: 'HEARTBEAT' as WebSocketEventType,
-          data: { timestamp: new Date().toISOString() },
-          timestamp: new Date().toISOString()
-        });
-      }
-    }, this.config.heartbeatInterval);
+    // Socket.io handles heartbeat automatically
   }
 
   private stopHeartbeat(): void {
-    if (this.heartbeatTimer) {
-      clearInterval(this.heartbeatTimer);
-      this.heartbeatTimer = null;
-    }
+    // Socket.io handles heartbeat automatically
   }
 
   // Message Handling
@@ -201,13 +209,13 @@ class WebSocketService {
 
   // Send Messages
   send(message: WebSocketMessage): boolean {
-    if (this.ws?.readyState !== WebSocket.OPEN) {
-      this.log('Cannot send message: WebSocket not connected');
+    if (!this.socket?.connected) {
+      this.log('Cannot send message: Socket.io not connected');
       return false;
     }
     
     try {
-      this.ws.send(JSON.stringify(message));
+      this.socket.emit(message.type.toLowerCase(), message);
       this.log('Sent message:', message);
       return true;
     } catch (error) {
@@ -274,24 +282,16 @@ class WebSocketService {
   subscribe(subscription: string): void {
     this.subscriptions.add(subscription);
     
-    if (this.ws?.readyState === WebSocket.OPEN) {
-      this.send({
-        type: 'SUBSCRIBE' as WebSocketEventType,
-        data: { subscription },
-        timestamp: new Date().toISOString()
-      });
+    if (this.socket?.connected) {
+      this.socket.emit('subscribe', { subscription });
     }
   }
 
   unsubscribe(subscription: string): void {
     this.subscriptions.delete(subscription);
     
-    if (this.ws?.readyState === WebSocket.OPEN) {
-      this.send({
-        type: 'UNSUBSCRIBE' as WebSocketEventType,
-        data: { subscription },
-        timestamp: new Date().toISOString()
-      });
+    if (this.socket?.connected) {
+      this.socket.emit('unsubscribe', { subscription });
     }
   }
 
@@ -349,19 +349,15 @@ class WebSocketService {
 
   // Utility Methods
   getConnectionState(): 'connecting' | 'open' | 'closing' | 'closed' {
-    if (!this.ws) return 'closed';
+    if (!this.socket) return 'closed';
     
-    switch (this.ws.readyState) {
-      case WebSocket.CONNECTING: return 'connecting';
-      case WebSocket.OPEN: return 'open';
-      case WebSocket.CLOSING: return 'closing';
-      case WebSocket.CLOSED: return 'closed';
-      default: return 'closed';
-    }
+    if (this.socket.connected) return 'open';
+    if (this.socket.disconnected) return 'closed';
+    return 'connecting';
   }
 
   isConnected(): boolean {
-    return this.ws?.readyState === WebSocket.OPEN;
+    return this.socket?.connected === true;
   }
 
   private log(message: string, ...args: any[]): void {

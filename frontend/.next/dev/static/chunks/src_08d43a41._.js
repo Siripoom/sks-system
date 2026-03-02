@@ -1661,8 +1661,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$des
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/UserOutlined.js [app-client] (ecmascript) <export default as UserOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SettingOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SettingOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/SettingOutlined.js [app-client] (ecmascript) <export default as SettingOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$LogoutOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__LogoutOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/LogoutOutlined.js [app-client] (ecmascript) <export default as LogoutOutlined>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SunOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SunOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/SunOutlined.js [app-client] (ecmascript) <export default as SunOutlined>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MoonOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MoonOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/MoonOutlined.js [app-client] (ecmascript) <export default as MoonOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$authStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/stores/authStore.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$appStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/stores/appStore.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/utils/format.ts [app-client] (ecmascript)");
@@ -1684,14 +1682,14 @@ const { Search } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$
 const { Text } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$typography$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Typography$3e$__["Typography"];
 function AppHeader(t0) {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(94);
-    if ($[0] !== "4364253107127eec52a65cb1c5f1191e37acdc8ca789e27487fec2a404d66c04") {
-        for(let $i = 0; $i < 94; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(80);
+    if ($[0] !== "9058a75839643a7e36d17f22f237b83746e48f6c85907ef6c149886b808397dc") {
+        for(let $i = 0; $i < 80; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "4364253107127eec52a65cb1c5f1191e37acdc8ca789e27487fec2a404d66c04";
+        $[0] = "9058a75839643a7e36d17f22f237b83746e48f6c85907ef6c149886b808397dc";
     }
-    const { collapsed, onToggle, theme, onThemeChange } = t0;
+    const { collapsed, onToggle, theme } = t0;
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const { user, logout } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$authStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuthStore"])();
     const { notifications, unreadCount, breadcrumbs, searchVisible, setSearchVisible, setSearchQuery } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$appStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAppStore"])();
@@ -1702,7 +1700,7 @@ function AppHeader(t0) {
         if ($[6] === Symbol.for("react.memo_cache_sentinel")) {
             t1 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__["UserOutlined"], {}, void 0, false, {
                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 59,
+                lineNumber: 58,
                 columnNumber: 12
             }, this);
             $[6] = t1;
@@ -1726,7 +1724,7 @@ function AppHeader(t0) {
         if ($[9] === Symbol.for("react.memo_cache_sentinel")) {
             t3 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SettingOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SettingOutlined$3e$__["SettingOutlined"], {}, void 0, false, {
                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 79,
+                lineNumber: 78,
                 columnNumber: 12
             }, this);
             $[9] = t3;
@@ -1759,7 +1757,7 @@ function AppHeader(t0) {
         if ($[13] === Symbol.for("react.memo_cache_sentinel")) {
             t6 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$LogoutOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__LogoutOutlined$3e$__["LogoutOutlined"], {}, void 0, false, {
                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 108,
+                lineNumber: 107,
                 columnNumber: 12
             }, this);
             $[13] = t6;
@@ -1889,11 +1887,11 @@ function AppHeader(t0) {
     if ($[28] !== collapsed) {
         t6 = collapsed ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MenuUnfoldOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MenuUnfoldOutlined$3e$__["MenuUnfoldOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 220,
+            lineNumber: 219,
             columnNumber: 22
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MenuFoldOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MenuFoldOutlined$3e$__["MenuFoldOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 220,
+            lineNumber: 219,
             columnNumber: 47
         }, this);
         $[28] = collapsed;
@@ -1921,7 +1919,7 @@ function AppHeader(t0) {
             style: t7
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 239,
+            lineNumber: 238,
             columnNumber: 10
         }, this);
         $[31] = onToggle;
@@ -1939,7 +1937,7 @@ function AppHeader(t0) {
             children: breadcrumbs.map(_AppHeaderBreadcrumbsMap)
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 248,
+            lineNumber: 247,
             columnNumber: 36
         }, this);
         $[34] = breadcrumbs;
@@ -1957,7 +1955,7 @@ function AppHeader(t0) {
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 258,
+            lineNumber: 257,
             columnNumber: 11
         }, this);
         $[36] = t8;
@@ -1989,13 +1987,13 @@ function AppHeader(t0) {
             autoFocus: true
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 276,
+            lineNumber: 275,
             columnNumber: 27
         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
             type: "text",
             icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SearchOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SearchOutlined$3e$__["SearchOutlined"], {}, void 0, false, {
                 fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 280,
+                lineNumber: 279,
                 columnNumber: 86
             }, void 0),
             onClick: {
@@ -2003,7 +2001,7 @@ function AppHeader(t0) {
             }["AppHeader[<Button>.onClick]"]
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 280,
+            lineNumber: 279,
             columnNumber: 60
         }, this);
         $[40] = handleSearch;
@@ -2014,340 +2012,260 @@ function AppHeader(t0) {
         t12 = $[43];
     }
     let t13;
-    if ($[44] !== theme) {
-        t13 = theme === "light" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MoonOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MoonOutlined$3e$__["MoonOutlined"], {}, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 292,
-            columnNumber: 31
-        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SunOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SunOutlined$3e$__["SunOutlined"], {}, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 292,
-            columnNumber: 50
-        }, this);
-        $[44] = theme;
+    if ($[44] !== notificationMenuItems) {
+        t13 = {
+            items: notificationMenuItems
+        };
+        $[44] = notificationMenuItems;
         $[45] = t13;
     } else {
         t13 = $[45];
     }
     let t14;
-    if ($[46] !== onThemeChange || $[47] !== t13) {
-        t14 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
-            type: "text",
-            icon: t13,
-            onClick: onThemeChange
-        }, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 300,
-            columnNumber: 11
-        }, this);
-        $[46] = onThemeChange;
-        $[47] = t13;
-        $[48] = t14;
-    } else {
-        t14 = $[48];
-    }
-    let t15;
-    if ($[49] !== notificationMenuItems) {
-        t15 = {
-            items: notificationMenuItems
-        };
-        $[49] = notificationMenuItems;
-        $[50] = t15;
-    } else {
-        t15 = $[50];
-    }
-    let t16;
-    if ($[51] === Symbol.for("react.memo_cache_sentinel")) {
-        t16 = [
+    if ($[46] === Symbol.for("react.memo_cache_sentinel")) {
+        t14 = [
             "click"
         ];
-        $[51] = t16;
+        $[46] = t14;
     } else {
-        t16 = $[51];
+        t14 = $[46];
     }
-    let t17;
-    if ($[52] === Symbol.for("react.memo_cache_sentinel")) {
-        t17 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$BellOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__BellOutlined$3e$__["BellOutlined"], {}, void 0, false, {
+    let t15;
+    if ($[47] === Symbol.for("react.memo_cache_sentinel")) {
+        t15 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$BellOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__BellOutlined$3e$__["BellOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 326,
+            lineNumber: 308,
             columnNumber: 11
         }, this);
+        $[47] = t15;
+    } else {
+        t15 = $[47];
+    }
+    let t16;
+    if ($[48] !== unreadCount) {
+        t16 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
+            type: "text",
+            icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$badge$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Badge$3e$__["Badge"], {
+                count: unreadCount,
+                size: "small",
+                children: t15
+            }, void 0, false, {
+                fileName: "[project]/src/components/layout/AppHeader.tsx",
+                lineNumber: 315,
+                columnNumber: 37
+            }, void 0)
+        }, void 0, false, {
+            fileName: "[project]/src/components/layout/AppHeader.tsx",
+            lineNumber: 315,
+            columnNumber: 11
+        }, this);
+        $[48] = unreadCount;
+        $[49] = t16;
+    } else {
+        t16 = $[49];
+    }
+    let t17;
+    if ($[50] !== t13 || $[51] !== t16) {
+        t17 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
+            menu: t13,
+            placement: "bottomRight",
+            trigger: t14,
+            children: t16
+        }, void 0, false, {
+            fileName: "[project]/src/components/layout/AppHeader.tsx",
+            lineNumber: 323,
+            columnNumber: 11
+        }, this);
+        $[50] = t13;
+        $[51] = t16;
         $[52] = t17;
     } else {
         t17 = $[52];
     }
     let t18;
-    if ($[53] !== unreadCount) {
-        t18 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
-            type: "text",
-            icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$badge$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Badge$3e$__["Badge"], {
-                count: unreadCount,
-                size: "small",
-                children: t17
-            }, void 0, false, {
-                fileName: "[project]/src/components/layout/AppHeader.tsx",
-                lineNumber: 333,
-                columnNumber: 37
-            }, void 0)
-        }, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 333,
-            columnNumber: 11
-        }, this);
-        $[53] = unreadCount;
+    if ($[53] !== userMenuItems) {
+        t18 = {
+            items: userMenuItems
+        };
+        $[53] = userMenuItems;
         $[54] = t18;
     } else {
         t18 = $[54];
     }
     let t19;
-    if ($[55] !== t15 || $[56] !== t18) {
-        t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
-            menu: t15,
-            placement: "bottomRight",
-            trigger: t16,
-            children: t18
-        }, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 341,
-            columnNumber: 11
-        }, this);
-        $[55] = t15;
-        $[56] = t18;
-        $[57] = t19;
-    } else {
-        t19 = $[57];
-    }
     let t20;
-    if ($[58] !== userMenuItems) {
-        t20 = {
-            items: userMenuItems
-        };
-        $[58] = userMenuItems;
-        $[59] = t20;
-    } else {
-        t20 = $[59];
-    }
-    let t21;
-    let t22;
-    if ($[60] === Symbol.for("react.memo_cache_sentinel")) {
-        t21 = [
+    if ($[55] === Symbol.for("react.memo_cache_sentinel")) {
+        t19 = [
             "click"
         ];
-        t22 = {
+        t20 = {
             display: "flex",
             alignItems: "center",
             cursor: "pointer",
             padding: "0 8px"
         };
-        $[60] = t21;
-        $[61] = t22;
+        $[55] = t19;
+        $[56] = t20;
     } else {
-        t21 = $[60];
-        t22 = $[61];
+        t19 = $[55];
+        t20 = $[56];
     }
-    let t23;
-    let t24;
-    if ($[62] === Symbol.for("react.memo_cache_sentinel")) {
-        t23 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__["UserOutlined"], {}, void 0, false, {
+    let t21;
+    let t22;
+    if ($[57] === Symbol.for("react.memo_cache_sentinel")) {
+        t21 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__["UserOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 377,
+            lineNumber: 359,
             columnNumber: 11
         }, this);
-        t24 = {
+        t22 = {
             marginRight: 8
         };
-        $[62] = t23;
-        $[63] = t24;
+        $[57] = t21;
+        $[58] = t22;
     } else {
-        t23 = $[62];
-        t24 = $[63];
+        t21 = $[57];
+        t22 = $[58];
+    }
+    let t23;
+    if ($[59] !== user) {
+        t23 = user ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getInitials"])(user.firstName, user.lastName) : "U";
+        $[59] = user;
+        $[60] = t23;
+    } else {
+        t23 = $[60];
+    }
+    let t24;
+    if ($[61] !== t23) {
+        t24 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$avatar$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Avatar$3e$__["Avatar"], {
+            size: "small",
+            icon: t21,
+            style: t22,
+            children: t23
+        }, void 0, false, {
+            fileName: "[project]/src/components/layout/AppHeader.tsx",
+            lineNumber: 379,
+            columnNumber: 11
+        }, this);
+        $[61] = t23;
+        $[62] = t24;
+    } else {
+        t24 = $[62];
     }
     let t25;
-    if ($[64] !== user) {
-        t25 = user ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getInitials"])(user.firstName, user.lastName) : "U";
-        $[64] = user;
-        $[65] = t25;
+    if ($[63] === Symbol.for("react.memo_cache_sentinel")) {
+        t25 = {
+            fontSize: "11px"
+        };
+        $[63] = t25;
     } else {
-        t25 = $[65];
+        t25 = $[63];
     }
-    let t26;
-    if ($[66] !== t25) {
-        t26 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$avatar$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Avatar$3e$__["Avatar"], {
-            size: "small",
-            icon: t23,
-            style: t24,
-            children: t25
+    const t26 = user?.role || "Unknown";
+    let t27;
+    if ($[64] !== t26) {
+        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
+            direction: "vertical",
+            size: 0,
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
+                type: "secondary",
+                style: t25,
+                children: t26
+            }, void 0, false, {
+                fileName: "[project]/src/components/layout/AppHeader.tsx",
+                lineNumber: 397,
+                columnNumber: 48
+            }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
             lineNumber: 397,
             columnNumber: 11
         }, this);
-        $[66] = t25;
-        $[67] = t26;
+        $[64] = t26;
+        $[65] = t27;
     } else {
-        t26 = $[67];
-    }
-    let t27;
-    if ($[68] === Symbol.for("react.memo_cache_sentinel")) {
-        t27 = {
-            fontSize: "12px"
-        };
-        $[68] = t27;
-    } else {
-        t27 = $[68];
+        t27 = $[65];
     }
     let t28;
-    if ($[69] !== user) {
-        t28 = user ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$format$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["formatFullName"])(user.firstName, user.lastName) : "User";
-        $[69] = user;
-        $[70] = t28;
+    if ($[66] !== t24 || $[67] !== t27) {
+        t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            style: t20,
+            children: [
+                t24,
+                t27
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/layout/AppHeader.tsx",
+            lineNumber: 405,
+            columnNumber: 11
+        }, this);
+        $[66] = t24;
+        $[67] = t27;
+        $[68] = t28;
     } else {
-        t28 = $[70];
+        t28 = $[68];
     }
     let t29;
-    if ($[71] !== t28) {
-        t29 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
-            strong: true,
-            style: t27,
+    if ($[69] !== t18 || $[70] !== t28) {
+        t29 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
+            menu: t18,
+            placement: "bottomRight",
+            trigger: t19,
             children: t28
         }, void 0, false, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 422,
+            lineNumber: 414,
             columnNumber: 11
         }, this);
-        $[71] = t28;
-        $[72] = t29;
+        $[69] = t18;
+        $[70] = t28;
+        $[71] = t29;
     } else {
-        t29 = $[72];
+        t29 = $[71];
     }
     let t30;
-    if ($[73] === Symbol.for("react.memo_cache_sentinel")) {
-        t30 = {
-            fontSize: "11px"
-        };
-        $[73] = t30;
-    } else {
-        t30 = $[73];
-    }
-    const t31 = user?.role || "Unknown";
-    let t32;
-    if ($[74] !== t31) {
-        t32 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
-            type: "secondary",
-            style: t30,
-            children: t31
-        }, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 440,
-            columnNumber: 11
-        }, this);
-        $[74] = t31;
-        $[75] = t32;
-    } else {
-        t32 = $[75];
-    }
-    let t33;
-    if ($[76] !== t29 || $[77] !== t32) {
-        t33 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
-            direction: "vertical",
-            size: 0,
-            children: [
-                t29,
-                t32
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 448,
-            columnNumber: 11
-        }, this);
-        $[76] = t29;
-        $[77] = t32;
-        $[78] = t33;
-    } else {
-        t33 = $[78];
-    }
-    let t34;
-    if ($[79] !== t26 || $[80] !== t33) {
-        t34 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            style: t22,
-            children: [
-                t26,
-                t33
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 457,
-            columnNumber: 11
-        }, this);
-        $[79] = t26;
-        $[80] = t33;
-        $[81] = t34;
-    } else {
-        t34 = $[81];
-    }
-    let t35;
-    if ($[82] !== t20 || $[83] !== t34) {
-        t35 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
-            menu: t20,
-            placement: "bottomRight",
-            trigger: t21,
-            children: t34
-        }, void 0, false, {
-            fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 466,
-            columnNumber: 11
-        }, this);
-        $[82] = t20;
-        $[83] = t34;
-        $[84] = t35;
-    } else {
-        t35 = $[84];
-    }
-    let t36;
-    if ($[85] !== t12 || $[86] !== t14 || $[87] !== t19 || $[88] !== t35) {
-        t36 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
+    if ($[72] !== t12 || $[73] !== t17 || $[74] !== t29) {
+        t30 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
             size: "middle",
             style: t11,
             children: [
                 t12,
-                t14,
-                t19,
-                t35
+                t17,
+                t29
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 475,
+            lineNumber: 423,
             columnNumber: 11
         }, this);
-        $[85] = t12;
-        $[86] = t14;
-        $[87] = t19;
-        $[88] = t35;
-        $[89] = t36;
+        $[72] = t12;
+        $[73] = t17;
+        $[74] = t29;
+        $[75] = t30;
     } else {
-        t36 = $[89];
+        t30 = $[75];
     }
-    let t37;
-    if ($[90] !== t10 || $[91] !== t36 || $[92] !== t4) {
-        t37 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Header, {
+    let t31;
+    if ($[76] !== t10 || $[77] !== t30 || $[78] !== t4) {
+        t31 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Header, {
             style: t4,
             children: [
                 t10,
-                t36
+                t30
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 486,
+            lineNumber: 433,
             columnNumber: 11
         }, this);
-        $[90] = t10;
-        $[91] = t36;
-        $[92] = t4;
-        $[93] = t37;
+        $[76] = t10;
+        $[77] = t30;
+        $[78] = t4;
+        $[79] = t31;
     } else {
-        t37 = $[93];
+        t31 = $[79];
     }
-    return t37;
+    return t31;
 }
 _s(AppHeader, "czXa0IYHsXQniwedFkJxy+ViLTE=", false, function() {
     return [
@@ -2363,7 +2281,7 @@ function _AppHeaderBreadcrumbsMap(item, index) {
         children: item.title
     }, index, false, {
         fileName: "[project]/src/components/layout/AppHeader.tsx",
-        lineNumber: 497,
+        lineNumber: 444,
         columnNumber: 10
     }, this);
 }
@@ -2378,7 +2296,7 @@ function _AppHeaderAnonymous(notification) {
                     children: notification.title
                 }, void 0, false, {
                     fileName: "[project]/src/components/layout/AppHeader.tsx",
-                    lineNumber: 502,
+                    lineNumber: 449,
                     columnNumber: 47
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2386,7 +2304,7 @@ function _AppHeaderAnonymous(notification) {
                     children: notification.message
                 }, void 0, false, {
                     fileName: "[project]/src/components/layout/AppHeader.tsx",
-                    lineNumber: 502,
+                    lineNumber: 449,
                     columnNumber: 109
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2394,13 +2312,13 @@ function _AppHeaderAnonymous(notification) {
                     children: notification.timestamp.toLocaleTimeString()
                 }, void 0, false, {
                     fileName: "[project]/src/components/layout/AppHeader.tsx",
-                    lineNumber: 502,
+                    lineNumber: 449,
                     columnNumber: 175
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/layout/AppHeader.tsx",
-            lineNumber: 502,
+            lineNumber: 449,
             columnNumber: 12
         }, this)
     };
@@ -3243,6 +3161,9 @@ class VehicleService {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(this.BASE_PATH, {
             params
         });
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to fetch vehicles');
+        }
         return response.data;
     }
     static async getVehicle(id) {
@@ -3267,6 +3188,9 @@ class VehicleService {
                 ...params
             }
         });
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to search vehicles');
+        }
         return response.data;
     }
     static async getVehicleStats(id) {
@@ -3751,11 +3675,11 @@ const { Option } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$
 function VehicleList(t0) {
     _s();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(61);
-    if ($[0] !== "0bb1e997c145eaa28c690bd5cf3eb5e8f67222c9c7d00f0de6e4fd539adb3f5b") {
+    if ($[0] !== "9a0ba5c4cece186da5a0cd2f3fe79ea4e25aa6dd7dfd0672cad101d91fd14813") {
         for(let $i = 0; $i < 61; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "0bb1e997c145eaa28c690bd5cf3eb5e8f67222c9c7d00f0de6e4fd539adb3f5b";
+        $[0] = "9a0ba5c4cece186da5a0cd2f3fe79ea4e25aa6dd7dfd0672cad101d91fd14813";
     }
     const { onAdd, onEdit } = t0;
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
@@ -4495,14 +4419,14 @@ function VehicleList(t0) {
         t30 = $[43];
     }
     let t31;
-    if ($[44] !== vehiclesData?.data?.items) {
-        t31 = vehiclesData?.data?.items || [];
-        $[44] = vehiclesData?.data?.items;
+    if ($[44] !== vehiclesData?.items) {
+        t31 = vehiclesData?.items || [];
+        $[44] = vehiclesData?.items;
         $[45] = t31;
     } else {
         t31 = $[45];
     }
-    const t32 = vehiclesData?.data?.pagination.total || 0;
+    const t32 = vehiclesData?.pagination?.total || 0;
     let t33;
     if ($[46] === Symbol.for("react.memo_cache_sentinel")) {
         t33 = [
@@ -4902,12 +4826,12 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                     children: isEditing ? 'Edit Vehicle' : 'Add New Vehicle'
                 }, void 0, false, {
                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                    lineNumber: 104,
+                    lineNumber: 105,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                lineNumber: 101,
+                lineNumber: 102,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$form$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Form$3e$__["Form"], {
@@ -4959,17 +4883,17 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                        lineNumber: 131,
+                                        lineNumber: 132,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 118,
+                                    lineNumber: 119,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 117,
+                                lineNumber: 118,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -4997,23 +4921,23 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                        lineNumber: 148,
+                                        lineNumber: 149,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 138,
+                                    lineNumber: 139,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 137,
+                                lineNumber: 138,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                        lineNumber: 116,
+                        lineNumber: 117,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5054,17 +4978,17 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                         max: currentYear + 1
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                        lineNumber: 167,
+                                        lineNumber: 168,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 155,
+                                    lineNumber: 156,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 154,
+                                lineNumber: 155,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5100,17 +5024,17 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                         addonAfter: "passengers"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                        lineNumber: 186,
+                                        lineNumber: 187,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 174,
+                                    lineNumber: 175,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 173,
+                                lineNumber: 174,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5136,23 +5060,23 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                         addonAfter: "miles"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                        lineNumber: 198,
+                                        lineNumber: 199,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 193,
+                                    lineNumber: 194,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 192,
+                                lineNumber: 193,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                        lineNumber: 153,
+                        lineNumber: 154,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5182,7 +5106,7 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                                 children: "Active"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                                lineNumber: 212,
+                                                lineNumber: 213,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
@@ -5190,7 +5114,7 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                                 children: "Inactive"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                                lineNumber: 213,
+                                                lineNumber: 214,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
@@ -5198,23 +5122,23 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                                 children: "Maintenance"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                                lineNumber: 214,
+                                                lineNumber: 215,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                        lineNumber: 211,
+                                        lineNumber: 212,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 207,
+                                    lineNumber: 208,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 206,
+                                lineNumber: 207,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5238,7 +5162,7 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                                 children: "Good Condition"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                                lineNumber: 225,
+                                                lineNumber: 226,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
@@ -5246,7 +5170,7 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                                 children: "Needs Attention"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                                lineNumber: 226,
+                                                lineNumber: 227,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
@@ -5254,29 +5178,29 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                                 children: "Critical"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                                lineNumber: 227,
+                                                lineNumber: 228,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                        lineNumber: 224,
+                                        lineNumber: 225,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 220,
+                                    lineNumber: 221,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 219,
+                                lineNumber: 220,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                        lineNumber: 205,
+                        lineNumber: 206,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5300,17 +5224,17 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                         disabledDate: (current)=>current && current > (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$dayjs$2f$dayjs$2e$min$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])().endOf('day')
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                        lineNumber: 236,
+                                        lineNumber: 237,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 235,
+                                    lineNumber: 236,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 234,
+                                lineNumber: 235,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5328,23 +5252,23 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                         disabledDate: (current_0)=>current_0 && current_0 < (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$dayjs$2f$dayjs$2e$min$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])().startOf('day')
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                        lineNumber: 244,
+                                        lineNumber: 245,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 243,
+                                    lineNumber: 244,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 242,
+                                lineNumber: 243,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                        lineNumber: 233,
+                        lineNumber: 234,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5369,22 +5293,22 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                     size: "large"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 257,
+                                    lineNumber: 258,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 253,
+                                lineNumber: 254,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                            lineNumber: 252,
+                            lineNumber: 253,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                        lineNumber: 251,
+                        lineNumber: 252,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5404,19 +5328,19 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$CloseOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__CloseOutlined$3e$__["CloseOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                            lineNumber: 267,
+                                            lineNumber: 268,
                                             columnNumber: 15
                                         }, this),
                                         "Cancel"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 266,
+                                    lineNumber: 267,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 265,
+                                lineNumber: 266,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5426,12 +5350,12 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                     children: "Reset"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 272,
+                                    lineNumber: 273,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 271,
+                                lineNumber: 272,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5443,37 +5367,37 @@ function VehicleForm({ vehicle, onSuccess, onCancel }) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SaveOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SaveOutlined$3e$__["SaveOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                            lineNumber: 278,
+                                            lineNumber: 279,
                                             columnNumber: 15
                                         }, this),
                                         isEditing ? 'Update Vehicle' : 'Create Vehicle'
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                    lineNumber: 277,
+                                    lineNumber: 278,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                                lineNumber: 276,
+                                lineNumber: 277,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                        lineNumber: 262,
+                        lineNumber: 263,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-                lineNumber: 111,
+                lineNumber: 112,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/vehicles/VehicleForm.tsx",
-        lineNumber: 100,
+        lineNumber: 101,
         columnNumber: 10
     }, this);
 }

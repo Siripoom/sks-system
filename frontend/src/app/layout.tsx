@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import QueryProvider from "@/components/providers/QueryProvider";
 import ThemeProvider from "@/components/common/ThemeProvider";
 import "./globals.css";
 
@@ -29,9 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );

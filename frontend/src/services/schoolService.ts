@@ -12,10 +12,10 @@ export class SchoolService {
 
   static async getSchools(
     params?: PaginationParams
-  ): Promise<PaginatedResponse<School>> {
+  ): Promise<{ items: School[], pagination: { page: number, limit: number, total: number, pages: number } }> {
     console.log('SchoolService.getSchools called with params:', params);
     
-    const response = await apiClient.get<PaginatedResponse<School>>(
+    const response = await apiClient.get<{ items: School[], pagination: { page: number, limit: number, total: number, pages: number } }>(
       this.BASE_PATH,
       { params }
     );
@@ -44,7 +44,7 @@ export class SchoolService {
     }
     
     console.log('SchoolService.getSchools returning data:', response.data);
-    return response.data as PaginatedResponse<School>;
+    return response.data;
   }
 
   static async getSchool(id: string): Promise<School> {
@@ -94,8 +94,8 @@ export class SchoolService {
   static async searchSchools(
     query: string,
     params?: PaginationParams
-  ): Promise<PaginatedResponse<School>> {
-    const response = await apiClient.get<PaginatedResponse<School>>(
+  ): Promise<{ items: School[], pagination: { page: number, limit: number, total: number, pages: number } }> {
+    const response = await apiClient.get<{ items: School[], pagination: { page: number, limit: number, total: number, pages: number } }>(
       `${this.BASE_PATH}/search`,
       {
         params: { q: query, ...params },
@@ -106,7 +106,7 @@ export class SchoolService {
       throw new Error(response.error?.message || 'Failed to search schools');
     }
     
-    return response.data as PaginatedResponse<School>;
+    return response.data;
   }
 
   static async getSchoolStats(id: string) {
