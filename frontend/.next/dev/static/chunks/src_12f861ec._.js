@@ -160,11 +160,26 @@ class ApiClient {
     setupInterceptors() {
         // Request interceptor to add auth token
         this.instance.interceptors.request.use((config)=>{
-            console.log('ApiClient: Making request to:', config.url);
+            // console.log('ApiClient: Making request to:', config.url);
             const token = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].getAccessToken();
-            if (token && !__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
-                config.headers.Authorization = `Bearer ${token}`;
+            // console.log('ApiClient: Token available:', !!token);
+            if (token) {
+                // console.log('ApiClient: Token expired?', TokenStorage.isTokenExpired(token));
+                if (!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
+                    config.headers.Authorization = `Bearer ${token}`;
+                // console.log('ApiClient: Added Authorization header');
+                } else {
+                // console.log('ApiClient: Token expired, not adding to request');
+                }
+            } else {
+            // console.log('ApiClient: No token available');
             }
+            // console.log('ApiClient: Request config:', {
+            //   url: config.url,
+            //   method: config.method,
+            //   hasAuth: !!config.headers.Authorization,
+            //   params: config.params
+            // });
             return config;
         }, (error)=>{
             console.error('ApiClient: Request error:', error);
@@ -2036,11 +2051,14 @@ __turbopack_context__.s([
     "useWebSocket",
     ()=>useWebSocket
 ]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$socket$2e$io$2d$client$2f$build$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/socket.io-client/build/esm/index.js [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$message$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__message$3e$__ = __turbopack_context__.i("[project]/node_modules/antd/es/message/index.js [app-client] (ecmascript) <export default as message>");
 'use client';
 ;
+;
 class WebSocketService {
-    ws = null;
+    socket = null;
     eventHandlers = new Map();
     connectionStatusHandlers = [];
     config;
@@ -2052,7 +2070,7 @@ class WebSocketService {
     subscriptions = new Set();
     constructor(config = {}){
         this.config = {
-            url: config.url || (("TURBOPACK compile-time truthy", 1) ? `ws://${window.location.hostname}:3001` : "TURBOPACK unreachable"),
+            url: config.url || (("TURBOPACK compile-time truthy", 1) ? ("TURBOPACK compile-time value", "http://localhost:5000") || `http://${window.location.hostname}:5000` : "TURBOPACK unreachable"),
             reconnectInterval: config.reconnectInterval || 5000,
             maxReconnectAttempts: config.maxReconnectAttempts || 10,
             heartbeatInterval: config.heartbeatInterval || 30000,
@@ -2063,41 +2081,74 @@ class WebSocketService {
     connect(userId) {
         return new Promise((resolve, reject)=>{
             try {
-                if (this.ws?.readyState === WebSocket.OPEN) {
+                if (this.socket?.connected) {
                     resolve();
                     return;
                 }
                 this.userId = userId || null;
                 this.isManuallyDisconnected = false;
-                const wsUrl = this.userId ? `${this.config.url}?userId=${this.userId}` : this.config.url;
-                this.ws = new WebSocket(wsUrl);
-                this.ws.onopen = ()=>{
-                    this.log('WebSocket connected');
+                const socketOptions = {
+                    reconnection: true,
+                    reconnectionAttempts: this.config.maxReconnectAttempts,
+                    reconnectionDelay: this.config.reconnectInterval,
+                    transports: [
+                        'websocket',
+                        'polling'
+                    ]
+                };
+                if (this.userId) {
+                    socketOptions.query = {
+                        userId: this.userId
+                    };
+                }
+                this.socket = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$socket$2e$io$2d$client$2f$build$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["io"])(this.config.url, socketOptions);
+                this.socket.on('connect', ()=>{
+                    this.log('Socket.io connected');
                     this.reconnectAttempts = 0;
-                    this.startHeartbeat();
                     this.notifyConnectionStatus('connected');
                     // Resubscribe to previous subscriptions
                     this.subscriptions.forEach((subscription)=>{
                         this.subscribe(subscription);
                     });
                     resolve();
-                };
-                this.ws.onmessage = (event)=>{
-                    this.handleMessage(event.data);
-                };
-                this.ws.onclose = (event)=>{
-                    this.log(`WebSocket disconnected: ${event.code} - ${event.reason}`);
-                    this.stopHeartbeat();
+                });
+                this.socket.on('message', (data)=>{
+                    this.handleMessage(JSON.stringify(data));
+                });
+                // Listen for all WebSocket event types
+                Object.values([
+                    'TRIP_LOCATION_UPDATE',
+                    'TRIP_STATUS_CHANGE',
+                    'STUDENT_STATUS_UPDATE',
+                    'ALERT_CREATED',
+                    'ALERT_ACKNOWLEDGED',
+                    'ALERT_RESOLVED',
+                    'EMERGENCY_REPORTED',
+                    'DRIVER_MESSAGE',
+                    'SYSTEM_NOTIFICATION',
+                    'ROUTE_UPDATE',
+                    'WEATHER_ALERT'
+                ]).forEach((eventType)=>{
+                    this.socket?.on(eventType.toLowerCase(), (data)=>{
+                        this.handleMessage(JSON.stringify({
+                            type: eventType,
+                            data,
+                            timestamp: new Date().toISOString()
+                        }));
+                    });
+                });
+                this.socket.on('disconnect', (reason)=>{
+                    this.log(`Socket.io disconnected: ${reason}`);
                     this.notifyConnectionStatus('disconnected');
-                    if (!this.isManuallyDisconnected && this.reconnectAttempts < this.config.maxReconnectAttempts) {
-                        this.scheduleReconnect();
-                    }
-                };
-                this.ws.onerror = (error)=>{
-                    this.log('WebSocket error:', error);
+                });
+                this.socket.on('reconnecting', ()=>{
+                    this.notifyConnectionStatus('reconnecting');
+                });
+                this.socket.on('connect_error', (error)=>{
+                    this.log('Socket.io connection error:', error);
                     this.notifyConnectionStatus('error');
                     reject(error);
-                };
+                });
             } catch (error) {
                 reject(error);
             }
@@ -2106,13 +2157,12 @@ class WebSocketService {
     disconnect() {
         this.isManuallyDisconnected = true;
         this.clearReconnectTimer();
-        this.stopHeartbeat();
-        if (this.ws) {
-            this.ws.close(1000, 'Manual disconnect');
-            this.ws = null;
+        if (this.socket) {
+            this.socket.disconnect();
+            this.socket = null;
         }
         this.subscriptions.clear();
-        this.log('WebSocket manually disconnected');
+        this.log('Socket.io manually disconnected');
     }
     scheduleReconnect() {
         if (this.reconnectTimer) return;
@@ -2132,25 +2182,12 @@ class WebSocketService {
             this.reconnectTimer = null;
         }
     }
-    // Heartbeat Management
+    // Heartbeat Management (Socket.io handles this automatically)
     startHeartbeat() {
-        this.heartbeatTimer = setInterval(()=>{
-            if (this.ws?.readyState === WebSocket.OPEN) {
-                this.send({
-                    type: 'HEARTBEAT',
-                    data: {
-                        timestamp: new Date().toISOString()
-                    },
-                    timestamp: new Date().toISOString()
-                });
-            }
-        }, this.config.heartbeatInterval);
+    // Socket.io handles heartbeat automatically
     }
     stopHeartbeat() {
-        if (this.heartbeatTimer) {
-            clearInterval(this.heartbeatTimer);
-            this.heartbeatTimer = null;
-        }
+    // Socket.io handles heartbeat automatically
     }
     // Message Handling
     handleMessage(rawMessage) {
@@ -2176,12 +2213,12 @@ class WebSocketService {
     }
     // Send Messages
     send(message) {
-        if (this.ws?.readyState !== WebSocket.OPEN) {
-            this.log('Cannot send message: WebSocket not connected');
+        if (!this.socket?.connected) {
+            this.log('Cannot send message: Socket.io not connected');
             return false;
         }
         try {
-            this.ws.send(JSON.stringify(message));
+            this.socket.emit(message.type.toLowerCase(), message);
             this.log('Sent message:', message);
             return true;
         } catch (error) {
@@ -2238,25 +2275,17 @@ class WebSocketService {
     // Subscription Management
     subscribe(subscription) {
         this.subscriptions.add(subscription);
-        if (this.ws?.readyState === WebSocket.OPEN) {
-            this.send({
-                type: 'SUBSCRIBE',
-                data: {
-                    subscription
-                },
-                timestamp: new Date().toISOString()
+        if (this.socket?.connected) {
+            this.socket.emit('subscribe', {
+                subscription
             });
         }
     }
     unsubscribe(subscription) {
         this.subscriptions.delete(subscription);
-        if (this.ws?.readyState === WebSocket.OPEN) {
-            this.send({
-                type: 'UNSUBSCRIBE',
-                data: {
-                    subscription
-                },
-                timestamp: new Date().toISOString()
+        if (this.socket?.connected) {
+            this.socket.emit('unsubscribe', {
+                subscription
             });
         }
     }
@@ -2313,22 +2342,13 @@ class WebSocketService {
     }
     // Utility Methods
     getConnectionState() {
-        if (!this.ws) return 'closed';
-        switch(this.ws.readyState){
-            case WebSocket.CONNECTING:
-                return 'connecting';
-            case WebSocket.OPEN:
-                return 'open';
-            case WebSocket.CLOSING:
-                return 'closing';
-            case WebSocket.CLOSED:
-                return 'closed';
-            default:
-                return 'closed';
-        }
+        if (!this.socket) return 'closed';
+        if (this.socket.connected) return 'open';
+        if (this.socket.disconnected) return 'closed';
+        return 'connecting';
     }
     isConnected() {
-        return this.ws?.readyState === WebSocket.OPEN;
+        return this.socket?.connected === true;
     }
     log(message, ...args) {
         if (this.config.enableLogging) {
@@ -2643,23 +2663,31 @@ const useAuthStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_mo
         error: null,
         // Actions
         login: async (credentials)=>{
+            console.log('AuthStore: Login attempt with credentials:', {
+                email: credentials.email
+            });
             set({
                 isLoading: true,
                 error: null
             });
             try {
                 const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$authService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].login(credentials);
+                console.log('AuthStore: Login response:', response);
                 if (response.success && response.data) {
+                    console.log('AuthStore: Login successful, user:', response.data.user);
+                    console.log('AuthStore: Tokens received:', !!response.data.tokens);
                     set({
                         isAuthenticated: true,
                         user: response.data.user,
                         isLoading: false,
                         error: null
                     });
+                    console.log('AuthStore: Auth state updated after login');
                 } else {
                     throw new Error('Login failed');
                 }
             } catch (error) {
+                console.error('AuthStore: Login error:', error);
                 set({
                     isAuthenticated: false,
                     user: null,
@@ -2805,12 +2833,17 @@ const useAuthStore = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_mo
             });
         },
         initializeAuth: ()=>{
+            console.log('AuthStore: Initializing auth...');
             const authData = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$authService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].initializeAuth();
+            console.log('AuthStore: Auth data:', authData);
+            console.log('AuthStore: Token available:', !!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$authService$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].getAccessToken());
+            console.log('AuthStore: User from storage:', authData.user);
             set({
                 isAuthenticated: authData.isAuthenticated,
                 user: authData.user,
                 isLoading: false
             });
+            console.log('AuthStore: Auth initialized, isAuthenticated:', authData.isAuthenticated);
         },
         // Helper functions
         hasRole: (role)=>{

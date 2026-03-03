@@ -160,26 +160,26 @@ class ApiClient {
     setupInterceptors() {
         // Request interceptor to add auth token
         this.instance.interceptors.request.use((config)=>{
-            console.log('ApiClient: Making request to:', config.url);
+            // console.log('ApiClient: Making request to:', config.url);
             const token = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].getAccessToken();
-            console.log('ApiClient: Token available:', !!token);
+            // console.log('ApiClient: Token available:', !!token);
             if (token) {
-                console.log('ApiClient: Token expired?', __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token));
+                // console.log('ApiClient: Token expired?', TokenStorage.isTokenExpired(token));
                 if (!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
                     config.headers.Authorization = `Bearer ${token}`;
-                    console.log('ApiClient: Added Authorization header');
+                // console.log('ApiClient: Added Authorization header');
                 } else {
-                    console.log('ApiClient: Token expired, not adding to request');
+                // console.log('ApiClient: Token expired, not adding to request');
                 }
             } else {
-                console.log('ApiClient: No token available');
+            // console.log('ApiClient: No token available');
             }
-            console.log('ApiClient: Request config:', {
-                url: config.url,
-                method: config.method,
-                hasAuth: !!config.headers.Authorization,
-                params: config.params
-            });
+            // console.log('ApiClient: Request config:', {
+            //   url: config.url,
+            //   method: config.method,
+            //   hasAuth: !!config.headers.Authorization,
+            //   params: config.params
+            // });
             return config;
         }, (error)=>{
             console.error('ApiClient: Request error:', error);
@@ -4914,11 +4914,11 @@ var _s = __turbopack_context__.k.signature();
 function RoutesPage() {
     _s();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(41);
-    if ($[0] !== "841227d3c142df083ad81f069c7b248235bef1360ed73f87c0bf2b94cc91eea0") {
+    if ($[0] !== "28090b57014fc7220b825354bf14753a8a95e389b8b0cad74ca210e139714405") {
         for(let $i = 0; $i < 41; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "841227d3c142df083ad81f069c7b248235bef1360ed73f87c0bf2b94cc91eea0";
+        $[0] = "28090b57014fc7220b825354bf14753a8a95e389b8b0cad74ca210e139714405";
     }
     const [isModalOpen, setIsModalOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [selectedRoute, setSelectedRoute] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(undefined);
@@ -5103,9 +5103,11 @@ function RoutesPage() {
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                             children: [
-                                "Duration: ",
+                                "Duration:",
+                                " ",
                                 selectedRoute.estimatedDuration && Math.round(selectedRoute.estimatedDuration / 60),
-                                " minutes"
+                                " ",
+                                "minutes"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/routes/page.tsx",
@@ -5120,7 +5122,7 @@ function RoutesPage() {
                         }, void 0, true, {
                             fileName: "[project]/src/app/routes/page.tsx",
                             lineNumber: 132,
-                            columnNumber: 415
+                            columnNumber: 423
                         }, this)
                     ]
                 }, void 0, true, {
@@ -5140,7 +5142,7 @@ function RoutesPage() {
         }, void 0, false, {
             fileName: "[project]/src/app/routes/page.tsx",
             lineNumber: 132,
-            columnNumber: 494
+            columnNumber: 502
         }, this);
         $[10] = isViewMode;
         $[11] = selectedRoute;

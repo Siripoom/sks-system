@@ -1,20 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Modal } from 'antd';
+import { useEffect } from 'react';
 import { useAppStore } from '@/stores/appStore';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import AppLayout from '@/components/layout/AppLayout';
 import { ProtectedComponent } from '@/components/auth/ProtectedRoute';
-import UserList from '@/components/users/UserList';
-import UserForm from '@/components/users/UserForm';
+import UserTabs from '@/components/users/UserTabs';
 import { USER_ROLES } from '@/constants/app';
-import type { User } from '@/types/api';
 
 function UsersContent() {
   const { setBreadcrumbs } = useAppStore();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [editingUser, setEditingUser] = useState<User | undefined>(undefined);
 
   useEffect(() => {
     setBreadcrumbs([
@@ -23,44 +18,9 @@ function UsersContent() {
     ]);
   }, [setBreadcrumbs]);
 
-  const handleAdd = () => {
-    setEditingUser(undefined);
-    setIsModalVisible(true);
-  };
-
-  const handleEdit = (user: User) => {
-    setEditingUser(user);
-    setIsModalVisible(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalVisible(false);
-    setEditingUser(undefined);
-  };
-
-  const handleSuccess = () => {
-    setIsModalVisible(false);
-    setEditingUser(undefined);
-  };
-
   return (
-    <ProtectedComponent roles={[USER_ROLES.ADMIN, USER_ROLES.TEACHER]}>
-      <UserList onAdd={handleAdd} onEdit={handleEdit} />
-      
-      <Modal
-        title={editingUser ? 'Edit User' : 'Add New User'}
-        open={isModalVisible}
-        onCancel={handleModalClose}
-        footer={null}
-        width={900}
-        destroyOnClose
-      >
-        <UserForm 
-          user={editingUser}
-          onSuccess={handleSuccess}
-          onCancel={handleModalClose}
-        />
-      </Modal>
+    <ProtectedComponent roles={[USER_ROLES.ADMIN, USER_ROLES.TEACHER, USER_ROLES.DRIVER]}>
+      <UserTabs />
     </ProtectedComponent>
   );
 }

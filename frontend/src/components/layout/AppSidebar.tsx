@@ -57,20 +57,20 @@ const menuItems: MenuItem[] = [
     path: ROUTES.USERS,
     roles: [USER_ROLES.ADMIN, USER_ROLES.TEACHER],
   },
-  {
-    key: 'students',
-    label: 'Students',
-    icon: <TeamOutlined />,
-    path: ROUTES.STUDENTS,
-    roles: [USER_ROLES.ADMIN, USER_ROLES.TEACHER],
-  },
-  {
-    key: 'drivers',
-    label: 'Drivers',
-    icon: <SafetyCertificateOutlined />,
-    path: ROUTES.DRIVERS,
-    roles: [USER_ROLES.ADMIN],
-  },
+  // {
+  //   key: 'students',
+  //   label: 'Students',
+  //   icon: <TeamOutlined />,
+  //   path: ROUTES.STUDENTS,
+  //   roles: [USER_ROLES.ADMIN, USER_ROLES.TEACHER],
+  // },
+  // {
+  //   key: 'drivers',
+  //   label: 'Drivers',
+  //   icon: <SafetyCertificateOutlined />,
+  //   path: ROUTES.DRIVERS,
+  //   roles: [USER_ROLES.ADMIN],
+  // },
   {
     key: 'routes',
     label: 'Routes',
@@ -104,20 +104,20 @@ const menuItems: MenuItem[] = [
     path: ROUTES.ASSIGNMENTS,
     roles: [USER_ROLES.ADMIN, USER_ROLES.TEACHER],
   },
-  {
-    key: 'guardians',
-    label: 'Guardians',
-    icon: <HeartOutlined />,
-    path: ROUTES.GUARDIANS,
-    roles: [USER_ROLES.ADMIN, USER_ROLES.TEACHER],
-  },
-  {
-    key: 'event-logs',
-    label: 'Event Logs',
-    icon: <HistoryOutlined />,
-    path: ROUTES.EVENT_LOGS,
-    roles: [USER_ROLES.ADMIN],
-  },
+  // {
+  //   key: 'guardians',
+  //   label: 'Guardians',
+  //   icon: <HeartOutlined />,
+  //   path: ROUTES.GUARDIANS,
+  //   roles: [USER_ROLES.ADMIN, USER_ROLES.TEACHER],
+  // },
+  // {
+  //   key: 'event-logs',
+  //   label: 'Event Logs',
+  //   icon: <HistoryOutlined />,
+  //   path: ROUTES.EVENT_LOGS,
+  //   roles: [USER_ROLES.ADMIN],
+  // },
 ];
 
 export default function AppSidebar({ collapsed, theme }: AppSidebarProps) {
@@ -126,13 +126,13 @@ export default function AppSidebar({ collapsed, theme }: AppSidebarProps) {
   const { user, hasAnyRole } = useAuthStore();
 
   // Filter menu items based on user role
-  const filteredMenuItems = menuItems.filter(item => {
+  const filteredMenuItems = menuItems.filter((item) => {
     if (!item.roles || item.roles.length === 0) return true;
     return user && hasAnyRole(item.roles);
   });
 
   // Convert to Ant Design menu items format
-  const antMenuItems = filteredMenuItems.map(item => ({
+  const antMenuItems = filteredMenuItems.map((item) => ({
     key: item.key,
     icon: item.icon,
     label: item.label,
@@ -145,7 +145,7 @@ export default function AppSidebar({ collapsed, theme }: AppSidebarProps) {
 
   // Get current selected key based on pathname
   const getSelectedKey = () => {
-    const currentItem = menuItems.find(item => item.path === pathname);
+    const currentItem = menuItems.find((item) => item.path === pathname);
     return currentItem ? [currentItem.key] : ['dashboard'];
   };
 
@@ -166,23 +166,27 @@ export default function AppSidebar({ collapsed, theme }: AppSidebarProps) {
       }}
     >
       {/* Logo and Title */}
-      <div style={{ 
-        height: 64, 
-        margin: 16, 
-        display: 'flex', 
-        alignItems: 'center',
-        justifyContent: collapsed ? 'center' : 'flex-start',
-      }}>
+      <div
+        style={{
+          height: 64,
+          margin: 16,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: collapsed ? 'center' : 'flex-start',
+        }}
+      >
         <Space>
-          <CarOutlined style={{ 
-            fontSize: '24px', 
-            color: '#1890ff',
-          }} />
+          <CarOutlined
+            style={{
+              fontSize: '24px',
+              color: '#1890ff',
+            }}
+          />
           {!collapsed && (
-            <Title 
-              level={4} 
-              style={{ 
-                color: '#ffffff', 
+            <Title
+              level={4}
+              style={{
+                color: '#ffffff',
                 margin: 0,
                 fontSize: '16px',
               }}
@@ -204,15 +208,17 @@ export default function AppSidebar({ collapsed, theme }: AppSidebarProps) {
 
       {/* Footer info */}
       {!collapsed && (
-        <div style={{
-          position: 'absolute',
-          bottom: 16,
-          left: 16,
-          right: 16,
-          textAlign: 'center',
-          color: 'rgba(255, 255, 255, 0.45)',
-          fontSize: '12px',
-        }}>
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 16,
+            left: 16,
+            right: 16,
+            textAlign: 'center',
+            color: 'rgba(255, 255, 255, 0.45)',
+            fontSize: '12px',
+          }}
+        >
           <div>SKS Transportation</div>
           <div>Management System</div>
           <div style={{ marginTop: 4 }}>v1.0.0</div>

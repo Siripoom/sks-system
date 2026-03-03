@@ -35,9 +35,17 @@ interface UserFormProps {
   user?: User;
   onSuccess: () => void;
   onCancel: () => void;
+  defaultRole?: string;
+  roleDisabled?: boolean;
 }
 
-export default function UserForm({ user, onSuccess, onCancel }: UserFormProps) {
+export default function UserForm({ 
+  user, 
+  onSuccess, 
+  onCancel, 
+  defaultRole,
+  roleDisabled = false 
+}: UserFormProps) {
   const [form] = Form.useForm();
   const [showPassword, setShowPassword] = useState(false);
   const isEditing = !!user;
@@ -150,7 +158,7 @@ export default function UserForm({ user, onSuccess, onCancel }: UserFormProps) {
         layout="vertical"
         onFinish={handleSubmit}
         initialValues={{ 
-          role: USER_ROLES.PARENT,
+          role: defaultRole || USER_ROLES.PARENT,
           isActive: true 
         }}
         autoComplete="off"
@@ -257,7 +265,7 @@ export default function UserForm({ user, onSuccess, onCancel }: UserFormProps) {
               <Select 
                 placeholder="Select user role" 
                 size="large"
-                disabled={!canManageRoles}
+                disabled={!canManageRoles || roleDisabled}
               >
                 {roleOptions.map(option => (
                   <Option key={option.value} value={option.value}>

@@ -3161,6 +3161,12 @@ class UserService {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(this.BASE_PATH, {
             params
         });
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to fetch users');
+        }
+        if (!response.data) {
+            throw new Error('No data received from users API');
+        }
         return response.data;
     }
     static async getUser(id) {
@@ -3185,6 +3191,12 @@ class UserService {
                 ...params
             }
         });
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to search users');
+        }
+        if (!response.data) {
+            throw new Error('No data received from user search API');
+        }
         return response.data;
     }
     static async getUserProfile() {
@@ -3785,71 +3797,73 @@ const { Search } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$
 const { Option } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$select$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Select$3e$__["Select"];
 function UserList(t0) {
     _s();
-    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(66);
-    if ($[0] !== "49138b00c35123b207799249892dc95f5517b12c8a7e5ca0abe1d1e66986979a") {
-        for(let $i = 0; $i < 66; $i += 1){
+    const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(70);
+    if ($[0] !== "86eefb1b1b6638643c4a9379b6d1fa4b153f997a4c4401351f74b44287228b15") {
+        for(let $i = 0; $i < 70; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "49138b00c35123b207799249892dc95f5517b12c8a7e5ca0abe1d1e66986979a";
+        $[0] = "86eefb1b1b6638643c4a9379b6d1fa4b153f997a4c4401351f74b44287228b15";
     }
-    const { onAdd, onEdit } = t0;
+    const { onAdd, onEdit, roleFilter: propRoleFilter, title: t1, addButtonText: t2 } = t0;
+    const title = t1 === undefined ? "User Management" : t1;
+    const addButtonText = t2 === undefined ? "Add User" : t2;
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
-    const [roleFilter, setRoleFilter] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
-    let t1;
+    const [roleFilter, setRoleFilter] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(propRoleFilter || "");
+    let t3;
     if ($[1] === Symbol.for("react.memo_cache_sentinel")) {
-        t1 = {
+        t3 = {
             current: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].DEFAULT_PAGE,
             pageSize: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].DEFAULT_PAGE_SIZE
         };
-        $[1] = t1;
+        $[1] = t3;
     } else {
-        t1 = $[1];
+        t3 = $[1];
     }
-    const [pagination, setPagination] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(t1);
+    const [pagination, setPagination] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(t3);
     const { user: currentUser } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$authStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuthStore"])();
-    const t2 = searchQuery || undefined;
-    const t3 = roleFilter || undefined;
-    let t4;
-    if ($[2] !== pagination.current || $[3] !== pagination.pageSize || $[4] !== t2 || $[5] !== t3) {
-        t4 = {
+    const t4 = searchQuery || undefined;
+    const t5 = roleFilter || undefined;
+    let t6;
+    if ($[2] !== pagination.current || $[3] !== pagination.pageSize || $[4] !== t4 || $[5] !== t5) {
+        t6 = {
             page: pagination.current,
             limit: pagination.pageSize,
-            search: t2,
-            role: t3
+            search: t4,
+            role: t5
         };
         $[2] = pagination.current;
         $[3] = pagination.pageSize;
-        $[4] = t2;
-        $[5] = t3;
-        $[6] = t4;
+        $[4] = t4;
+        $[5] = t5;
+        $[6] = t6;
     } else {
-        t4 = $[6];
+        t6 = $[6];
     }
-    const { data: usersData, isLoading, error } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useUsers$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUsers"])(t4);
+    const { data: usersData, isLoading, error } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useUsers$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUsers"])(t6);
     const deleteUserMutation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useUsers$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDeleteUser"])();
     const updateRoleMutation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useUsers$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUpdateUserRole"])();
-    let t5;
+    let t7;
     if ($[7] !== deleteUserMutation) {
-        t5 = ({
+        t7 = ({
             "UserList[handleDelete]": async (id, name)=>{
                 ;
                 try {
                     await deleteUserMutation.mutateAsync(id);
                     __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$message$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__message$3e$__["message"].success(`User "${name}" deleted successfully`);
-                } catch (t6) {
+                } catch (t8) {
                     __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$message$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__message$3e$__["message"].error("Failed to delete user");
                 }
             }
         })["UserList[handleDelete]"];
         $[7] = deleteUserMutation;
-        $[8] = t5;
+        $[8] = t7;
     } else {
-        t5 = $[8];
+        t7 = $[8];
     }
-    const handleDelete = t5;
-    let t6;
+    const handleDelete = t7;
+    let t8;
     if ($[9] !== updateRoleMutation) {
-        t6 = ({
+        t8 = ({
             "UserList[handleRoleChange]": async (id_0, role, userName)=>{
                 ;
                 try {
@@ -3858,20 +3872,20 @@ function UserList(t0) {
                         role
                     });
                     __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$message$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__message$3e$__["message"].success(`Role updated for ${userName}`);
-                } catch (t7) {
+                } catch (t9) {
                     __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$message$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__message$3e$__["message"].error("Failed to update user role");
                 }
             }
         })["UserList[handleRoleChange]"];
         $[9] = updateRoleMutation;
-        $[10] = t6;
+        $[10] = t8;
     } else {
-        t6 = $[10];
+        t8 = $[10];
     }
-    const handleRoleChange = t6;
-    let t7;
+    const handleRoleChange = t8;
+    let t9;
     if ($[11] === Symbol.for("react.memo_cache_sentinel")) {
-        t7 = ({
+        t9 = ({
             "UserList[handleTableChange]": (paginationConfig)=>{
                 setPagination({
                     current: paginationConfig.current,
@@ -3879,28 +3893,28 @@ function UserList(t0) {
                 });
             }
         })["UserList[handleTableChange]"];
-        $[11] = t7;
+        $[11] = t9;
     } else {
-        t7 = $[11];
+        t9 = $[11];
     }
-    const handleTableChange = t7;
-    let t8;
+    const handleTableChange = t9;
+    let t10;
     if ($[12] === Symbol.for("react.memo_cache_sentinel")) {
-        t8 = ({
+        t10 = ({
             "UserList[handleSearch]": (value)=>{
                 setSearchQuery(value);
                 setPagination(_UserListHandleSearchSetPagination);
             }
         })["UserList[handleSearch]"];
-        $[12] = t8;
+        $[12] = t10;
     } else {
-        t8 = $[12];
+        t10 = $[12];
     }
-    const handleSearch = t8;
+    const handleSearch = t10;
     const getRoleColor = _UserListGetRoleColor;
-    let t9;
+    let t11;
     if ($[13] !== currentUser?.id || $[14] !== currentUser?.role || $[15] !== handleRoleChange || $[16] !== onEdit) {
-        t9 = ({
+        t11 = ({
             "UserList[getUserActions]": (user)=>{
                 const canManageRoles = currentUser?.role === __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].ADMIN;
                 const isCurrentUser = currentUser?.id === user.id;
@@ -3909,7 +3923,7 @@ function UserList(t0) {
                         key: "edit",
                         icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EditOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__EditOutlined$3e$__["EditOutlined"], {}, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 158,
+                            lineNumber: 166,
                             columnNumber: 17
                         }, this),
                         label: "Edit User",
@@ -3923,7 +3937,7 @@ function UserList(t0) {
                         key: "role-submenu",
                         icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserSwitchOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserSwitchOutlined$3e$__["UserSwitchOutlined"], {}, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 167,
+                            lineNumber: 175,
                             columnNumber: 19
                         }, this),
                         label: "Change Role",
@@ -3962,14 +3976,14 @@ function UserList(t0) {
         $[14] = currentUser?.role;
         $[15] = handleRoleChange;
         $[16] = onEdit;
-        $[17] = t9;
+        $[17] = t11;
     } else {
-        t9 = $[17];
+        t11 = $[17];
     }
-    const getUserActions = t9;
-    let t10;
+    const getUserActions = t11;
+    let t12;
     if ($[18] !== currentUser?.id) {
-        t10 = {
+        t12 = {
             title: "User",
             key: "user",
             width: "25%",
@@ -3986,7 +4000,7 @@ function UserList(t0) {
                             size: 40,
                             icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__["UserOutlined"], {}, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 216,
+                                lineNumber: 224,
                                 columnNumber: 36
                             }, void 0),
                             style: {
@@ -3998,7 +4012,7 @@ function UserList(t0) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 216,
+                            lineNumber: 224,
                             columnNumber: 12
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4018,13 +4032,13 @@ function UserList(t0) {
                                             children: "You"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/users/UserList.tsx",
-                                            lineNumber: 224,
+                                            lineNumber: 232,
                                             columnNumber: 87
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 218,
+                                    lineNumber: 226,
                                     columnNumber: 83
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4038,14 +4052,14 @@ function UserList(t0) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MailOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MailOutlined$3e$__["MailOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserList.tsx",
-                                            lineNumber: 230,
+                                            lineNumber: 238,
                                             columnNumber: 16
                                         }, this),
                                         record.email
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 224,
+                                    lineNumber: 232,
                                     columnNumber: 121
                                 }, this),
                                 record.phone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4059,40 +4073,40 @@ function UserList(t0) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$PhoneOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PhoneOutlined$3e$__["PhoneOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserList.tsx",
-                                            lineNumber: 236,
+                                            lineNumber: 244,
                                             columnNumber: 16
                                         }, this),
                                         record.phone
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 230,
+                                    lineNumber: 238,
                                     columnNumber: 69
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 218,
+                            lineNumber: 226,
                             columnNumber: 78
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 212,
+                    lineNumber: 220,
                     columnNumber: 16
                 }, this);
             }
         };
         $[18] = currentUser?.id;
-        $[19] = t10;
+        $[19] = t12;
     } else {
-        t10 = $[19];
+        t12 = $[19];
     }
-    let t11;
-    let t12;
     let t13;
+    let t14;
+    let t15;
     if ($[20] === Symbol.for("react.memo_cache_sentinel")) {
-        t11 = {
+        t13 = {
             title: "Role",
             dataIndex: "role",
             key: "role",
@@ -4107,7 +4121,7 @@ function UserList(t0) {
                     children: role_1
                 }, void 0, false, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 254,
+                    lineNumber: 262,
                     columnNumber: 25
                 }, this),
             filters: [
@@ -4129,7 +4143,7 @@ function UserList(t0) {
                 }
             ]
         };
-        t12 = {
+        t14 = {
             title: "Status",
             dataIndex: "isActive",
             key: "status",
@@ -4137,23 +4151,23 @@ function UserList(t0) {
             align: "center",
             render: _temp
         };
-        t13 = {
+        t15 = {
             title: "Details",
             key: "details",
             width: "25%",
             render: _temp2
         };
-        $[20] = t11;
-        $[21] = t12;
-        $[22] = t13;
+        $[20] = t13;
+        $[21] = t14;
+        $[22] = t15;
     } else {
-        t11 = $[20];
-        t12 = $[21];
-        t13 = $[22];
+        t13 = $[20];
+        t14 = $[21];
+        t15 = $[22];
     }
-    let t14;
+    let t16;
     if ($[23] !== currentUser?.id || $[24] !== deleteUserMutation || $[25] !== getUserActions || $[26] !== handleDelete || $[27] !== onEdit) {
-        t14 = {
+        t16 = {
             title: "Actions",
             key: "actions",
             width: "20%",
@@ -4168,7 +4182,7 @@ function UserList(t0) {
                                 type: "text",
                                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EditOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__EditOutlined$3e$__["EditOutlined"], {}, void 0, false, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 303,
+                                    lineNumber: 311,
                                     columnNumber: 76
                                 }, void 0),
                                 onClick: {
@@ -4177,12 +4191,12 @@ function UserList(t0) {
                                 size: "small"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 303,
+                                lineNumber: 311,
                                 columnNumber: 50
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 303,
+                            lineNumber: 311,
                             columnNumber: 23
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
@@ -4197,18 +4211,18 @@ function UserList(t0) {
                                 type: "text",
                                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MoreOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MoreOutlined$3e$__["MoreOutlined"], {}, void 0, false, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 307,
+                                    lineNumber: 315,
                                     columnNumber: 84
                                 }, void 0),
                                 size: "small"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 307,
+                                lineNumber: 315,
                                 columnNumber: 58
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 305,
+                            lineNumber: 313,
                             columnNumber: 85
                         }, this),
                         !isCurrentUser_1 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$popconfirm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Popconfirm$3e$__["Popconfirm"], {
@@ -4228,7 +4242,7 @@ function UserList(t0) {
                                     type: "text",
                                     icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$DeleteOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__DeleteOutlined$3e$__["DeleteOutlined"], {}, void 0, false, {
                                         fileName: "[project]/src/components/users/UserList.tsx",
-                                        lineNumber: 311,
+                                        lineNumber: 319,
                                         columnNumber: 69
                                     }, void 0),
                                     danger: true,
@@ -4236,23 +4250,23 @@ function UserList(t0) {
                                     loading: deleteUserMutation.isPending
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 311,
+                                    lineNumber: 319,
                                     columnNumber: 43
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 311,
+                                lineNumber: 319,
                                 columnNumber: 14
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 307,
+                            lineNumber: 315,
                             columnNumber: 149
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 303,
+                    lineNumber: 311,
                     columnNumber: 16
                 }, this);
             }
@@ -4262,171 +4276,189 @@ function UserList(t0) {
         $[25] = getUserActions;
         $[26] = handleDelete;
         $[27] = onEdit;
-        $[28] = t14;
+        $[28] = t16;
     } else {
-        t14 = $[28];
+        t16 = $[28];
     }
-    let t15;
-    if ($[29] !== t10 || $[30] !== t14) {
-        t15 = [
-            t10,
-            t11,
+    let t17;
+    if ($[29] !== t12 || $[30] !== t16) {
+        t17 = [
             t12,
             t13,
-            t14
+            t14,
+            t15,
+            t16
         ];
-        $[29] = t10;
-        $[30] = t14;
-        $[31] = t15;
+        $[29] = t12;
+        $[30] = t16;
+        $[31] = t17;
     } else {
-        t15 = $[31];
+        t17 = $[31];
     }
-    const columns = t15;
+    const columns = t17;
     if (error) {
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$message$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__message$3e$__["message"].error("Failed to load users");
     }
-    let t16;
+    let t18;
     if ($[32] === Symbol.for("react.memo_cache_sentinel")) {
-        t16 = {
+        t18 = {
             marginBottom: "16px"
         };
-        $[32] = t16;
+        $[32] = t18;
     } else {
-        t16 = $[32];
+        t18 = $[32];
     }
-    let t17;
+    let t19;
     if ($[33] === Symbol.for("react.memo_cache_sentinel")) {
-        t17 = [
+        t19 = [
             16,
             16
         ];
-        $[33] = t17;
+        $[33] = t19;
     } else {
-        t17 = $[33];
+        t19 = $[33];
     }
-    let t18;
+    let t20;
     if ($[34] === Symbol.for("react.memo_cache_sentinel")) {
-        t18 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
+        t20 = {
+            margin: 0
+        };
+        $[34] = t20;
+    } else {
+        t20 = $[34];
+    }
+    let t21;
+    if ($[35] !== title) {
+        t21 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
             xs: 24,
             sm: 16,
             md: 18,
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Title, {
                 level: 4,
-                style: {
-                    margin: 0
-                },
-                children: "User Management"
+                style: t20,
+                children: title
             }, void 0, false, {
                 fileName: "[project]/src/components/users/UserList.tsx",
-                lineNumber: 354,
+                lineNumber: 371,
                 columnNumber: 40
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 354,
+            lineNumber: 371,
             columnNumber: 11
         }, this);
-        $[34] = t18;
+        $[35] = title;
+        $[36] = t21;
     } else {
-        t18 = $[34];
+        t21 = $[36];
     }
-    let t19;
-    if ($[35] === Symbol.for("react.memo_cache_sentinel")) {
-        t19 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$PlusOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PlusOutlined$3e$__["PlusOutlined"], {}, void 0, false, {
+    let t22;
+    if ($[37] === Symbol.for("react.memo_cache_sentinel")) {
+        t22 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$PlusOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__PlusOutlined$3e$__["PlusOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 363,
+            lineNumber: 379,
             columnNumber: 11
         }, this);
-        $[35] = t19;
+        $[37] = t22;
     } else {
-        t19 = $[35];
+        t22 = $[37];
     }
-    let t20;
-    if ($[36] !== onAdd) {
-        t20 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            style: t16,
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
-                justify: "space-between",
-                align: "middle",
-                gutter: t17,
-                children: [
-                    t18,
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
-                        xs: 24,
-                        sm: 8,
-                        md: 6,
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
-                            type: "primary",
-                            icon: t19,
-                            onClick: onAdd,
-                            block: true,
-                            children: "Add User"
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 370,
-                            columnNumber: 117
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/users/UserList.tsx",
-                        lineNumber: 370,
-                        columnNumber: 90
-                    }, this)
-                ]
-            }, void 0, true, {
+    let t23;
+    if ($[38] !== addButtonText || $[39] !== onAdd) {
+        t23 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
+            xs: 24,
+            sm: 8,
+            md: 6,
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$button$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Button$3e$__["Button"], {
+                type: "primary",
+                icon: t22,
+                onClick: onAdd,
+                block: true,
+                children: addButtonText
+            }, void 0, false, {
                 fileName: "[project]/src/components/users/UserList.tsx",
-                lineNumber: 370,
-                columnNumber: 28
+                lineNumber: 386,
+                columnNumber: 38
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 370,
+            lineNumber: 386,
             columnNumber: 11
         }, this);
-        $[36] = onAdd;
-        $[37] = t20;
-    } else {
-        t20 = $[37];
-    }
-    let t21;
-    if ($[38] === Symbol.for("react.memo_cache_sentinel")) {
-        t21 = {
-            marginBottom: "16px"
-        };
-        $[38] = t21;
-    } else {
-        t21 = $[38];
-    }
-    let t22;
-    if ($[39] === Symbol.for("react.memo_cache_sentinel")) {
-        t22 = [
-            16,
-            16
-        ];
-        $[39] = t22;
-    } else {
-        t22 = $[39];
-    }
-    let t23;
-    if ($[40] === Symbol.for("react.memo_cache_sentinel")) {
-        t23 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SearchOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SearchOutlined$3e$__["SearchOutlined"], {}, void 0, false, {
-            fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 394,
-            columnNumber: 11
-        }, this);
+        $[38] = addButtonText;
+        $[39] = onAdd;
         $[40] = t23;
     } else {
         t23 = $[40];
     }
     let t24;
-    if ($[41] === Symbol.for("react.memo_cache_sentinel")) {
-        t24 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
+    if ($[41] !== t21 || $[42] !== t23) {
+        t24 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            style: t18,
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
+                justify: "space-between",
+                align: "middle",
+                gutter: t19,
+                children: [
+                    t21,
+                    t23
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/users/UserList.tsx",
+                lineNumber: 395,
+                columnNumber: 28
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/users/UserList.tsx",
+            lineNumber: 395,
+            columnNumber: 11
+        }, this);
+        $[41] = t21;
+        $[42] = t23;
+        $[43] = t24;
+    } else {
+        t24 = $[43];
+    }
+    let t25;
+    if ($[44] === Symbol.for("react.memo_cache_sentinel")) {
+        t25 = {
+            marginBottom: "16px"
+        };
+        $[44] = t25;
+    } else {
+        t25 = $[44];
+    }
+    let t26;
+    if ($[45] === Symbol.for("react.memo_cache_sentinel")) {
+        t26 = [
+            16,
+            16
+        ];
+        $[45] = t26;
+    } else {
+        t26 = $[45];
+    }
+    let t27;
+    if ($[46] === Symbol.for("react.memo_cache_sentinel")) {
+        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SearchOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SearchOutlined$3e$__["SearchOutlined"], {}, void 0, false, {
+            fileName: "[project]/src/components/users/UserList.tsx",
+            lineNumber: 420,
+            columnNumber: 11
+        }, this);
+        $[46] = t27;
+    } else {
+        t27 = $[46];
+    }
+    let t28;
+    if ($[47] === Symbol.for("react.memo_cache_sentinel")) {
+        t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
             xs: 24,
             sm: 12,
             md: 8,
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Search, {
                 placeholder: "Search users...",
                 allowClear: true,
-                enterButton: t23,
+                enterButton: t27,
                 size: "large",
                 onSearch: handleSearch,
                 style: {
@@ -4434,218 +4466,200 @@ function UserList(t0) {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/components/users/UserList.tsx",
-                lineNumber: 401,
+                lineNumber: 427,
                 columnNumber: 39
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 401,
+            lineNumber: 427,
             columnNumber: 11
         }, this);
-        $[41] = t24;
+        $[47] = t28;
     } else {
-        t24 = $[41];
+        t28 = $[47];
     }
-    let t25;
-    if ($[42] === Symbol.for("react.memo_cache_sentinel")) {
-        t25 = {
-            width: "100%"
-        };
-        $[42] = t25;
-    } else {
-        t25 = $[42];
-    }
-    const t26 = roleFilter || undefined;
-    let t27;
-    let t28;
     let t29;
-    let t30;
-    if ($[43] === Symbol.for("react.memo_cache_sentinel")) {
-        t27 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
-            value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].ADMIN,
-            children: "Admin"
-        }, void 0, false, {
-            fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 423,
-            columnNumber: 11
-        }, this);
-        t28 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
-            value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].TEACHER,
-            children: "Teacher"
-        }, void 0, false, {
-            fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 424,
-            columnNumber: 11
-        }, this);
-        t29 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
-            value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].DRIVER,
-            children: "Driver"
-        }, void 0, false, {
-            fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 425,
-            columnNumber: 11
-        }, this);
-        t30 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
-            value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].PARENT,
-            children: "Parent"
-        }, void 0, false, {
-            fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 426,
-            columnNumber: 11
-        }, this);
-        $[43] = t27;
-        $[44] = t28;
-        $[45] = t29;
-        $[46] = t30;
-    } else {
-        t27 = $[43];
-        t28 = $[44];
-        t29 = $[45];
-        t30 = $[46];
-    }
-    let t31;
-    if ($[47] !== t26) {
-        t31 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            style: t21,
-            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
-                gutter: t22,
+    if ($[48] !== propRoleFilter || $[49] !== roleFilter) {
+        t29 = !propRoleFilter && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
+            xs: 24,
+            sm: 12,
+            md: 6,
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$select$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Select$3e$__["Select"], {
+                placeholder: "Filter by role",
+                allowClear: true,
+                size: "large",
+                style: {
+                    width: "100%"
+                },
+                value: roleFilter || undefined,
+                onChange: setRoleFilter,
                 children: [
-                    t24,
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
-                        xs: 24,
-                        sm: 12,
-                        md: 6,
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$select$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Select$3e$__["Select"], {
-                            placeholder: "Filter by role",
-                            allowClear: true,
-                            size: "large",
-                            style: t25,
-                            value: t26,
-                            onChange: setRoleFilter,
-                            children: [
-                                t27,
-                                t28,
-                                t29,
-                                t30
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 439,
-                            columnNumber: 79
-                        }, this)
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
+                        value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].ADMIN,
+                        children: "Admin"
                     }, void 0, false, {
                         fileName: "[project]/src/components/users/UserList.tsx",
-                        lineNumber: 439,
-                        columnNumber: 51
+                        lineNumber: 438,
+                        columnNumber: 67
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
+                        value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].TEACHER,
+                        children: "Teacher"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/users/UserList.tsx",
+                        lineNumber: 438,
+                        columnNumber: 114
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
+                        value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].DRIVER,
+                        children: "Driver"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/users/UserList.tsx",
+                        lineNumber: 438,
+                        columnNumber: 165
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
+                        value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].PARENT,
+                        children: "Parent"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/users/UserList.tsx",
+                        lineNumber: 438,
+                        columnNumber: 214
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/users/UserList.tsx",
-                lineNumber: 439,
+                lineNumber: 436,
+                columnNumber: 58
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/components/users/UserList.tsx",
+            lineNumber: 436,
+            columnNumber: 30
+        }, this);
+        $[48] = propRoleFilter;
+        $[49] = roleFilter;
+        $[50] = t29;
+    } else {
+        t29 = $[50];
+    }
+    let t30;
+    if ($[51] !== t29) {
+        t30 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            style: t25,
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
+                gutter: t26,
+                children: [
+                    t28,
+                    t29
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/users/UserList.tsx",
+                lineNumber: 447,
                 columnNumber: 28
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 439,
+            lineNumber: 447,
             columnNumber: 11
         }, this);
-        $[47] = t26;
-        $[48] = t31;
+        $[51] = t29;
+        $[52] = t30;
     } else {
-        t31 = $[48];
+        t30 = $[52];
     }
-    let t32;
-    if ($[49] !== usersData?.data?.items) {
-        t32 = usersData?.data?.items || [];
-        $[49] = usersData?.data?.items;
-        $[50] = t32;
+    let t31;
+    if ($[53] !== usersData?.items) {
+        t31 = usersData?.items || [];
+        $[53] = usersData?.items;
+        $[54] = t31;
     } else {
-        t32 = $[50];
+        t31 = $[54];
     }
-    const t33 = usersData?.data?.pagination.total || 0;
-    let t34;
-    if ($[51] === Symbol.for("react.memo_cache_sentinel")) {
-        t34 = [
+    const t32 = usersData?.pagination?.total || 0;
+    let t33;
+    if ($[55] === Symbol.for("react.memo_cache_sentinel")) {
+        t33 = [
             ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].PAGE_SIZE_OPTIONS
         ];
-        $[51] = t34;
+        $[55] = t33;
     } else {
-        t34 = $[51];
+        t33 = $[55];
     }
-    let t35;
-    if ($[52] !== pagination.current || $[53] !== pagination.pageSize || $[54] !== t33) {
-        t35 = {
+    let t34;
+    if ($[56] !== pagination.current || $[57] !== pagination.pageSize || $[58] !== t32) {
+        t34 = {
             current: pagination.current,
             pageSize: pagination.pageSize,
-            total: t33,
+            total: t32,
             showSizeChanger: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].SHOW_SIZE_CHANGER,
             showQuickJumper: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PAGINATION"].SHOW_QUICK_JUMPER,
-            pageSizeOptions: t34,
+            pageSizeOptions: t33,
             showTotal: _temp3
         };
-        $[52] = pagination.current;
-        $[53] = pagination.pageSize;
-        $[54] = t33;
-        $[55] = t35;
+        $[56] = pagination.current;
+        $[57] = pagination.pageSize;
+        $[58] = t32;
+        $[59] = t34;
     } else {
-        t35 = $[55];
+        t34 = $[59];
     }
-    let t36;
-    if ($[56] === Symbol.for("react.memo_cache_sentinel")) {
-        t36 = {
+    let t35;
+    if ($[60] === Symbol.for("react.memo_cache_sentinel")) {
+        t35 = {
             x: 1000
         };
-        $[56] = t36;
+        $[60] = t35;
     } else {
-        t36 = $[56];
+        t35 = $[60];
     }
-    let t37;
-    if ($[57] !== columns || $[58] !== isLoading || $[59] !== t32 || $[60] !== t35) {
-        t37 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$table$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Table$3e$__["Table"], {
+    let t36;
+    if ($[61] !== columns || $[62] !== isLoading || $[63] !== t31 || $[64] !== t34) {
+        t36 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$table$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Table$3e$__["Table"], {
             columns: columns,
-            dataSource: t32,
+            dataSource: t31,
             rowKey: "id",
             loading: isLoading,
-            pagination: t35,
+            pagination: t34,
             onChange: handleTableChange,
-            scroll: t36,
+            scroll: t35,
             size: "small"
         }, void 0, false, {
             fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 490,
+            lineNumber: 498,
             columnNumber: 11
         }, this);
-        $[57] = columns;
-        $[58] = isLoading;
-        $[59] = t32;
-        $[60] = t35;
-        $[61] = t37;
+        $[61] = columns;
+        $[62] = isLoading;
+        $[63] = t31;
+        $[64] = t34;
+        $[65] = t36;
     } else {
-        t37 = $[61];
+        t36 = $[65];
     }
-    let t38;
-    if ($[62] !== t20 || $[63] !== t31 || $[64] !== t37) {
-        t38 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$card$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Card$3e$__["Card"], {
+    let t37;
+    if ($[66] !== t24 || $[67] !== t30 || $[68] !== t36) {
+        t37 = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$card$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Card$3e$__["Card"], {
             children: [
-                t20,
-                t31,
-                t37
+                t24,
+                t30,
+                t36
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 501,
+            lineNumber: 509,
             columnNumber: 11
         }, this);
-        $[62] = t20;
-        $[63] = t31;
-        $[64] = t37;
-        $[65] = t38;
+        $[66] = t24;
+        $[67] = t30;
+        $[68] = t36;
+        $[69] = t37;
     } else {
-        t38 = $[65];
+        t37 = $[69];
     }
-    return t38;
+    return t37;
 }
-_s(UserList, "ZYdkeuF2wFeNFsIMEyh8EWc1VIM=", false, function() {
+_s(UserList, "JtW2I1jPc/n9fljZDhaWm9XEUNc=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$authStore$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuthStore"],
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useUsers$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useUsers"],
@@ -4673,7 +4687,7 @@ function _temp2(__0, record_0) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/users/UserList.tsx",
-                lineNumber: 515,
+                lineNumber: 523,
                 columnNumber: 68
             }, this),
             record_0.dateOfBirth && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4687,7 +4701,7 @@ function _temp2(__0, record_0) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/users/UserList.tsx",
-                lineNumber: 518,
+                lineNumber: 526,
                 columnNumber: 67
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -4701,13 +4715,13 @@ function _temp2(__0, record_0) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/users/UserList.tsx",
-                lineNumber: 521,
+                lineNumber: 529,
                 columnNumber: 54
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/users/UserList.tsx",
-        lineNumber: 515,
+        lineNumber: 523,
         columnNumber: 10
     }, this);
 }
@@ -4716,17 +4730,17 @@ function _temp(isActive) {
         color: isActive ? "success" : "default",
         icon: isActive ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$CheckCircleOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckCircleOutlined$3e$__["CheckCircleOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 527,
+            lineNumber: 535,
             columnNumber: 73
         }, void 0) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$StopOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__StopOutlined$3e$__["StopOutlined"], {}, void 0, false, {
             fileName: "[project]/src/components/users/UserList.tsx",
-            lineNumber: 527,
+            lineNumber: 535,
             columnNumber: 99
         }, void 0),
         children: isActive ? "Active" : "Inactive"
     }, void 0, false, {
         fileName: "[project]/src/components/users/UserList.tsx",
-        lineNumber: 527,
+        lineNumber: 535,
         columnNumber: 10
     }, this);
 }
@@ -4808,7 +4822,7 @@ var _s = __turbopack_context__.k.signature();
 const { Title } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$typography$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Typography$3e$__["Typography"];
 const { TextArea } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$input$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Input$3e$__["Input"];
 const { Option } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$select$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Select$3e$__["Select"];
-function UserForm({ user, onSuccess, onCancel }) {
+function UserForm({ user, onSuccess, onCancel, defaultRole, roleDisabled = false }) {
     _s();
     const [form] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$form$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Form$3e$__["Form"].useForm();
     const [showPassword, setShowPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -4932,12 +4946,12 @@ function UserForm({ user, onSuccess, onCancel }) {
                     children: isEditing ? 'Edit User' : 'Add New User'
                 }, void 0, false, {
                     fileName: "[project]/src/components/users/UserForm.tsx",
-                    lineNumber: 140,
+                    lineNumber: 144,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/users/UserForm.tsx",
-                lineNumber: 137,
+                lineNumber: 141,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$form$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Form$3e$__["Form"], {
@@ -4945,7 +4959,7 @@ function UserForm({ user, onSuccess, onCancel }) {
                 layout: "vertical",
                 onFinish: handleSubmit,
                 initialValues: {
-                    role: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].PARENT,
+                    role: defaultRole || __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["USER_ROLES"].PARENT,
                     isActive: true
                 },
                 autoComplete: "off",
@@ -4981,17 +4995,17 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 164,
+                                        lineNumber: 168,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 154,
+                                    lineNumber: 158,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 153,
+                                lineNumber: 157,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5019,23 +5033,23 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 179,
+                                        lineNumber: 183,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 169,
+                                    lineNumber: 173,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 168,
+                                lineNumber: 172,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 152,
+                        lineNumber: 156,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5066,17 +5080,17 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         disabled: isEditing
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 193,
+                                        lineNumber: 197,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 186,
+                                    lineNumber: 190,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 185,
+                                lineNumber: 189,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5096,23 +5110,23 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 203,
+                                        lineNumber: 207,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 199,
+                                    lineNumber: 203,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 198,
+                                lineNumber: 202,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 184,
+                        lineNumber: 188,
                         columnNumber: 9
                     }, this),
                     !isEditing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5140,31 +5154,31 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     size: "large",
                                     iconRender: (visible)=>visible ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EyeOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__EyeOutlined$3e$__["EyeOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                            lineNumber: 217,
+                                            lineNumber: 221,
                                             columnNumber: 108
                                         }, void 0) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EyeInvisibleOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__EyeInvisibleOutlined$3e$__["EyeInvisibleOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                            lineNumber: 217,
+                                            lineNumber: 221,
                                             columnNumber: 126
                                         }, void 0)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 217,
+                                    lineNumber: 221,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 210,
+                                lineNumber: 214,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserForm.tsx",
-                            lineNumber: 209,
+                            lineNumber: 213,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 208,
+                        lineNumber: 212,
                         columnNumber: 24
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5188,7 +5202,7 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$select$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Select$3e$__["Select"], {
                                         placeholder: "Select user role",
                                         size: "large",
-                                        disabled: !canManageRoles,
+                                        disabled: !canManageRoles || roleDisabled,
                                         children: roleOptions.map((option)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
                                                 value: option.value,
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5200,7 +5214,7 @@ function UserForm({ user, onSuccess, onCancel }) {
                                                             children: option.label
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                                            lineNumber: 231,
+                                                            lineNumber: 235,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -5211,33 +5225,33 @@ function UserForm({ user, onSuccess, onCancel }) {
                                                             children: option.description
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                                            lineNumber: 234,
+                                                            lineNumber: 238,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                                    lineNumber: 230,
+                                                    lineNumber: 234,
                                                     columnNumber: 21
                                                 }, this)
                                             }, option.value, false, {
                                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                                lineNumber: 229,
+                                                lineNumber: 233,
                                                 columnNumber: 44
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 228,
+                                        lineNumber: 232,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 224,
+                                    lineNumber: 228,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 223,
+                                lineNumber: 227,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5255,23 +5269,23 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         disabledDate: (current)=>current && current > (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$dayjs$2f$dayjs$2e$min$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])().endOf('day')
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 246,
+                                        lineNumber: 250,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 245,
+                                    lineNumber: 249,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 244,
+                                lineNumber: 248,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 222,
+                        lineNumber: 226,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5296,29 +5310,29 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     size: "large"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 259,
+                                    lineNumber: 263,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 255,
+                                lineNumber: 259,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserForm.tsx",
-                            lineNumber: 254,
+                            lineNumber: 258,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 253,
+                        lineNumber: 257,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$divider$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Divider$3e$__["Divider"], {
                         children: "Emergency Contact"
                     }, void 0, false, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 265,
+                        lineNumber: 269,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5344,17 +5358,17 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 273,
+                                        lineNumber: 277,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 269,
+                                    lineNumber: 273,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 268,
+                                lineNumber: 272,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5374,17 +5388,17 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 282,
+                                        lineNumber: 286,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 278,
+                                    lineNumber: 282,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 277,
+                                lineNumber: 281,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5404,23 +5418,23 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 291,
+                                        lineNumber: 295,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 287,
+                                    lineNumber: 291,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 286,
+                                lineNumber: 290,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 267,
+                        lineNumber: 271,
                         columnNumber: 9
                     }, this),
                     isEditing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5440,22 +5454,22 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     size: "default"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 300,
+                                    lineNumber: 304,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 299,
+                                lineNumber: 303,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserForm.tsx",
-                            lineNumber: 298,
+                            lineNumber: 302,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 297,
+                        lineNumber: 301,
                         columnNumber: 23
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -5475,19 +5489,19 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$CloseOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__CloseOutlined$3e$__["CloseOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                            lineNumber: 310,
+                                            lineNumber: 314,
                                             columnNumber: 15
                                         }, this),
                                         "Cancel"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 309,
+                                    lineNumber: 313,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 308,
+                                lineNumber: 312,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5497,12 +5511,12 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     children: "Reset"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 315,
+                                    lineNumber: 319,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 314,
+                                lineNumber: 318,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -5514,37 +5528,37 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SaveOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__SaveOutlined$3e$__["SaveOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                            lineNumber: 321,
+                                            lineNumber: 325,
                                             columnNumber: 15
                                         }, this),
                                         isEditing ? 'Update User' : 'Create User'
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 320,
+                                    lineNumber: 324,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 319,
+                                lineNumber: 323,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 305,
+                        lineNumber: 309,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/users/UserForm.tsx",
-                lineNumber: 147,
+                lineNumber: 151,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/users/UserForm.tsx",
-        lineNumber: 136,
+        lineNumber: 140,
         columnNumber: 10
     }, this);
 }

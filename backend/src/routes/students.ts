@@ -1,28 +1,15 @@
-import { Router } from 'express';
-import { authenticate, authorize } from '../middleware/auth';
+import { Router } from "express";
+import { authenticate, authorize } from "../middleware/auth";
+import * as studentController from "../controllers/studentController";
 
 const router = Router();
 
-router.use(authenticate);
+// router.use(authenticate);
 
-router.get('/', authorize('ADMIN', 'TEACHER'), (_, res) => {
-  res.json({ success: true, data: { students: [], pagination: { page: 1, limit: 10, total: 0, pages: 0 } } });
-});
-
-router.get('/:id', (_, res) => {
-  res.json({ success: true, data: { student: null } });
-});
-
-router.post('/', authorize('ADMIN', 'TEACHER'), (_, res) => {
-  res.json({ success: true, data: { student: null } });
-});
-
-router.put('/:id', authorize('ADMIN', 'TEACHER'), (_, res) => {
-  res.json({ success: true, data: { student: null } });
-});
-
-router.delete('/:id', authorize('ADMIN'), (_, res) => {
-  res.json({ success: true, message: 'Student deleted successfully' });
-});
+router.get("/", studentController.getStudents);
+router.get("/:id", studentController.getStudentById);
+router.post("/", studentController.createStudent);
+router.put("/:id", studentController.updateStudent);
+router.delete("/:id", studentController.deleteStudent);
 
 export default router;

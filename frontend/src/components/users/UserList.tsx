@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  Table, 
-  Button, 
-  Space, 
-  Popconfirm, 
-  message, 
+import {
+  Table,
+  Button,
+  Space,
+  Popconfirm,
+  message,
   Card,
   Input,
   Row,
@@ -16,12 +16,12 @@ import {
   Tooltip,
   Select,
   Avatar,
-  Dropdown
+  Dropdown,
 } from 'antd';
-import { 
-  PlusOutlined, 
-  EditOutlined, 
-  DeleteOutlined, 
+import {
+  PlusOutlined,
+  EditOutlined,
+  DeleteOutlined,
   SearchOutlined,
   UserOutlined,
   MailOutlined,
@@ -29,7 +29,7 @@ import {
   MoreOutlined,
   UserSwitchOutlined,
   StopOutlined,
-  CheckCircleOutlined
+  CheckCircleOutlined,
 } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import type { MenuProps } from 'antd';
@@ -46,11 +46,20 @@ const { Option } = Select;
 interface UserListProps {
   onAdd: () => void;
   onEdit: (user: User) => void;
+  roleFilter?: string;
+  title?: string;
+  addButtonText?: string;
 }
 
-export default function UserList({ onAdd, onEdit }: UserListProps) {
+export default function UserList({
+  onAdd,
+  onEdit,
+  roleFilter: propRoleFilter,
+  title = 'User Management',
+  addButtonText = 'Add User',
+}: UserListProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [roleFilter, setRoleFilter] = useState<string>('');
+  const [roleFilter, setRoleFilter] = useState<string>(propRoleFilter || '');
   const [pagination, setPagination] = useState({
     current: PAGINATION.DEFAULT_PAGE,
     pageSize: PAGINATION.DEFAULT_PAGE_SIZE,
@@ -58,16 +67,18 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
 
   const { user: currentUser } = useAuthStore();
 
-  const { 
-    data: usersData, 
-    isLoading, 
-    error 
+  const {
+    data: usersData,
+    isLoading,
+    error,
   } = useUsers({
     page: pagination.current,
     limit: pagination.pageSize,
     search: searchQuery || undefined,
-    role: roleFilter || undefined
+    role: roleFilter || undefined,
   });
+
+  console.log(usersData);
 
   const deleteUserMutation = useDeleteUser();
   const updateRoleMutation = useUpdateUserRole();
@@ -81,7 +92,11 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
     }
   };
 
-  const handleRoleChange = async (id: string, role: string, userName: string) => {
+  const handleRoleChange = async (
+    id: string,
+    role: string,
+    userName: string
+  ) => {
     try {
       await updateRoleMutation.mutateAsync({ id, role });
       message.success(`Role updated for ${userName}`);
@@ -99,7 +114,7 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
 
   const handleSearch = (value: string) => {
     setSearchQuery(value);
-    setPagination(prev => ({ ...prev, current: 1 }));
+    setPagination((prev) => ({ ...prev, current: 1 }));
   };
 
   const getRoleColor = (role: string) => {
@@ -120,14 +135,14 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
   const getUserActions = (user: User): MenuProps['items'] => {
     const canManageRoles = currentUser?.role === USER_ROLES.ADMIN;
     const isCurrentUser = currentUser?.id === user.id;
-    
+
     const actions: MenuProps['items'] = [
       {
         key: 'edit',
         icon: <EditOutlined />,
         label: 'Edit User',
         onClick: () => onEdit(user),
-      }
+      },
     ];
 
     if (canManageRoles && !isCurrentUser) {
@@ -142,25 +157,45 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
               key: 'role-admin',
               label: 'Admin',
               disabled: user.role === USER_ROLES.ADMIN,
-              onClick: () => handleRoleChange(user.id, USER_ROLES.ADMIN, formatFullName(user.firstName, user.lastName)),
+              onClick: () =>
+                handleRoleChange(
+                  user.id,
+                  USER_ROLES.ADMIN,
+                  formatFullName(user.firstName, user.lastName)
+                ),
             },
             {
               key: 'role-teacher',
               label: 'Teacher',
               disabled: user.role === USER_ROLES.TEACHER,
-              onClick: () => handleRoleChange(user.id, USER_ROLES.TEACHER, formatFullName(user.firstName, user.lastName)),
+              onClick: () =>
+                handleRoleChange(
+                  user.id,
+                  USER_ROLES.TEACHER,
+                  formatFullName(user.firstName, user.lastName)
+                ),
             },
             {
               key: 'role-driver',
               label: 'Driver',
               disabled: user.role === USER_ROLES.DRIVER,
-              onClick: () => handleRoleChange(user.id, USER_ROLES.DRIVER, formatFullName(user.firstName, user.lastName)),
+              onClick: () =>
+                handleRoleChange(
+                  user.id,
+                  USER_ROLES.DRIVER,
+                  formatFullName(user.firstName, user.lastName)
+                ),
             },
             {
               key: 'role-parent',
               label: 'Parent',
               disabled: user.role === USER_ROLES.PARENT,
-              onClick: () => handleRoleChange(user.id, USER_ROLES.PARENT, formatFullName(user.firstName, user.lastName)),
+              onClick: () =>
+                handleRoleChange(
+                  user.id,
+                  USER_ROLES.PARENT,
+                  formatFullName(user.firstName, user.lastName)
+                ),
             },
           ],
         }
@@ -179,32 +214,49 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
         const isCurrentUser = currentUser?.id === record.id;
         return (
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <Avatar 
-              size={40} 
+            <Avatar
+              size={40}
               icon={<UserOutlined />}
               style={{ backgroundColor: getRoleColor(record.role) }}
             >
-              {record.firstName.charAt(0)}{record.lastName.charAt(0)}
+              {record.firstName.charAt(0)}
+              {record.lastName.charAt(0)}
             </Avatar>
             <div>
-              <div style={{ 
-                fontWeight: 500, 
-                fontSize: '14px', 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '8px' 
-              }}>
+              <div
+                style={{
+                  fontWeight: 500,
+                  fontSize: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                }}
+              >
                 {formatFullName(record.firstName, record.lastName)}
-                {isCurrentUser && (
-                  <Tag color="blue">You</Tag>
-                )}
+                {isCurrentUser && <Tag color="blue">You</Tag>}
               </div>
-              <div style={{ fontSize: '12px', color: '#666', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <div
+                style={{
+                  fontSize: '12px',
+                  color: '#666',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                }}
+              >
                 <MailOutlined />
                 {record.email}
               </div>
               {record.phone && (
-                <div style={{ fontSize: '12px', color: '#666', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <div
+                  style={{
+                    fontSize: '12px',
+                    color: '#666',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                  }}
+                >
                   <PhoneOutlined />
                   {record.phone}
                 </div>
@@ -221,7 +273,10 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
       width: '15%',
       align: 'center',
       render: (role: string) => (
-        <Tag color={getRoleColor(role)} style={{ minWidth: '70px', textAlign: 'center' }}>
+        <Tag
+          color={getRoleColor(role)}
+          style={{ minWidth: '70px', textAlign: 'center' }}
+        >
           {role}
         </Tag>
       ),
@@ -239,8 +294,8 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
       width: '15%',
       align: 'center',
       render: (isActive: boolean) => (
-        <Tag 
-          color={isActive ? 'success' : 'default'} 
+        <Tag
+          color={isActive ? 'success' : 'default'}
           icon={isActive ? <CheckCircleOutlined /> : <StopOutlined />}
         >
           {isActive ? 'Active' : 'Inactive'}
@@ -276,7 +331,7 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
       align: 'center',
       render: (_, record: User) => {
         const isCurrentUser = currentUser?.id === record.id;
-        
+
         return (
           <Space>
             <Tooltip title="Edit User">
@@ -287,24 +342,25 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
                 size="small"
               />
             </Tooltip>
-            
-            <Dropdown 
-              menu={{ items: getUserActions(record) }} 
+
+            <Dropdown
+              menu={{ items: getUserActions(record) }}
               trigger={['click']}
               placement="bottomRight"
             >
-              <Button
-                type="text"
-                icon={<MoreOutlined />}
-                size="small"
-              />
+              <Button type="text" icon={<MoreOutlined />} size="small" />
             </Dropdown>
 
             {!isCurrentUser && (
               <Popconfirm
                 title="Delete User"
                 description={`Are you sure you want to delete "${formatFullName(record.firstName, record.lastName)}"?`}
-                onConfirm={() => handleDelete(record.id, formatFullName(record.firstName, record.lastName))}
+                onConfirm={() =>
+                  handleDelete(
+                    record.id,
+                    formatFullName(record.firstName, record.lastName)
+                  )
+                }
                 okText="Yes"
                 cancelText="No"
                 okButtonProps={{ danger: true }}
@@ -336,17 +392,17 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
         <Row justify="space-between" align="middle" gutter={[16, 16]}>
           <Col xs={24} sm={16} md={18}>
             <Title level={4} style={{ margin: 0 }}>
-              User Management
+              {title}
             </Title>
           </Col>
           <Col xs={24} sm={8} md={6}>
-            <Button 
-              type="primary" 
-              icon={<PlusOutlined />} 
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
               onClick={onAdd}
               block
             >
-              Add User
+              {addButtonText}
             </Button>
           </Col>
         </Row>
@@ -364,21 +420,23 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
               style={{ width: '100%' }}
             />
           </Col>
-          <Col xs={24} sm={12} md={6}>
-            <Select
-              placeholder="Filter by role"
-              allowClear
-              size="large"
-              style={{ width: '100%' }}
-              value={roleFilter || undefined}
-              onChange={setRoleFilter}
-            >
-              <Option value={USER_ROLES.ADMIN}>Admin</Option>
-              <Option value={USER_ROLES.TEACHER}>Teacher</Option>
-              <Option value={USER_ROLES.DRIVER}>Driver</Option>
-              <Option value={USER_ROLES.PARENT}>Parent</Option>
-            </Select>
-          </Col>
+          {!propRoleFilter && (
+            <Col xs={24} sm={12} md={6}>
+              <Select
+                placeholder="Filter by role"
+                allowClear
+                size="large"
+                style={{ width: '100%' }}
+                value={roleFilter || undefined}
+                onChange={setRoleFilter}
+              >
+                <Option value={USER_ROLES.ADMIN}>Admin</Option>
+                <Option value={USER_ROLES.TEACHER}>Teacher</Option>
+                <Option value={USER_ROLES.DRIVER}>Driver</Option>
+                <Option value={USER_ROLES.PARENT}>Parent</Option>
+              </Select>
+            </Col>
+          )}
         </Row>
       </div>
 
@@ -390,11 +448,11 @@ export default function UserList({ onAdd, onEdit }: UserListProps) {
         pagination={{
           current: pagination.current,
           pageSize: pagination.pageSize,
-          total: usersData?.data?.pagination.total || 0,
+          total: usersData?.data?.pagination?.total || 0,
           showSizeChanger: PAGINATION.SHOW_SIZE_CHANGER,
           showQuickJumper: PAGINATION.SHOW_QUICK_JUMPER,
           pageSizeOptions: [...PAGINATION.PAGE_SIZE_OPTIONS],
-          showTotal: (total, range) => 
+          showTotal: (total, range) =>
             `${range[0]}-${range[1]} of ${total} users`,
         }}
         onChange={handleTableChange}

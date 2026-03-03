@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { Modal } from 'antd';
 import AssignmentList from '@/components/assignments/AssignmentList';
 import AssignmentForm from '@/components/assignments/AssignmentForm';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
+import AppLayout from '@/components/layout/AppLayout';
 import type { Assignment } from '@/types/api';
 
-export default function AssignmentsPage() {
+function AssignmentsContent() {
   const [formVisible, setFormVisible] = useState(false);
   const [viewModalVisible, setViewModalVisible] = useState(false);
   const [transferModalVisible, setTransferModalVisible] = useState(false);
@@ -113,5 +115,15 @@ export default function AssignmentsPage() {
         )}
       </Modal>
     </>
+  );
+}
+
+export default function AssignmentsPage() {
+  return (
+    <ProtectedRoute>
+      <AppLayout>
+        <AssignmentsContent />
+      </AppLayout>
+    </ProtectedRoute>
   );
 }

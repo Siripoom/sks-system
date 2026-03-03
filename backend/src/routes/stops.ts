@@ -1,28 +1,37 @@
-import { Router } from 'express';
-import { authenticate, authorize } from '../middleware/auth';
+import { Router } from "express";
+import { authenticate, authorize } from "../middleware/auth";
+import { validate } from "../middleware/validate";
+import { 
+  createStop,
+  updateStop,
+  deleteStop
+} from "../controllers/stopController";
+import { 
+  createStopSchema,
+  updateStopSchema
+} from "../schemas/route";
 
 const router = Router();
 
+// Apply authentication to all routes
 router.use(authenticate);
 
-router.get('/', (_, res) => {
-  res.json({ success: true, data: { stops: [], pagination: { page: 1, limit: 10, total: 0, pages: 0 } } });
-});
+// Stop CRUD Operations
+router.post("/", 
+  validate(createStopSchema), 
+  authorize('ADMIN', 'TEACHER'), 
+  createStop
+);
 
-router.get('/:id', (_, res) => {
-  res.json({ success: true, data: { stop: null } });
-});
+router.put("/:id", 
+  validate(updateStopSchema), 
+  authorize('ADMIN', 'TEACHER'), 
+  updateStop
+);
 
-router.post('/', authorize('ADMIN', 'TEACHER'), (_, res) => {
-  res.json({ success: true, data: { stop: null } });
-});
-
-router.put('/:id', authorize('ADMIN', 'TEACHER'), (_, res) => {
-  res.json({ success: true, data: { stop: null } });
-});
-
-router.delete('/:id', authorize('ADMIN'), (_, res) => {
-  res.json({ success: true, message: 'Stop deleted successfully' });
-});
+router.delete("/:id", 
+  authorize('ADMIN', 'TEACHER'), 
+  deleteStop
+);
 
 export default router;

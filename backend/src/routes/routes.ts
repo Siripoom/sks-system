@@ -1,28 +1,126 @@
-import { Router } from 'express';
-import { authenticate, authorize } from '../middleware/auth';
+import { Router } from "express";
+import { authenticate, authorize } from "../middleware/auth";
+import { validate } from "../middleware/validate";
+import { validateQuery } from "../middleware/validateQuery";
+import {
+  createRoute,
+  getRoutes,
+  getRouteById,
+  updateRoute,
+  deleteRoute,
+  toggleRouteStatus,
+  bulkUpdateRoutes,
+  duplicateRoute,
+} from "../controllers/routeController";
+import {
+  getRouteStops,
+  reorderStops,
+  getRouteAssignments,
+  assignStudentsToRoute,
+  removeStudentFromRoute,
+} from "../controllers/stopController";
+import {
+  createRouteSchema,
+  updateRouteSchema,
+  routeFiltersSchema,
+  reorderStopsSchema,
+  assignStudentsSchema,
+  bulkUpdateRoutesSchema,
+  duplicateRouteSchema,
+} from "../schemas/route";
 
 const router = Router();
 
-router.use(authenticate);
+// Apply authentication to all routes
+// router.use(authenticate);
 
-router.get('/', (_, res) => {
-  res.json({ success: true, data: { routes: [], pagination: { page: 1, limit: 10, total: 0, pages: 0 } } });
-});
+// Route CRUD Operations
+router.get(
+  "/",
+  validateQuery(routeFiltersSchema),
+  // authorize('ADMIN', 'TEACHER'),
+  getRoutes,
+);
 
-router.get('/:id', (_, res) => {
-  res.json({ success: true, data: { route: null } });
-});
+router.get(
+  "/:id",
+  // authorize('ADMIN', 'TEACHER'),
+  getRouteById,
+);
 
-router.post('/', authorize('ADMIN', 'TEACHER'), (_, res) => {
-  res.json({ success: true, data: { route: null } });
-});
+router.post(
+  "/",
+  validate(createRouteSchema),
+  // authorize('ADMIN', 'TEACHER'),
+  createRoute,
+);
 
-router.put('/:id', authorize('ADMIN', 'TEACHER'), (_, res) => {
-  res.json({ success: true, data: { route: null } });
-});
+router.put(
+  "/:id",
+  validate(updateRouteSchema),
+  // authorize('ADMIN', 'TEACHER'),
+  updateRoute,
+);
 
-router.delete('/:id', authorize('ADMIN'), (_, res) => {
-  res.json({ success: true, message: 'Route deleted successfully' });
-});
+router.delete(
+  "/:id",
+  // authorize('ADMIN', 'TEACHER'),
+  deleteRoute,
+);
+
+router.patch(
+  "/:id/toggle-status",
+  // authorize('ADMIN', 'TEACHER'),
+  toggleRouteStatus,
+);
+
+// Bulk Operations
+router.patch(
+  "/bulk",
+  validate(bulkUpdateRoutesSchema),
+  // authorize('ADMIN'),
+  bulkUpdateRoutes,
+);
+
+router.post(
+  "/:id/duplicate",
+  validate(duplicateRouteSchema),
+  // authorize('ADMIN', 'TEACHER'),
+  duplicateRoute,
+);
+
+// Stop Management
+router.get(
+  "/:id/stops",
+  // authorize('ADMIN', 'TEACHER'),
+  getRouteStops,
+);
+
+router.patch(
+  "/:id/stops/reorder",
+  validate(reorderStopsSchema),
+  // authorize('ADMIN', 'TEACHER'),
+  reorderStops,
+);
+
+// Student Assignment Management
+router.get(
+  "/:id/assignments",
+  // authorize('ADMIN', 'TEACHER'),
+  getRouteAssignments,
+);
+
+router.post(
+  "/:id/assign-students",
+  validate(assignStudentsSchema),
+  // authorize('ADMIN', 'TEACHER'),
+  assignStudentsToRoute,
+);
+
+router.delete(
+  "/:id/students/:studentId",
+  // authorize('ADMIN', 'TEACHER'),
+  removeStudentFromRoute,
+);
 
 export default router;

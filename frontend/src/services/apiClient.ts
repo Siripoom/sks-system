@@ -1,4 +1,9 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  AxiosError,
+} from 'axios';
 import { API_CONFIG, ERROR_MESSAGES } from '@/constants/app';
 import { TokenStorage } from '@/utils/auth';
 import type { ApiResponse, PaginatedResponse } from '@/types/api';
@@ -10,7 +15,7 @@ class ApiClient {
 
   constructor() {
     console.log('ApiClient: Initializing with BASE_URL:', API_CONFIG.BASE_URL);
-    
+
     this.instance = axios.create({
       baseURL: API_CONFIG.BASE_URL,
       timeout: API_CONFIG.TIMEOUT,
@@ -27,29 +32,29 @@ class ApiClient {
     // Request interceptor to add auth token
     this.instance.interceptors.request.use(
       (config) => {
-        console.log('ApiClient: Making request to:', config.url);
+        // console.log('ApiClient: Making request to:', config.url);
         const token = TokenStorage.getAccessToken();
-        console.log('ApiClient: Token available:', !!token);
-        
+        // console.log('ApiClient: Token available:', !!token);
+
         if (token) {
-          console.log('ApiClient: Token expired?', TokenStorage.isTokenExpired(token));
+          // console.log('ApiClient: Token expired?', TokenStorage.isTokenExpired(token));
           if (!TokenStorage.isTokenExpired(token)) {
             config.headers.Authorization = `Bearer ${token}`;
-            console.log('ApiClient: Added Authorization header');
+            // console.log('ApiClient: Added Authorization header');
           } else {
-            console.log('ApiClient: Token expired, not adding to request');
+            // console.log('ApiClient: Token expired, not adding to request');
           }
         } else {
-          console.log('ApiClient: No token available');
+          // console.log('ApiClient: No token available');
         }
-        
-        console.log('ApiClient: Request config:', {
-          url: config.url,
-          method: config.method,
-          hasAuth: !!config.headers.Authorization,
-          params: config.params
-        });
-        
+
+        // console.log('ApiClient: Request config:', {
+        //   url: config.url,
+        //   method: config.method,
+        //   hasAuth: !!config.headers.Authorization,
+        //   params: config.params
+        // });
+
         return config;
       },
       (error) => {
@@ -61,7 +66,11 @@ class ApiClient {
     // Response interceptor to handle token refresh and errors
     this.instance.interceptors.response.use(
       (response) => {
-        console.log('ApiClient: Response received:', response.status, response.config.url);
+        console.log(
+          'ApiClient: Response received:',
+          response.status,
+          response.config.url
+        );
         return response;
       },
       async (error: AxiosError) => {
@@ -70,15 +79,17 @@ class ApiClient {
           statusText: error.response?.statusText,
           url: error.config?.url,
           code: error.code,
-          message: error.message
+          message: error.message,
         });
-        
-        const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
-        
+
+        const originalRequest = error.config as AxiosRequestConfig & {
+          _retry?: boolean;
+        };
+
         // Handle 401 Unauthorized errors
         if (error.response?.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true;
-          
+
           try {
             const newToken = await this.handleTokenRefresh();
             if (newToken && originalRequest.headers) {
@@ -90,7 +101,7 @@ class ApiClient {
             return Promise.reject(refreshError);
           }
         }
-        
+
         // Handle other errors
         return Promise.reject(this.handleError(error));
       }
@@ -99,7 +110,7 @@ class ApiClient {
 
   private async handleTokenRefresh(): Promise<string | null> {
     const refreshToken = TokenStorage.getRefreshToken();
-    
+
     if (!refreshToken) {
       this.handleAuthFailure();
       return null;
@@ -120,13 +131,14 @@ class ApiClient {
       });
 
       if (response.data.success) {
-        const { accessToken, refreshToken: newRefreshToken } = response.data.data;
+        const { accessToken, refreshToken: newRefreshToken } =
+          response.data.data;
         TokenStorage.setTokens(accessToken, newRefreshToken);
-        
+
         // Notify all waiting requests
         this.refreshSubscribers.forEach((callback) => callback(accessToken));
         this.refreshSubscribers = [];
-        
+
         return accessToken;
       } else {
         throw new Error('Token refresh failed');
@@ -149,9 +161,12 @@ class ApiClient {
 
   private handleAuthFailure() {
     TokenStorage.clearTokens();
-    
+
     // Only redirect if not already on login page
-    if (typeof window !== 'undefined' && !window.location.pathname.includes('/auth')) {
+    if (
+      typeof window !== 'undefined' &&
+      !window.location.pathname.includes('/auth')
+    ) {
       window.location.href = '/auth/login';
     }
   }
@@ -192,45 +207,79 @@ class ApiClient {
   }
 
   // Generic API methods
-  async get<T>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async get<T>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await this.instance.get(url, config);
+      const response: AxiosResponse<ApiResponse<T>> = await this.instance.get(
+        url,
+        config
+      );
       return response.data;
     } catch (error) {
       throw error;
     }
   }
 
-  async post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async post<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await this.instance.post(url, data, config);
+      const response: AxiosResponse<ApiResponse<T>> = await this.instance.post(
+        url,
+        data,
+        config
+      );
       return response.data;
     } catch (error) {
       throw error;
     }
   }
 
-  async put<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async put<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await this.instance.put(url, data, config);
+      const response: AxiosResponse<ApiResponse<T>> = await this.instance.put(
+        url,
+        data,
+        config
+      );
       return response.data;
     } catch (error) {
       throw error;
     }
   }
 
-  async patch<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async patch<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await this.instance.patch(url, data, config);
+      const response: AxiosResponse<ApiResponse<T>> = await this.instance.patch(
+        url,
+        data,
+        config
+      );
       return response.data;
     } catch (error) {
       throw error;
     }
   }
 
-  async delete<T>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
+  async delete<T>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<ApiResponse<T>> {
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await this.instance.delete(url, config);
+      const response: AxiosResponse<ApiResponse<T>> =
+        await this.instance.delete(url, config);
       return response.data;
     } catch (error) {
       throw error;
@@ -248,19 +297,20 @@ class ApiClient {
     const params = new URLSearchParams({
       page: page.toString(),
       limit: limit.toString(),
-      ...Object.entries(filters || {}).reduce((acc, [key, value]) => {
-        if (value !== undefined && value !== null && value !== '') {
-          acc[key] = value.toString();
-        }
-        return acc;
-      }, {} as Record<string, string>),
+      ...Object.entries(filters || {}).reduce(
+        (acc, [key, value]) => {
+          if (value !== undefined && value !== null && value !== '') {
+            acc[key] = value.toString();
+          }
+          return acc;
+        },
+        {} as Record<string, string>
+      ),
     });
 
     try {
-      const response: AxiosResponse<PaginatedResponse<T>> = await this.instance.get(
-        `${url}?${params}`,
-        config
-      );
+      const response: AxiosResponse<PaginatedResponse<T>> =
+        await this.instance.get(`${url}?${params}`, config);
       return response.data;
     } catch (error) {
       throw error;
@@ -285,17 +335,23 @@ class ApiClient {
     }
 
     try {
-      const response: AxiosResponse<ApiResponse<T>> = await this.instance.post(url, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        onUploadProgress: (progressEvent) => {
-          if (onUploadProgress && progressEvent.total) {
-            const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            onUploadProgress(progress);
-          }
-        },
-      });
+      const response: AxiosResponse<ApiResponse<T>> = await this.instance.post(
+        url,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          onUploadProgress: (progressEvent) => {
+            if (onUploadProgress && progressEvent.total) {
+              const progress = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              onUploadProgress(progress);
+            }
+          },
+        }
+      );
       return response.data;
     } catch (error) {
       throw error;
@@ -315,13 +371,13 @@ class ApiClient {
         return await request();
       } catch (error) {
         lastError = error;
-        
+
         if (attempt === maxRetries) {
           throw lastError;
         }
-        
+
         // Wait before retrying
-        await new Promise(resolve => setTimeout(resolve, delay * attempt));
+        await new Promise((resolve) => setTimeout(resolve, delay * attempt));
       }
     }
 

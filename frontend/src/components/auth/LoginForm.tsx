@@ -75,9 +75,9 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
           maxWidth: 400,
           boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)',
         }}
-        bodyStyle={{ padding: '40px' }}
+        styles={{ body: { padding: '40px' } }}
       >
-        <Space direction="vertical" size="large" style={{ width: '100%' }}>
+        <Space orientation="vertical" size="large" style={{ width: '100%' }}>
           {/* Header */}
           <div style={{ textAlign: 'center' }}>
             <div style={{ 

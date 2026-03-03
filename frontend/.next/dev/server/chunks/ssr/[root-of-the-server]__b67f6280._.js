@@ -235,26 +235,26 @@ class ApiClient {
     setupInterceptors() {
         // Request interceptor to add auth token
         this.instance.interceptors.request.use((config)=>{
-            console.log('ApiClient: Making request to:', config.url);
+            // console.log('ApiClient: Making request to:', config.url);
             const token = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].getAccessToken();
-            console.log('ApiClient: Token available:', !!token);
+            // console.log('ApiClient: Token available:', !!token);
             if (token) {
-                console.log('ApiClient: Token expired?', __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token));
+                // console.log('ApiClient: Token expired?', TokenStorage.isTokenExpired(token));
                 if (!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
                     config.headers.Authorization = `Bearer ${token}`;
-                    console.log('ApiClient: Added Authorization header');
+                // console.log('ApiClient: Added Authorization header');
                 } else {
-                    console.log('ApiClient: Token expired, not adding to request');
+                // console.log('ApiClient: Token expired, not adding to request');
                 }
             } else {
-                console.log('ApiClient: No token available');
+            // console.log('ApiClient: No token available');
             }
-            console.log('ApiClient: Request config:', {
-                url: config.url,
-                method: config.method,
-                hasAuth: !!config.headers.Authorization,
-                params: config.params
-            });
+            // console.log('ApiClient: Request config:', {
+            //   url: config.url,
+            //   method: config.method,
+            //   hasAuth: !!config.headers.Authorization,
+            //   params: config.params
+            // });
             return config;
         }, (error)=>{
             console.error('ApiClient: Request error:', error);
@@ -3549,7 +3549,7 @@ function RoutesPage() {
                 onManageAssignments: handleManageAssignments
             }, void 0, false, {
                 fileName: "[project]/src/app/routes/page.tsx",
-                lineNumber: 56,
+                lineNumber: 58,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$modal$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Modal$3e$__["Modal"], {
@@ -3565,7 +3565,7 @@ function RoutesPage() {
                             children: "Route details view component coming soon..."
                         }, void 0, false, {
                             fileName: "[project]/src/app/routes/page.tsx",
-                            lineNumber: 81,
+                            lineNumber: 83,
                             columnNumber: 13
                         }, this),
                         selectedRoute && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3574,14 +3574,14 @@ function RoutesPage() {
                                     children: selectedRoute.routeName
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/routes/page.tsx",
-                                    lineNumber: 84,
+                                    lineNumber: 86,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     children: selectedRoute.description
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/routes/page.tsx",
-                                    lineNumber: 85,
+                                    lineNumber: 87,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3591,7 +3591,7 @@ function RoutesPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/routes/page.tsx",
-                                    lineNumber: 86,
+                                    lineNumber: 88,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3601,7 +3601,7 @@ function RoutesPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/routes/page.tsx",
-                                    lineNumber: 87,
+                                    lineNumber: 89,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3612,18 +3612,20 @@ function RoutesPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/routes/page.tsx",
-                                    lineNumber: 88,
+                                    lineNumber: 90,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     children: [
-                                        "Duration: ",
+                                        "Duration:",
+                                        ' ',
                                         selectedRoute.estimatedDuration && Math.round(selectedRoute.estimatedDuration / 60),
-                                        " minutes"
+                                        ' ',
+                                        "minutes"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/routes/page.tsx",
-                                    lineNumber: 89,
+                                    lineNumber: 91,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3633,19 +3635,19 @@ function RoutesPage() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/routes/page.tsx",
-                                    lineNumber: 90,
+                                    lineNumber: 97,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/routes/page.tsx",
-                            lineNumber: 83,
+                            lineNumber: 85,
                             columnNumber: 15
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/routes/page.tsx",
-                    lineNumber: 79,
+                    lineNumber: 81,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$routes$2f$RouteForm$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                     route: selectedRoute,
@@ -3653,12 +3655,12 @@ function RoutesPage() {
                     onCancel: handleCloseModal
                 }, void 0, false, {
                     fileName: "[project]/src/app/routes/page.tsx",
-                    lineNumber: 95,
+                    lineNumber: 102,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/routes/page.tsx",
-                lineNumber: 64,
+                lineNumber: 66,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$drawer$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Drawer$3e$__["Drawer"], {
@@ -3673,7 +3675,7 @@ function RoutesPage() {
                             children: "Stop management interface coming soon..."
                         }, void 0, false, {
                             fileName: "[project]/src/app/routes/page.tsx",
-                            lineNumber: 112,
+                            lineNumber: 119,
                             columnNumber: 11
                         }, this),
                         selectedRoute && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3682,7 +3684,7 @@ function RoutesPage() {
                                     children: "Current Stops:"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/routes/page.tsx",
-                                    lineNumber: 115,
+                                    lineNumber: 122,
                                     columnNumber: 15
                                 }, this),
                                 selectedRoute.stops?.map((stop, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3701,12 +3703,12 @@ function RoutesPage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/routes/page.tsx",
-                                                    lineNumber: 118,
-                                                    columnNumber: 24
+                                                    lineNumber: 133,
+                                                    columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/routes/page.tsx",
-                                                lineNumber: 118,
+                                                lineNumber: 132,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3717,7 +3719,7 @@ function RoutesPage() {
                                                 children: stop.address
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/routes/page.tsx",
-                                                lineNumber: 119,
+                                                lineNumber: 137,
                                                 columnNumber: 19
                                             }, this),
                                             stop.estimatedArrival && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3731,30 +3733,30 @@ function RoutesPage() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/routes/page.tsx",
-                                                lineNumber: 121,
+                                                lineNumber: 141,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, stop.id, true, {
                                         fileName: "[project]/src/app/routes/page.tsx",
-                                        lineNumber: 117,
+                                        lineNumber: 124,
                                         columnNumber: 17
                                     }, this))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/routes/page.tsx",
-                            lineNumber: 114,
+                            lineNumber: 121,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/routes/page.tsx",
-                    lineNumber: 111,
+                    lineNumber: 118,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/routes/page.tsx",
-                lineNumber: 104,
+                lineNumber: 111,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$drawer$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Drawer$3e$__["Drawer"], {
@@ -3769,7 +3771,7 @@ function RoutesPage() {
                             children: "Student assignment interface coming soon..."
                         }, void 0, false, {
                             fileName: "[project]/src/app/routes/page.tsx",
-                            lineNumber: 139,
+                            lineNumber: 161,
                             columnNumber: 11
                         }, this),
                         selectedRoute && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3778,7 +3780,7 @@ function RoutesPage() {
                                     children: "Assigned Students:"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/routes/page.tsx",
-                                    lineNumber: 142,
+                                    lineNumber: 164,
                                     columnNumber: 15
                                 }, this),
                                 selectedRoute.assignments?.map((assignment)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3796,12 +3798,12 @@ function RoutesPage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/routes/page.tsx",
-                                                    lineNumber: 145,
-                                                    columnNumber: 24
+                                                    lineNumber: 175,
+                                                    columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/routes/page.tsx",
-                                                lineNumber: 145,
+                                                lineNumber: 174,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3815,7 +3817,7 @@ function RoutesPage() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/routes/page.tsx",
-                                                lineNumber: 146,
+                                                lineNumber: 177,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3829,36 +3831,36 @@ function RoutesPage() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/routes/page.tsx",
-                                                lineNumber: 147,
+                                                lineNumber: 180,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, assignment.id, true, {
                                         fileName: "[project]/src/app/routes/page.tsx",
-                                        lineNumber: 144,
+                                        lineNumber: 166,
                                         columnNumber: 17
                                     }, this))
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/routes/page.tsx",
-                            lineNumber: 141,
+                            lineNumber: 163,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/routes/page.tsx",
-                    lineNumber: 138,
+                    lineNumber: 160,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/routes/page.tsx",
-                lineNumber: 131,
+                lineNumber: 153,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/routes/page.tsx",
-        lineNumber: 55,
+        lineNumber: 57,
         columnNumber: 5
     }, this);
 }

@@ -5,9 +5,11 @@ import { Modal, Drawer } from 'antd';
 import TripList from '@/components/trips/TripList';
 import TripForm from '@/components/trips/TripForm';
 import StudentCheckIn from '@/components/driver/StudentCheckIn';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
+import AppLayout from '@/components/layout/AppLayout';
 import type { Trip } from '@/types/api';
 
-export default function TripsPage() {
+function TripsContent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | undefined>(undefined);
   const [isViewMode, setIsViewMode] = useState(false);
@@ -47,7 +49,7 @@ export default function TripsPage() {
   };
 
   return (
-    <div style={{ padding: '24px' }}>
+    <div>
       <TripList 
         onAdd={handleAdd}
         onEdit={handleEdit}
@@ -116,5 +118,15 @@ export default function TripsPage() {
         )}
       </Drawer>
     </div>
+  );
+}
+
+export default function TripsPage() {
+  return (
+    <ProtectedRoute>
+      <AppLayout>
+        <TripsContent />
+      </AppLayout>
+    </ProtectedRoute>
   );
 }

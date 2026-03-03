@@ -1,12 +1,35 @@
 import apiClient from './apiClient';
-import type { User, CreateUserData, UpdateUserData, PaginationParams, PaginatedResponse } from '@/types/api';
+import type {
+  User,
+  CreateUserData,
+  UpdateUserData,
+  PaginationParams,
+  PaginatedResponse,
+} from '@/types/api';
 
 export class UserService {
   private static readonly BASE_PATH = '/users';
 
-  static async getUsers(params?: PaginationParams & { role?: string }): Promise<PaginatedResponse<User>> {
-    const response = await apiClient.get<PaginatedResponse<User>>(this.BASE_PATH, { params });
-    return response.data as PaginatedResponse<User>;
+  static async getUsers(
+    params?: PaginationParams & { role?: string }
+  ): Promise<PaginatedResponse<User>> {
+    const response = await apiClient.get<{
+      items: User[];
+      pagination: { page: number; limit: number; total: number; pages: number };
+    }>(this.BASE_PATH, { params });
+
+    if (!response.success) {
+      throw new Error(response.error?.message || 'Failed to fetch users');
+    }
+
+    if (!response.data) {
+      throw new Error('No data received from users API');
+    }
+    console.log('Fetched users:', response.data);
+    return {
+      success: true,
+      data: response.data,
+    } as PaginatedResponse<User>;
   }
 
   static async getUser(id: string): Promise<User> {
@@ -28,11 +51,29 @@ export class UserService {
     await apiClient.delete(`${this.BASE_PATH}/${id}`);
   }
 
-  static async searchUsers(query: string, params?: PaginationParams): Promise<PaginatedResponse<User>> {
-    const response = await apiClient.get<PaginatedResponse<User>>(`${this.BASE_PATH}/search`, {
-      params: { q: query, ...params }
+  static async searchUsers(
+    query: string,
+    params?: PaginationParams
+  ): Promise<PaginatedResponse<User>> {
+    const response = await apiClient.get<{
+      items: User[];
+      pagination: { page: number; limit: number; total: number; pages: number };
+    }>(`${this.BASE_PATH}/search`, {
+      params: { q: query, ...params },
     });
-    return response.data as PaginatedResponse<User>;
+
+    if (!response.success) {
+      throw new Error(response.error?.message || 'Failed to search users');
+    }
+
+    if (!response.data) {
+      throw new Error('No data received from user search API');
+    }
+
+    return {
+      success: true,
+      data: response.data,
+    } as PaginatedResponse<User>;
   }
 
   static async getUserProfile(): Promise<User> {
@@ -45,22 +86,31 @@ export class UserService {
     return response.data as User;
   }
 
-  static async changePassword(currentPassword: string, newPassword: string): Promise<void> {
+  static async changePassword(
+    currentPassword: string,
+    newPassword: string
+  ): Promise<void> {
     await apiClient.post('/auth/change-password', {
       currentPassword,
-      newPassword
+      newPassword,
     });
   }
 
   static async updateUserRole(id: string, role: string): Promise<User> {
-    const response = await apiClient.patch<User>(`${this.BASE_PATH}/${id}/role`, { role });
+    const response = await apiClient.patch<User>(
+      `${this.BASE_PATH}/${id}/role`,
+      { role }
+    );
     return response.data as User;
   }
 
-  static async bulkUpdateUsers(userIds: string[], updates: Partial<UpdateUserData>): Promise<void> {
+  static async bulkUpdateUsers(
+    userIds: string[],
+    updates: Partial<UpdateUserData>
+  ): Promise<void> {
     await apiClient.post(`${this.BASE_PATH}/bulk-update`, {
       userIds,
-      updates
+      updates,
     });
   }
 

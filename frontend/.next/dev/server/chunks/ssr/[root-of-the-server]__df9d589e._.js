@@ -2370,6 +2370,12 @@ class UserService {
         const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$apiClient$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(this.BASE_PATH, {
             params
         });
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to fetch users');
+        }
+        if (!response.data) {
+            throw new Error('No data received from users API');
+        }
         return response.data;
     }
     static async getUser(id) {
@@ -2394,6 +2400,12 @@ class UserService {
                 ...params
             }
         });
+        if (!response.success) {
+            throw new Error(response.error?.message || 'Failed to search users');
+        }
+        if (!response.data) {
+            throw new Error('No data received from user search API');
+        }
         return response.data;
     }
     static async getUserProfile() {
@@ -2644,9 +2656,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$t
 const { Title } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$typography$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Typography$3e$__["Typography"];
 const { Search } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$input$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Input$3e$__["Input"];
 const { Option } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$select$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Select$3e$__["Select"];
-function UserList({ onAdd, onEdit }) {
+function UserList({ onAdd, onEdit, roleFilter: propRoleFilter, title = "User Management", addButtonText = "Add User" }) {
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
-    const [roleFilter, setRoleFilter] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
+    const [roleFilter, setRoleFilter] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(propRoleFilter || '');
     const [pagination, setPagination] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         current: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PAGINATION"].DEFAULT_PAGE,
         pageSize: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PAGINATION"].DEFAULT_PAGE_SIZE
@@ -2714,7 +2726,7 @@ function UserList({ onAdd, onEdit }) {
                 key: 'edit',
                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EditOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__EditOutlined$3e$__["EditOutlined"], {}, void 0, false, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 127,
+                    lineNumber: 136,
                     columnNumber: 15
                 }, this),
                 label: 'Edit User',
@@ -2728,7 +2740,7 @@ function UserList({ onAdd, onEdit }) {
                 key: 'role-submenu',
                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserSwitchOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__UserSwitchOutlined$3e$__["UserSwitchOutlined"], {}, void 0, false, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 138,
+                    lineNumber: 147,
                     columnNumber: 17
                 }, this),
                 label: 'Change Role',
@@ -2780,7 +2792,7 @@ function UserList({ onAdd, onEdit }) {
                             size: 40,
                             icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__["UserOutlined"], {}, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 184,
+                                lineNumber: 193,
                                 columnNumber: 21
                             }, void 0),
                             style: {
@@ -2792,7 +2804,7 @@ function UserList({ onAdd, onEdit }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 182,
+                            lineNumber: 191,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2812,13 +2824,13 @@ function UserList({ onAdd, onEdit }) {
                                             children: "You"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/users/UserList.tsx",
-                                            lineNumber: 199,
+                                            lineNumber: 208,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 190,
+                                    lineNumber: 199,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2832,14 +2844,14 @@ function UserList({ onAdd, onEdit }) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MailOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MailOutlined$3e$__["MailOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserList.tsx",
-                                            lineNumber: 203,
+                                            lineNumber: 212,
                                             columnNumber: 17
                                         }, this),
                                         record.email
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 202,
+                                    lineNumber: 211,
                                     columnNumber: 15
                                 }, this),
                                 record.phone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2853,26 +2865,26 @@ function UserList({ onAdd, onEdit }) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$PhoneOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__PhoneOutlined$3e$__["PhoneOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserList.tsx",
-                                            lineNumber: 208,
+                                            lineNumber: 217,
                                             columnNumber: 19
                                         }, this),
                                         record.phone
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 207,
+                                    lineNumber: 216,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 189,
+                            lineNumber: 198,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 181,
+                    lineNumber: 190,
                     columnNumber: 11
                 }, this);
             }
@@ -2892,7 +2904,7 @@ function UserList({ onAdd, onEdit }) {
                     children: role
                 }, void 0, false, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 224,
+                    lineNumber: 233,
                     columnNumber: 9
                 }, this),
             filters: [
@@ -2924,17 +2936,17 @@ function UserList({ onAdd, onEdit }) {
                     color: isActive ? 'success' : 'default',
                     icon: isActive ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$CheckCircleOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckCircleOutlined$3e$__["CheckCircleOutlined"], {}, void 0, false, {
                         fileName: "[project]/src/components/users/UserList.tsx",
-                        lineNumber: 244,
+                        lineNumber: 253,
                         columnNumber: 28
                     }, void 0) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$StopOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__StopOutlined$3e$__["StopOutlined"], {}, void 0, false, {
                         fileName: "[project]/src/components/users/UserList.tsx",
-                        lineNumber: 244,
+                        lineNumber: 253,
                         columnNumber: 54
                     }, void 0),
                     children: isActive ? 'Active' : 'Inactive'
                 }, void 0, false, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 242,
+                    lineNumber: 251,
                     columnNumber: 9
                 }, this)
         },
@@ -2957,7 +2969,7 @@ function UserList({ onAdd, onEdit }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 257,
+                            lineNumber: 266,
                             columnNumber: 13
                         }, this),
                         record.dateOfBirth && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2971,7 +2983,7 @@ function UserList({ onAdd, onEdit }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 262,
+                            lineNumber: 271,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2985,13 +2997,13 @@ function UserList({ onAdd, onEdit }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 266,
+                            lineNumber: 275,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 255,
+                    lineNumber: 264,
                     columnNumber: 9
                 }, this)
         },
@@ -3010,19 +3022,19 @@ function UserList({ onAdd, onEdit }) {
                                 type: "text",
                                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EditOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__EditOutlined$3e$__["EditOutlined"], {}, void 0, false, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 285,
+                                    lineNumber: 294,
                                     columnNumber: 23
                                 }, void 0),
                                 onClick: ()=>onEdit(record),
                                 size: "small"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 283,
+                                lineNumber: 292,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 282,
+                            lineNumber: 291,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$dropdown$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Dropdown$3e$__["Dropdown"], {
@@ -3037,18 +3049,18 @@ function UserList({ onAdd, onEdit }) {
                                 type: "text",
                                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$MoreOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MoreOutlined$3e$__["MoreOutlined"], {}, void 0, false, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 298,
+                                    lineNumber: 307,
                                     columnNumber: 23
                                 }, void 0),
                                 size: "small"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 296,
+                                lineNumber: 305,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 291,
+                            lineNumber: 300,
                             columnNumber: 13
                         }, this),
                         !isCurrentUser && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$popconfirm$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Popconfirm$3e$__["Popconfirm"], {
@@ -3066,7 +3078,7 @@ function UserList({ onAdd, onEdit }) {
                                     type: "text",
                                     icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$DeleteOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__DeleteOutlined$3e$__["DeleteOutlined"], {}, void 0, false, {
                                         fileName: "[project]/src/components/users/UserList.tsx",
-                                        lineNumber: 315,
+                                        lineNumber: 324,
                                         columnNumber: 27
                                     }, void 0),
                                     danger: true,
@@ -3074,23 +3086,23 @@ function UserList({ onAdd, onEdit }) {
                                     loading: deleteUserMutation.isPending
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 313,
+                                    lineNumber: 322,
                                     columnNumber: 19
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 312,
+                                lineNumber: 321,
                                 columnNumber: 17
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 304,
+                            lineNumber: 313,
                             columnNumber: 15
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 281,
+                    lineNumber: 290,
                     columnNumber: 11
                 }, this);
             }
@@ -3122,15 +3134,15 @@ function UserList({ onAdd, onEdit }) {
                                 style: {
                                     margin: 0
                                 },
-                                children: "User Management"
+                                children: title
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 338,
+                                lineNumber: 347,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 337,
+                            lineNumber: 346,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -3141,31 +3153,31 @@ function UserList({ onAdd, onEdit }) {
                                 type: "primary",
                                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$PlusOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__PlusOutlined$3e$__["PlusOutlined"], {}, void 0, false, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 345,
+                                    lineNumber: 354,
                                     columnNumber: 21
                                 }, void 0),
                                 onClick: onAdd,
                                 block: true,
-                                children: "Add User"
+                                children: addButtonText
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 343,
+                                lineNumber: 352,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 342,
+                            lineNumber: 351,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 336,
+                    lineNumber: 345,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/users/UserList.tsx",
-                lineNumber: 335,
+                lineNumber: 344,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3187,7 +3199,7 @@ function UserList({ onAdd, onEdit }) {
                                 allowClear: true,
                                 enterButton: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SearchOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__SearchOutlined$3e$__["SearchOutlined"], {}, void 0, false, {
                                     fileName: "[project]/src/components/users/UserList.tsx",
-                                    lineNumber: 361,
+                                    lineNumber: 370,
                                     columnNumber: 28
                                 }, void 0),
                                 size: "large",
@@ -3197,15 +3209,15 @@ function UserList({ onAdd, onEdit }) {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 358,
+                                lineNumber: 367,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 357,
+                            lineNumber: 366,
                             columnNumber: 11
                         }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
+                        !propRoleFilter && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
                             xs: 24,
                             sm: 12,
                             md: 6,
@@ -3224,64 +3236,64 @@ function UserList({ onAdd, onEdit }) {
                                         children: "Admin"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserList.tsx",
-                                        lineNumber: 376,
-                                        columnNumber: 15
+                                        lineNumber: 386,
+                                        columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
                                         value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].TEACHER,
                                         children: "Teacher"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserList.tsx",
-                                        lineNumber: 377,
-                                        columnNumber: 15
+                                        lineNumber: 387,
+                                        columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
                                         value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].DRIVER,
                                         children: "Driver"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserList.tsx",
-                                        lineNumber: 378,
-                                        columnNumber: 15
+                                        lineNumber: 388,
+                                        columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
                                         value: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].PARENT,
                                         children: "Parent"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserList.tsx",
-                                        lineNumber: 379,
-                                        columnNumber: 15
+                                        lineNumber: 389,
+                                        columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/users/UserList.tsx",
-                                lineNumber: 368,
-                                columnNumber: 13
+                                lineNumber: 378,
+                                columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserList.tsx",
-                            lineNumber: 367,
-                            columnNumber: 11
+                            lineNumber: 377,
+                            columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/users/UserList.tsx",
-                    lineNumber: 356,
+                    lineNumber: 365,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/users/UserList.tsx",
-                lineNumber: 355,
+                lineNumber: 364,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$table$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Table$3e$__["Table"], {
                 columns: columns,
-                dataSource: usersData?.data?.items || [],
+                dataSource: usersData?.items || [],
                 rowKey: "id",
                 loading: isLoading,
                 pagination: {
                     current: pagination.current,
                     pageSize: pagination.pageSize,
-                    total: usersData?.data?.pagination.total || 0,
+                    total: usersData?.pagination?.total || 0,
                     showSizeChanger: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PAGINATION"].SHOW_SIZE_CHANGER,
                     showQuickJumper: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PAGINATION"].SHOW_QUICK_JUMPER,
                     pageSizeOptions: [
@@ -3296,13 +3308,13 @@ function UserList({ onAdd, onEdit }) {
                 size: "small"
             }, void 0, false, {
                 fileName: "[project]/src/components/users/UserList.tsx",
-                lineNumber: 385,
+                lineNumber: 396,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/users/UserList.tsx",
-        lineNumber: 334,
+        lineNumber: 343,
         columnNumber: 5
     }, this);
 }
@@ -3348,7 +3360,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$dayjs$2f$day
 const { Title } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$typography$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Typography$3e$__["Typography"];
 const { TextArea } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$input$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Input$3e$__["Input"];
 const { Option } = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$select$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Select$3e$__["Select"];
-function UserForm({ user, onSuccess, onCancel }) {
+function UserForm({ user, onSuccess, onCancel, defaultRole, roleDisabled = false }) {
     const [form] = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$form$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Form$3e$__["Form"].useForm();
     const [showPassword, setShowPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const isEditing = !!user;
@@ -3469,12 +3481,12 @@ function UserForm({ user, onSuccess, onCancel }) {
                     children: isEditing ? 'Edit User' : 'Add New User'
                 }, void 0, false, {
                     fileName: "[project]/src/components/users/UserForm.tsx",
-                    lineNumber: 143,
+                    lineNumber: 151,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/users/UserForm.tsx",
-                lineNumber: 142,
+                lineNumber: 150,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$form$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Form$3e$__["Form"], {
@@ -3482,7 +3494,7 @@ function UserForm({ user, onSuccess, onCancel }) {
                 layout: "vertical",
                 onFinish: handleSubmit,
                 initialValues: {
-                    role: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].PARENT,
+                    role: defaultRole || __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].PARENT,
                     isActive: true
                 },
                 autoComplete: "off",
@@ -3518,17 +3530,17 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 170,
+                                        lineNumber: 178,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 161,
+                                    lineNumber: 169,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 160,
+                                lineNumber: 168,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -3556,23 +3568,23 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 187,
+                                        lineNumber: 195,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 178,
+                                    lineNumber: 186,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 177,
+                                lineNumber: 185,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 159,
+                        lineNumber: 167,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -3603,17 +3615,17 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         disabled: isEditing
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 205,
+                                        lineNumber: 213,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 197,
+                                    lineNumber: 205,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 196,
+                                lineNumber: 204,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -3633,23 +3645,23 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 221,
+                                        lineNumber: 229,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 214,
+                                    lineNumber: 222,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 213,
+                                lineNumber: 221,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 195,
+                        lineNumber: 203,
                         columnNumber: 9
                     }, this),
                     !isEditing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -3677,31 +3689,31 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     size: "large",
                                     iconRender: (visible)=>visible ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EyeOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__EyeOutlined$3e$__["EyeOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                            lineNumber: 243,
+                                            lineNumber: 251,
                                             columnNumber: 55
                                         }, void 0) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EyeInvisibleOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__EyeInvisibleOutlined$3e$__["EyeInvisibleOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                            lineNumber: 243,
+                                            lineNumber: 251,
                                             columnNumber: 73
                                         }, void 0)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 240,
+                                    lineNumber: 248,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 232,
+                                lineNumber: 240,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserForm.tsx",
-                            lineNumber: 231,
+                            lineNumber: 239,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 230,
+                        lineNumber: 238,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -3725,7 +3737,7 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$select$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Select$3e$__["Select"], {
                                         placeholder: "Select user role",
                                         size: "large",
-                                        disabled: !canManageRoles,
+                                        disabled: !canManageRoles || roleDisabled,
                                         children: roleOptions.map((option)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Option, {
                                                 value: option.value,
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3737,7 +3749,7 @@ function UserForm({ user, onSuccess, onCancel }) {
                                                             children: option.label
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                                            lineNumber: 265,
+                                                            lineNumber: 273,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3748,33 +3760,33 @@ function UserForm({ user, onSuccess, onCancel }) {
                                                             children: option.description
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                                            lineNumber: 266,
+                                                            lineNumber: 274,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                                    lineNumber: 264,
+                                                    lineNumber: 272,
                                                     columnNumber: 21
                                                 }, this)
                                             }, option.value, false, {
                                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                                lineNumber: 263,
+                                                lineNumber: 271,
                                                 columnNumber: 19
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 257,
+                                        lineNumber: 265,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 252,
+                                    lineNumber: 260,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 251,
+                                lineNumber: 259,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -3792,23 +3804,23 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         disabledDate: (current)=>current && current > (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$dayjs$2f$dayjs$2e$min$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])().endOf('day')
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 279,
+                                        lineNumber: 287,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 275,
+                                    lineNumber: 283,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 274,
+                                lineNumber: 282,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 250,
+                        lineNumber: 258,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -3833,29 +3845,29 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     size: "large"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 298,
+                                    lineNumber: 306,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 291,
+                                lineNumber: 299,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserForm.tsx",
-                            lineNumber: 290,
+                            lineNumber: 298,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 289,
+                        lineNumber: 297,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$divider$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Divider$3e$__["Divider"], {
                         children: "Emergency Contact"
                     }, void 0, false, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 308,
+                        lineNumber: 316,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -3881,17 +3893,17 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 319,
+                                        lineNumber: 327,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 312,
+                                    lineNumber: 320,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 311,
+                                lineNumber: 319,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -3911,17 +3923,17 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 334,
+                                        lineNumber: 342,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 327,
+                                    lineNumber: 335,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 326,
+                                lineNumber: 334,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -3941,23 +3953,23 @@ function UserForm({ user, onSuccess, onCancel }) {
                                         size: "large"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/users/UserForm.tsx",
-                                        lineNumber: 349,
+                                        lineNumber: 357,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 342,
+                                    lineNumber: 350,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 341,
+                                lineNumber: 349,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 310,
+                        lineNumber: 318,
                         columnNumber: 9
                     }, this),
                     isEditing && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -3977,22 +3989,22 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     size: "default"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 366,
+                                    lineNumber: 374,
                                     columnNumber: 17
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 361,
+                                lineNumber: 369,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/users/UserForm.tsx",
-                            lineNumber: 360,
+                            lineNumber: 368,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 359,
+                        lineNumber: 367,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$row$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Row$3e$__["Row"], {
@@ -4012,19 +4024,19 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$CloseOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__CloseOutlined$3e$__["CloseOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                            lineNumber: 382,
+                                            lineNumber: 390,
                                             columnNumber: 15
                                         }, this),
                                         "Cancel"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 378,
+                                    lineNumber: 386,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 377,
+                                lineNumber: 385,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -4034,12 +4046,12 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     children: "Reset"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 387,
+                                    lineNumber: 395,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 386,
+                                lineNumber: 394,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$col$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Col$3e$__["Col"], {
@@ -4051,37 +4063,37 @@ function UserForm({ user, onSuccess, onCancel }) {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SaveOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__SaveOutlined$3e$__["SaveOutlined"], {}, void 0, false, {
                                             fileName: "[project]/src/components/users/UserForm.tsx",
-                                            lineNumber: 401,
+                                            lineNumber: 409,
                                             columnNumber: 15
                                         }, this),
                                         isEditing ? 'Update User' : 'Create User'
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/users/UserForm.tsx",
-                                    lineNumber: 395,
+                                    lineNumber: 403,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/users/UserForm.tsx",
-                                lineNumber: 394,
+                                lineNumber: 402,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/users/UserForm.tsx",
-                        lineNumber: 376,
+                        lineNumber: 384,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/users/UserForm.tsx",
-                lineNumber: 148,
+                lineNumber: 156,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/users/UserForm.tsx",
-        lineNumber: 141,
+        lineNumber: 149,
         columnNumber: 5
     }, this);
 }

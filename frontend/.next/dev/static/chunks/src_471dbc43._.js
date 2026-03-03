@@ -160,26 +160,26 @@ class ApiClient {
     setupInterceptors() {
         // Request interceptor to add auth token
         this.instance.interceptors.request.use((config)=>{
-            console.log('ApiClient: Making request to:', config.url);
+            // console.log('ApiClient: Making request to:', config.url);
             const token = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].getAccessToken();
-            console.log('ApiClient: Token available:', !!token);
+            // console.log('ApiClient: Token available:', !!token);
             if (token) {
-                console.log('ApiClient: Token expired?', __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token));
+                // console.log('ApiClient: Token expired?', TokenStorage.isTokenExpired(token));
                 if (!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
                     config.headers.Authorization = `Bearer ${token}`;
-                    console.log('ApiClient: Added Authorization header');
+                // console.log('ApiClient: Added Authorization header');
                 } else {
-                    console.log('ApiClient: Token expired, not adding to request');
+                // console.log('ApiClient: Token expired, not adding to request');
                 }
             } else {
-                console.log('ApiClient: No token available');
+            // console.log('ApiClient: No token available');
             }
-            console.log('ApiClient: Request config:', {
-                url: config.url,
-                method: config.method,
-                hasAuth: !!config.headers.Authorization,
-                params: config.params
-            });
+            // console.log('ApiClient: Request config:', {
+            //   url: config.url,
+            //   method: config.method,
+            //   hasAuth: !!config.headers.Authorization,
+            //   params: config.params
+            // });
             return config;
         }, (error)=>{
             console.error('ApiClient: Request error:', error);
@@ -1143,11 +1143,11 @@ const { Title, Text, Link } = __TURBOPACK__imported__module__$5b$project$5d2f$no
 function LoginForm(t0) {
     _s();
     const $ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$compiler$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["c"])(46);
-    if ($[0] !== "6d5c10bc007c78358b379e5c620f64c38e415d280befb6ad2c0d3c9b05c14333") {
+    if ($[0] !== "2fc0fa262e6e5257a3d30a05f6afede633fee3dee12bda6ac837c7fb6a5ee886") {
         for(let $i = 0; $i < 46; $i += 1){
             $[$i] = Symbol.for("react.memo_cache_sentinel");
         }
-        $[0] = "6d5c10bc007c78358b379e5c620f64c38e415d280befb6ad2c0d3c9b05c14333";
+        $[0] = "2fc0fa262e6e5257a3d30a05f6afede633fee3dee12bda6ac837c7fb6a5ee886";
     }
     const { onSwitchToRegister } = t0;
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
@@ -1220,7 +1220,9 @@ function LoginForm(t0) {
             boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)"
         };
         t5 = {
-            padding: "40px"
+            body: {
+                padding: "40px"
+            }
         };
         $[9] = t4;
         $[10] = t5;
@@ -1247,7 +1249,7 @@ function LoginForm(t0) {
             children: "🚌"
         }, void 0, false, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 127,
+            lineNumber: 129,
             columnNumber: 10
         }, this);
         $[11] = t6;
@@ -1272,7 +1274,7 @@ function LoginForm(t0) {
                     children: "Welcome Back"
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 142,
+                    lineNumber: 144,
                     columnNumber: 30
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
@@ -1280,13 +1282,13 @@ function LoginForm(t0) {
                     children: "Sign in to your SKS Transportation account"
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 144,
+                    lineNumber: 146,
                     columnNumber: 30
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 142,
+            lineNumber: 144,
             columnNumber: 10
         }, this);
         $[14] = t9;
@@ -1304,7 +1306,7 @@ function LoginForm(t0) {
             onClose: clearError
         }, void 0, false, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 151,
+            lineNumber: 153,
             columnNumber: 20
         }, this);
         $[15] = clearError;
@@ -1337,19 +1339,19 @@ function LoginForm(t0) {
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$input$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Input$3e$__["Input"], {
                 prefix: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__["UserOutlined"], {}, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 173,
+                    lineNumber: 175,
                     columnNumber: 62
                 }, void 0),
                 placeholder: "Email address",
                 autoComplete: "username"
             }, void 0, false, {
                 fileName: "[project]/src/components/auth/LoginForm.tsx",
-                lineNumber: 173,
+                lineNumber: 175,
                 columnNumber: 47
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 173,
+            lineNumber: 175,
             columnNumber: 11
         }, this);
         $[19] = t12;
@@ -1376,7 +1378,7 @@ function LoginForm(t0) {
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$input$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Input$3e$__["Input"].Password, {
                 prefix: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$LockOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__LockOutlined$3e$__["LockOutlined"], {}, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 190,
+                    lineNumber: 192,
                     columnNumber: 74
                 }, void 0),
                 placeholder: "Password",
@@ -1384,12 +1386,12 @@ function LoginForm(t0) {
                 iconRender: _LoginFormInputPasswordIconRender
             }, void 0, false, {
                 fileName: "[project]/src/components/auth/LoginForm.tsx",
-                lineNumber: 190,
+                lineNumber: 192,
                 columnNumber: 50
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 190,
+            lineNumber: 192,
             columnNumber: 11
         }, this);
         $[21] = t14;
@@ -1424,7 +1426,7 @@ function LoginForm(t0) {
             children: "Remember me"
         }, void 0, false, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 217,
+            lineNumber: 219,
             columnNumber: 11
         }, this);
         $[24] = rememberMe;
@@ -1439,7 +1441,7 @@ function LoginForm(t0) {
             children: "Forgot password?"
         }, void 0, false, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 225,
+            lineNumber: 227,
             columnNumber: 11
         }, this);
         $[26] = handleForgotPassword;
@@ -1458,12 +1460,12 @@ function LoginForm(t0) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/auth/LoginForm.tsx",
-                lineNumber: 233,
+                lineNumber: 235,
                 columnNumber: 22
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 233,
+            lineNumber: 235,
             columnNumber: 11
         }, this);
         $[28] = t17;
@@ -1493,12 +1495,12 @@ function LoginForm(t0) {
                 children: "Sign In"
             }, void 0, false, {
                 fileName: "[project]/src/components/auth/LoginForm.tsx",
-                lineNumber: 251,
+                lineNumber: 253,
                 columnNumber: 22
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 251,
+            lineNumber: 253,
             columnNumber: 11
         }, this);
         $[32] = isLoading;
@@ -1523,7 +1525,7 @@ function LoginForm(t0) {
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 259,
+            lineNumber: 261,
             columnNumber: 11
         }, this);
         $[34] = form;
@@ -1542,7 +1544,7 @@ function LoginForm(t0) {
                     children: "or"
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 270,
+                    lineNumber: 272,
                     columnNumber: 35
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1559,18 +1561,18 @@ function LoginForm(t0) {
                                 children: "Sign up now"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/LoginForm.tsx",
-                                lineNumber: 272,
+                                lineNumber: 274,
                                 columnNumber: 60
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/auth/LoginForm.tsx",
-                        lineNumber: 272,
+                        lineNumber: 274,
                         columnNumber: 10
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 270,
+                    lineNumber: 272,
                     columnNumber: 56
                 }, this)
             ]
@@ -1595,61 +1597,61 @@ function LoginForm(t0) {
                     children: "Demo Credentials:"
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 285,
+                    lineNumber: 287,
                     columnNumber: 8
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 285,
+                    lineNumber: 287,
                     columnNumber: 52
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
                     children: "Admin: admin@demo.com / password123"
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 285,
+                    lineNumber: 287,
                     columnNumber: 58
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 285,
+                    lineNumber: 287,
                     columnNumber: 106
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
                     children: "Teacher: teacher@demo.com / password123"
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 285,
+                    lineNumber: 287,
                     columnNumber: 112
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 285,
+                    lineNumber: 287,
                     columnNumber: 164
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
                     children: "Driver: driver@demo.com / password123"
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 285,
+                    lineNumber: 287,
                     columnNumber: 170
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 285,
+                    lineNumber: 287,
                     columnNumber: 220
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Text, {
                     children: "Parent: parent@demo.com / password123"
                 }, void 0, false, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 285,
+                    lineNumber: 287,
                     columnNumber: 226
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 280,
+            lineNumber: 282,
             columnNumber: 53
         }, this);
         $[41] = t24;
@@ -1662,9 +1664,9 @@ function LoginForm(t0) {
             style: t3,
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$card$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Card$3e$__["Card"], {
                 style: t4,
-                bodyStyle: t5,
+                styles: t5,
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
-                    direction: "vertical",
+                    orientation: "vertical",
                     size: "large",
                     style: t6,
                     children: [
@@ -1676,17 +1678,17 @@ function LoginForm(t0) {
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/auth/LoginForm.tsx",
-                    lineNumber: 292,
-                    columnNumber: 59
+                    lineNumber: 294,
+                    columnNumber: 56
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/auth/LoginForm.tsx",
-                lineNumber: 292,
+                lineNumber: 294,
                 columnNumber: 27
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/components/auth/LoginForm.tsx",
-            lineNumber: 292,
+            lineNumber: 294,
             columnNumber: 11
         }, this);
         $[42] = t10;
@@ -1710,11 +1712,11 @@ _c = LoginForm;
 function _LoginFormInputPasswordIconRender(visible) {
     return visible ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EyeTwoTone$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__EyeTwoTone$3e$__["EyeTwoTone"], {}, void 0, false, {
         fileName: "[project]/src/components/auth/LoginForm.tsx",
-        lineNumber: 303,
+        lineNumber: 305,
         columnNumber: 20
     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EyeInvisibleOutlined$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__EyeInvisibleOutlined$3e$__["EyeInvisibleOutlined"], {}, void 0, false, {
         fileName: "[project]/src/components/auth/LoginForm.tsx",
-        lineNumber: 303,
+        lineNumber: 305,
         columnNumber: 37
     }, this);
 }

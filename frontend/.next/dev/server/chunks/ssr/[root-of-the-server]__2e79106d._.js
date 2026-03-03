@@ -253,26 +253,26 @@ class ApiClient {
     setupInterceptors() {
         // Request interceptor to add auth token
         this.instance.interceptors.request.use((config)=>{
-            console.log('ApiClient: Making request to:', config.url);
+            // console.log('ApiClient: Making request to:', config.url);
             const token = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].getAccessToken();
-            console.log('ApiClient: Token available:', !!token);
+            // console.log('ApiClient: Token available:', !!token);
             if (token) {
-                console.log('ApiClient: Token expired?', __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token));
+                // console.log('ApiClient: Token expired?', TokenStorage.isTokenExpired(token));
                 if (!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
                     config.headers.Authorization = `Bearer ${token}`;
-                    console.log('ApiClient: Added Authorization header');
+                // console.log('ApiClient: Added Authorization header');
                 } else {
-                    console.log('ApiClient: Token expired, not adding to request');
+                // console.log('ApiClient: Token expired, not adding to request');
                 }
             } else {
-                console.log('ApiClient: No token available');
+            // console.log('ApiClient: No token available');
             }
-            console.log('ApiClient: Request config:', {
-                url: config.url,
-                method: config.method,
-                hasAuth: !!config.headers.Authorization,
-                params: config.params
-            });
+            // console.log('ApiClient: Request config:', {
+            //   url: config.url,
+            //   method: config.method,
+            //   hasAuth: !!config.headers.Authorization,
+            //   params: config.params
+            // });
             return config;
         }, (error)=>{
             console.error('ApiClient: Request error:', error);
@@ -1252,11 +1252,13 @@ function LoginForm({ onSwitchToRegister }) {
                 maxWidth: 400,
                 boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)'
             },
-            bodyStyle: {
-                padding: '40px'
+            styles: {
+                body: {
+                    padding: '40px'
+                }
             },
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$antd$2f$es$2f$space$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__$3c$export__default__as__Space$3e$__["Space"], {
-                direction: "vertical",
+                orientation: "vertical",
                 size: "large",
                 style: {
                     width: '100%'

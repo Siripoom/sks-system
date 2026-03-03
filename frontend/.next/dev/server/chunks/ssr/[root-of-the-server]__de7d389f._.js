@@ -235,26 +235,26 @@ class ApiClient {
     setupInterceptors() {
         // Request interceptor to add auth token
         this.instance.interceptors.request.use((config)=>{
-            console.log('ApiClient: Making request to:', config.url);
+            // console.log('ApiClient: Making request to:', config.url);
             const token = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].getAccessToken();
-            console.log('ApiClient: Token available:', !!token);
+            // console.log('ApiClient: Token available:', !!token);
             if (token) {
-                console.log('ApiClient: Token expired?', __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token));
+                // console.log('ApiClient: Token expired?', TokenStorage.isTokenExpired(token));
                 if (!__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$auth$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["TokenStorage"].isTokenExpired(token)) {
                     config.headers.Authorization = `Bearer ${token}`;
-                    console.log('ApiClient: Added Authorization header');
+                // console.log('ApiClient: Added Authorization header');
                 } else {
-                    console.log('ApiClient: Token expired, not adding to request');
+                // console.log('ApiClient: Token expired, not adding to request');
                 }
             } else {
-                console.log('ApiClient: No token available');
+            // console.log('ApiClient: No token available');
             }
-            console.log('ApiClient: Request config:', {
-                url: config.url,
-                method: config.method,
-                hasAuth: !!config.headers.Authorization,
-                params: config.params
-            });
+            // console.log('ApiClient: Request config:', {
+            //   url: config.url,
+            //   method: config.method,
+            //   hasAuth: !!config.headers.Authorization,
+            //   params: config.params
+            // });
             return config;
         }, (error)=>{
             console.error('ApiClient: Request error:', error);
@@ -1869,13 +1869,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$des
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$BankOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__BankOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/BankOutlined.js [app-ssr] (ecmascript) <export default as BankOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$CarOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__CarOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/CarOutlined.js [app-ssr] (ecmascript) <export default as CarOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$UserOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__UserOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/UserOutlined.js [app-ssr] (ecmascript) <export default as UserOutlined>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$TeamOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__TeamOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/TeamOutlined.js [app-ssr] (ecmascript) <export default as TeamOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$EnvironmentOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__EnvironmentOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/EnvironmentOutlined.js [app-ssr] (ecmascript) <export default as EnvironmentOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$ScheduleOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ScheduleOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/ScheduleOutlined.js [app-ssr] (ecmascript) <export default as ScheduleOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$LinkOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__LinkOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/LinkOutlined.js [app-ssr] (ecmascript) <export default as LinkOutlined>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SafetyCertificateOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__SafetyCertificateOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/SafetyCertificateOutlined.js [app-ssr] (ecmascript) <export default as SafetyCertificateOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$HeartOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__HeartOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/HeartOutlined.js [app-ssr] (ecmascript) <export default as HeartOutlined>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$HistoryOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__HistoryOutlined$3e$__ = __turbopack_context__.i("[project]/node_modules/@ant-design/icons/es/icons/HistoryOutlined.js [app-ssr] (ecmascript) <export default as HistoryOutlined>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$stores$2f$authStore$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/stores/authStore.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/constants/app.ts [app-ssr] (ecmascript)");
@@ -1942,33 +1939,20 @@ const menuItems = [
             __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].TEACHER
         ]
     },
-    {
-        key: 'students',
-        label: 'Students',
-        icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$TeamOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__TeamOutlined$3e$__["TeamOutlined"], {}, void 0, false, {
-            fileName: "[project]/src/components/layout/AppSidebar.tsx",
-            lineNumber: 63,
-            columnNumber: 11
-        }, ("TURBOPACK compile-time value", void 0)),
-        path: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ROUTES"].STUDENTS,
-        roles: [
-            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].ADMIN,
-            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].TEACHER
-        ]
-    },
-    {
-        key: 'drivers',
-        label: 'Drivers',
-        icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$SafetyCertificateOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__SafetyCertificateOutlined$3e$__["SafetyCertificateOutlined"], {}, void 0, false, {
-            fileName: "[project]/src/components/layout/AppSidebar.tsx",
-            lineNumber: 70,
-            columnNumber: 11
-        }, ("TURBOPACK compile-time value", void 0)),
-        path: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ROUTES"].DRIVERS,
-        roles: [
-            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].ADMIN
-        ]
-    },
+    // {
+    //   key: 'students',
+    //   label: 'Students',
+    //   icon: <TeamOutlined />,
+    //   path: ROUTES.STUDENTS,
+    //   roles: [USER_ROLES.ADMIN, USER_ROLES.TEACHER],
+    // },
+    // {
+    //   key: 'drivers',
+    //   label: 'Drivers',
+    //   icon: <SafetyCertificateOutlined />,
+    //   path: ROUTES.DRIVERS,
+    //   roles: [USER_ROLES.ADMIN],
+    // },
     {
         key: 'routes',
         label: 'Routes',
@@ -2027,33 +2011,6 @@ const menuItems = [
         roles: [
             __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].ADMIN,
             __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].TEACHER
-        ]
-    },
-    {
-        key: 'guardians',
-        label: 'Guardians',
-        icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$HeartOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__HeartOutlined$3e$__["HeartOutlined"], {}, void 0, false, {
-            fileName: "[project]/src/components/layout/AppSidebar.tsx",
-            lineNumber: 110,
-            columnNumber: 11
-        }, ("TURBOPACK compile-time value", void 0)),
-        path: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ROUTES"].GUARDIANS,
-        roles: [
-            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].ADMIN,
-            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].TEACHER
-        ]
-    },
-    {
-        key: 'event-logs',
-        label: 'Event Logs',
-        icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ant$2d$design$2f$icons$2f$es$2f$icons$2f$HistoryOutlined$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__HistoryOutlined$3e$__["HistoryOutlined"], {}, void 0, false, {
-            fileName: "[project]/src/components/layout/AppSidebar.tsx",
-            lineNumber: 117,
-            columnNumber: 11
-        }, ("TURBOPACK compile-time value", void 0)),
-        path: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ROUTES"].EVENT_LOGS,
-        roles: [
-            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$constants$2f$app$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["USER_ROLES"].ADMIN
         ]
     }
 ];
@@ -2118,7 +2075,7 @@ function AppSidebar({ collapsed, theme }) {
                             }
                         }, void 0, false, {
                             fileName: "[project]/src/components/layout/AppSidebar.tsx",
-                            lineNumber: 177,
+                            lineNumber: 179,
                             columnNumber: 11
                         }, this),
                         !collapsed && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Title, {
@@ -2131,13 +2088,13 @@ function AppSidebar({ collapsed, theme }) {
                             children: "SKS Transport"
                         }, void 0, false, {
                             fileName: "[project]/src/components/layout/AppSidebar.tsx",
-                            lineNumber: 182,
+                            lineNumber: 186,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/layout/AppSidebar.tsx",
-                    lineNumber: 176,
+                    lineNumber: 178,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
@@ -2155,7 +2112,7 @@ function AppSidebar({ collapsed, theme }) {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/components/layout/AppSidebar.tsx",
-                lineNumber: 197,
+                lineNumber: 201,
                 columnNumber: 7
             }, this),
             !collapsed && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2173,14 +2130,14 @@ function AppSidebar({ collapsed, theme }) {
                         children: "SKS Transportation"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppSidebar.tsx",
-                        lineNumber: 216,
+                        lineNumber: 222,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         children: "Management System"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppSidebar.tsx",
-                        lineNumber: 217,
+                        lineNumber: 223,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2190,13 +2147,13 @@ function AppSidebar({ collapsed, theme }) {
                         children: "v1.0.0"
                     }, void 0, false, {
                         fileName: "[project]/src/components/layout/AppSidebar.tsx",
-                        lineNumber: 218,
+                        lineNumber: 224,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/layout/AppSidebar.tsx",
-                lineNumber: 207,
+                lineNumber: 211,
                 columnNumber: 9
             }, this)
         ]
